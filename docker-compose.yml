@@ -1,0 +1,32 @@
+version: '3'
+
+volumes:
+  mysql:
+
+services:
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    volumes:
+      - mysql:/var/lib/mysql
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - ./backend:/backend
+      - ./docker/php/upload.ini:/usr/local/etc/php/conf.d/upload.ini
+  nginx:
+    image: nginx:1.17-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    links:
+      - app
+    volumes:
+      -  ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./backend:/backend:ro
+      - ./frontend/dist:/frontend:ro
