@@ -1,20 +1,41 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import FrontPage from '@/components/wordpress/FrontPage'
-import NotFound from '@/components/NotFound'
+import LetterList from './components/letter/List'
+import LetterDetail from './components/letter/detail/Detail'
+import FrontPage from './components/wordpress/FrontPage'
+import NotFound from './components/NotFound'
 
 Vue.use(VueRouter)
 
 const ROUTE_SUFFIX = ' | Industriegeschichte Privat'
 
-const routes = [
+export const routes = [
     {
         path: '',
         component: FrontPage,
         name: 'frontpage',
         meta: {
             title: 'Familie Engels Briefe' + ROUTE_SUFFIX
+        }
+    },
+    {
+        path: '/briefe',
+        component: LetterList,
+        name: 'letters',
+        meta: {
+            title: 'Briefe' + ROUTE_SUFFIX
+        }
+    },
+    {
+        path: '/briefe/:number',
+        component: LetterDetail,
+        name: 'letter',
+        props: true,
+        meta: {
+            title: function (to) {
+                return 'Brief ' + to.params.number + ROUTE_SUFFIX
+            }
         }
     },
     {

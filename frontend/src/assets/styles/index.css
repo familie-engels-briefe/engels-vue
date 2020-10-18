@@ -1,7 +1,8 @@
-@import 'fonts.css';
-@import 'wordpress.css';
-
 @tailwind base;
+
+@import 'fonts.css';
+@import 'typography.css';
+@import 'wordpress.css';
 
 @tailwind components;
 

@@ -5,20 +5,31 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
+    "@babel/core": "^7.12",
     "@fortawesome/fontawesome-svg-core": "^1.2",
     "@fortawesome/pro-regular-svg-icons": "^5.15",
     "@fortawesome/vue-fontawesome": "^2.0",
+    "@storybook/addon-actions": "^6.0",
+    "@storybook/addon-essentials": "^6.0",
+    "@storybook/addon-links": "^6.0",
+    "@storybook/vue": "^6.0",
     "@vue/cli-plugin-babel": "^4.5",
     "@vue/cli-plugin-eslint": "^4.5",
     "@vue/cli-service": "^4.5",
     "axios": "^0.20",
     "babel-eslint": "^10.1",
+    "babel-loader": "^8.1",
     "core-js": "^3.6",
-    "eslint": "^6.7",
-    "eslint-plugin-vue": "^6.2",
+    "eslint": "^7.11",
+    "eslint-plugin-vue": "^7.0",
+    "pdfobject": "^2.2",
+    "react-is": "^16.13",
+    "storybook-vue-router": "^1.0",
     "tailwindcss": "^1.9",
     "vue": "^2.6",
     "vue-router": "^3.4",
@@ -42,5 +53,6 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "dependencies": {}
 }
