@@ -9,9 +9,7 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v1
       - run: 'echo "$FONTAWESOME_AUTH_TOKEN" > .npmrc'
         shell: bash
         env:
