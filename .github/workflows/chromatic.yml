@@ -3,7 +3,7 @@ name: 'Publish storybook to chromatic'
 on: push
 
 jobs:
-  test:
+  chromatic:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -12,6 +12,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - uses: ferluisxd/create-npmrc@3
+        with:
+          org_name: https://npm.fontawesome.com/
+          env:
+            AUTH_TOKEN: ${{ secrets.FONTAWESOME_AUTH_TOKEN }}
       - run: yarn
       - uses: chromaui/action@v1
         with:
