@@ -1,0 +1,155 @@
+@import "~@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "~@fortawesome/fontawesome-free/css/solid.css";
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+    @apply leading-normal text-gray-900 bg-white;
+
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+h1 {
+    @apply text-3xl leading-none font-light;
+}
+
+h2 {
+    @apply text-2xl mt-12 mb-4 leading-none;
+}
+
+h3 {
+    @apply text-xl mt-10 mb-3 leading-none;
+}
+
+h3 code {
+    color: inherit;
+}
+
+h4 {
+    @apply font-bold mt-6 mb-2 uppercase leading-none;
+}
+
+a {
+    transition: color .2s;
+}
+
+a:hover {
+    @apply text-gray-700;
+    transition: color .2s;
+}
+
+code {
+    @apply text-purple-700 font-mono;
+}
+
+.docs p {
+    @apply text-gray-700;
+}
+
+.docs p + p {
+    @apply mt-2;
+}
+
+table {
+    @apply w-full text-left mt-4 mb-4 border-t border-gray-300;
+}
+
+table th {
+    @apply bg-gray-100 font-semibold text-sm text-gray-700 p-2;
+}
+
+table td {
+    @apply p-2 border-t border-gray-300;
+}
+
+#navigation a,
+#navigation button {
+    @apply block mt-4 text-teal-100 text-sm font-bold mr-4;
+}
+
+#navigation button {
+    @apply mt-0 mr-0;
+}
+
+@media (min-width: 1024px) {
+    #navigation a,
+    #navigation button {
+        @apply mt-0 inline-block;
+    }
+}
+
+#navigation a:hover,
+#navigation button:hover {
+    @apply text-white;
+}
+
+#sub-navigation {
+    @apply text-sm text-gray-700;
+}
+
+#sub-navigation > li {
+    @apply mb-4;
+}
+
+#sub-navigation > li > a {
+    @apply font-bold uppercase;
+}
+
+#sub-navigation a {
+    @apply block mb-2;
+}
+
+label {
+    @apply block text-gray-700 text-sm font-bold mb-1;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    @apply outline-none shadow-outline;
+}
+
+button:not(.no-button),
+.button {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded cursor-pointer;
+    transition: background-color .2s;
+}
+button:not(.no-button):focus,
+.button:focus {
+    @apply outline-none shadow-outline;
+}
+button:not(.no-button):hover,
+.button:hover {
+    @apply bg-blue-700 text-white;
+    transition: background-color .2s;
+}
+button.loading:not(.no-button),
+.button.loading {
+    @apply opacity-50 cursor-not-allowed;
+}
+
+.button-secondary {
+    @apply bg-gray-700 text-white;
+}
+.button-secondary:hover {
+    @apply bg-gray-900 text-white;
+}
