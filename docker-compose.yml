@@ -1,32 +1,83 @@
 version: '3'
 
 volumes:
-  mysql:
+  exist-data:
+  exist-config:
+  wordpress-mysql:
+  wordpress-uploads:
+  redis-data:
+  api-storage-framework:
+  api-storage-logs:
+  api-mysql:
 
 services:
-  mysql:
-    image: mysql:8
+  # XML database
+  exist:
+    image: existdb/existdb:5.2.0
     restart: unless-stopped
     volumes:
-      - mysql:/var/lib/mysql
-  app:
-    build: .
+      - exist-data:/exist/data/
+      - exist-config:/exist/etc/
+
+  # Wordpress database
+  wordpress-mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    volumes:
+      - wordpress-mysql:/var/lib/mysql
+
+  # Wordpress php
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./docker/wordpress/Dockerfile
     restart: unless-stopped
     depends_on:
-      - mysql
-    links:
-      - mysql
+      - wordpress-mysql
     volumes:
-      - ./backend:/backend
+      - ./wordpress:/wordpress
       - ./docker/php/upload.ini:/usr/local/etc/php/conf.d/upload.ini
+      - wordpress-uploads:/wordpress/wp-content/uploads
+
+  # API database
+  api-mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    volumes:
+      - api-mysql:/var/lib/mysql
+
+  # Engels API
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./api:/api
+      - api-storage-framework:/api/storage/framework
+      - api-storage-logs:/api/storage/logs
+    depends_on:
+      - exist
+      - api-mysql
+      - redis
+
+  # Caching server
+  redis:
+    image: redis:6.0
+    restart: unless-stopped
+    command: redis-server
+    volumes:
+      - redis-data:/data
+
+  # Webserver proxy
   nginx:
-    image: nginx:1.17-alpine
+    image: nginx:1.19-alpine
     restart: unless-stopped
     depends_on:
-      - app
-    links:
-      - app
+      - wordpress
+      - api
     volumes:
       -  ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./backend:/backend:ro
+      - ./wordpress:/wordpress:ro
+      - ./api/public:/api:ro
       - ./frontend/dist:/frontend:ro

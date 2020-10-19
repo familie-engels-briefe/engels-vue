@@ -1,14 +1,31 @@
 version: '3'
 
 services:
-  mysql:
+  exist:
+    ports:
+      - 8081:8080
+  api-mysql:
     ports:
       - 3306:3306
     environment:
       MYSQL_DATABASE: 'engels'
       MYSQL_USER: 'engels'
-      MYSQL_PASSWORD: '123456'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-  nginx:
+      MYSQL_PASSWORD: 'secret'
+      MYSQL_ROOT_PASSWORD: 'secret'
+  wordpress-mysql:
     ports:
-      - 8080:80
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: 'engels'
+      MYSQL_USER: 'engels'
+      MYSQL_PASSWORD: 'secret'
+      MYSQL_ROOT_PASSWORD: 'secret'
+  redis:
+    command: redis-server --requirepass secret
+  nginx:
+    volumes:
+      - ./docker/nginx/conf.d.local:/etc/nginx/conf.d:ro
+    ports:
+      - 8070:8070
+      - 8080:8080
+      - 8090:8090
