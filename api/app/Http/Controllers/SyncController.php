@@ -18,11 +18,16 @@ class SyncController extends Controller
      */
     public function index(LetterRepository $repository)
     {
+        $error = null;
         try {
             $response = json_decode($repository->all()->getContent());
+            if (isset($response->error)) {
+                throw new Exception(trim($response->error));
+            }
             $numberOfDocuments = count($response->data->letter);
         } catch (Exception $e) {
             Log::error($e->getMessage());
+            $error = $e->getMessage();
             $numberOfDocuments = 0;
         }
 
@@ -61,6 +66,7 @@ class SyncController extends Controller
             'numberOfDocuments' => $numberOfDocuments,
             'numberOfHtmlFiles' => $numberOfHtmlFiles,
             'cacheSize' => $cacheSize,
+            'error' => $error,
         ]);
     }
 

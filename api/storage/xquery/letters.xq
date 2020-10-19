@@ -8,7 +8,7 @@ declare namespace output = "http://www.w3.org/2010/xslt-xquery-serialization";
 declare namespace json="http://www.json.org";
 declare option output:method "json";
 
-declare variable $data-collection := "xmldb:exist:///db/apps/engels-replication/data";
+declare variable $data-collection := "xmldb:exist:///db/apps/engels/data/";
 
 let $personSenderReceiverFilter := request:get-parameter("person-sender-receiver", "")
 
@@ -44,7 +44,7 @@ let $letters :=
                 <letter
                     number="{$number}"
                     version="{if ($doc/tei:TEI/@n) then $doc/tei:TEI/@n else ""}"
-                    editor="{extract:getEditorName($doc)}"
+                    (: editor="{extract:getEditorName($doc)}" :)
                     name="{util:unescape-uri($resource-name, "UTF-8")}"
                     date="{extract:getSenderDate($doc)}">
                     {

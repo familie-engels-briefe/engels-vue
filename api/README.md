@@ -6,6 +6,7 @@ This repository serves as the api to get the xml letters from the database and a
 
 * Copy the sample configuration file `.env.example` to `.env` and change where necessary
 * `dockerc-compose exec api php artisan migrate` to migrate the database
+* Copy all files from the `storage/xquery` directory into your exist 5 app
 * To create an admin user run `docker-compose exec api php artisan users:create your@email.com`
 * To load the xml files and facsimiles into exist 5 setup the test sync (see below) and run `docker-compose exec api php artisan exist:sync`
 

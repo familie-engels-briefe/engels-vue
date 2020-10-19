@@ -12,6 +12,12 @@
             )
         </h1>
 
+        @if ($error !== null)
+            <div class="mb-4 bg-red-300 text-red-900 font-bold">
+                {{ $error }}
+            </div>
+        @endif
+
         <p class="mb-4 text-gray-700">
             The syncronisation takes a few seconds. It compares the letters and all other relevant files from the current exist 4 database <code>{{ config('database.connections.exist_replication.host') }}:{{ config('database.connections.exist_replication.port') }}/{{ config('database.connections.exist_replication.collection') }}</code> and writes them into the exist 5 database <code>{{ config('database.connections.exist.host') }}:{{ config('database.connections.exist.port') }}/{{ config('database.connections.exist.collection') }}</code> which feeds the api.
         </p>

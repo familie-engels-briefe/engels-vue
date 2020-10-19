@@ -19,7 +19,9 @@ RUN mkdir -p /api/storage/logs && \
     mkdir -p /api/storage/framework/sessions && \
     mkdir -p /api/storage/framework/testing && \
     mkdir -p /api/storage/framework/views && \
-    chown -R engels:engels /api
+    mkdir -p /home/engels/.config/psysh && \
+    chown -R engels:engels /api && \
+    chown -R engels:engels /home/engels/.config/psysh
 
 WORKDIR /api
 

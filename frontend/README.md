@@ -1,9 +1,8 @@
 # Frontend
 
 ## Project setup
-```
-yarn install
-```
+
+Copy the `.env.local.example` file to `.env.local` and adjust the settings. Then run `yarn install`
 
 ### Compiles and hot-reloads for development
 ```
