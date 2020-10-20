@@ -21,7 +21,7 @@ services:
       MYSQL_PASSWORD: 'secret'
       MYSQL_ROOT_PASSWORD: 'secret'
   redis:
-    command: redis-server --requirepass secret
+    command: redis-server --appendonly yes --requirepass secret
   nginx:
     volumes:
       - ./docker/nginx/conf.d.local:/etc/nginx/conf.d:ro

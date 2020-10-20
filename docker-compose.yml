@@ -65,7 +65,7 @@ services:
   redis:
     image: redis:6.0
     restart: unless-stopped
-    command: redis-server
+    command: redis-server --appendonly yes
     volumes:
       - redis-data:/data
 
