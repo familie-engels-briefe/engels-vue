@@ -86,13 +86,13 @@ export default {
     },
     created () {
         // Check if the given letter should be used
-        if (this.letterLocal.loaded && this.letterLocal.loaded === false) {
+        if (this.letterLocal.loaded === true) {
             console.debug('Loaded letter details locally')
 
             this.details = this.letterLocal.details
-            this.xmlContent = this.letterLocal.xmlContent
-            this.htmlNormalized = this.letterLocal.htmlNormalized
-            this.htmlDiplomatic = this.letterLocal.htmlDiplomatic
+            this.xmlContent = this.letterLocal.xml
+            this.htmlNormalized = this.letterLocal.html.norm
+            this.htmlDiplomatic = this.letterLocal.html.dipl
             this.facsimiles = this.letterLocal.facsimiles
             this.loaded = true
             return

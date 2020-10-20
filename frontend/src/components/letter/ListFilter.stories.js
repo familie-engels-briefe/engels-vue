@@ -3,7 +3,7 @@ import ListFilter from './ListFilter'
 import lettersLocal from './../../data/letters.js'
 
 export default {
-    title: 'Letter/ListFilter',
+    title: 'Letter/List/Filter',
     component: ListFilter,
 }
 
@@ -12,7 +12,7 @@ const Template = (args, { argTypes }) => ({
         ListFilter
     },
     template: '' +
-        '<div class="w-32">' +
+        '<div class="w-20">' +
         '<ListFilter :letters="lettersLocal"></ListFilter>' +
         '</div>',
     props: Object.keys(argTypes)
