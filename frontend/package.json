@@ -1,60 +1,61 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12",
-    "@fortawesome/fontawesome-svg-core": "^1.2",
-    "@fortawesome/pro-regular-svg-icons": "^5.15",
-    "@fortawesome/vue-fontawesome": "^2.0",
-    "@storybook/addon-actions": "^6.0",
-    "@storybook/addon-essentials": "^6.0",
-    "@storybook/addon-links": "^6.0",
-    "@storybook/vue": "^6.0",
-    "@vue/cli-plugin-babel": "^4.5",
-    "@vue/cli-plugin-eslint": "^4.5",
-    "@vue/cli-service": "^4.5",
-    "axios": "^0.20",
-    "babel-eslint": "^10.1",
-    "babel-loader": "^8.1",
-    "chromatic": "^5.2.0",
-    "core-js": "^3.6",
-    "eslint": "^7.11",
-    "eslint-plugin-vue": "^7.0",
-    "pdfobject": "^2.2",
-    "react-is": "^16.13",
-    "storybook-vue-router": "^1.0",
-    "tailwindcss": "^1.9",
-    "vue": "^2.6",
-    "vue-router": "^3.4",
-    "vue-template-compiler": "^2.6"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "watch": "vue-cli-service build --watch",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook",
+        "chromatic": "npx chromatic"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+    "devDependencies": {
+        "@babel/core": "^7.12",
+        "@fortawesome/fontawesome-svg-core": "^1.2",
+        "@fortawesome/pro-regular-svg-icons": "^5.15",
+        "@fortawesome/vue-fontawesome": "^2.0",
+        "@storybook/addon-actions": "^6.0",
+        "@storybook/addon-essentials": "^6.0",
+        "@storybook/addon-links": "^6.0",
+        "@storybook/vue": "^6.0",
+        "@vue/cli-plugin-babel": "^4.5",
+        "@vue/cli-plugin-eslint": "^4.5",
+        "@vue/cli-service": "^4.5",
+        "axios": "^0.20",
+        "babel-eslint": "^10.1",
+        "babel-loader": "^8.1",
+        "chromatic": "^5.2.0",
+        "core-js": "^3.6",
+        "eslint": "^7.11",
+        "eslint-plugin-vue": "^7.0",
+        "pdfobject": "^2.2",
+        "react-is": "^16.13",
+        "storybook-vue-router": "^1.0",
+        "tailwindcss": "^1.9",
+        "vue": "^2.6",
+        "vue-router": "^3.4",
+        "vue-template-compiler": "^2.6"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {}
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "dependencies": {}
+    "dependencies": {}
 }
