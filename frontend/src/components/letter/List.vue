@@ -9,30 +9,32 @@
                 </div>
             </div>
 
-            <div class="flex-1 max-h-screen overflow-y-auto">
-                <table class="font-medium w-full">
-                    <thead>
-                    <tr>
-                        <th>Nr</th>
-                        <th>Von</th>
-                        <th>An</th>
-                        <th>Datum</th>
-                        <th>Ort</th>
-                        <th>Typ</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="letter in letters" :key="letter.number" @click="goToLetter(letter)">
-                        <td v-text="letter.number"></td>
-                        <td v-text="letter.sent.person.ref"></td>
-                        <td v-text="letter.received.person.ref"></td>
-                        <td class="cell-muted" v-text="letter.date"></td>
-                        <td class="cell-muted" v-text="letter.sent.place.ref"></td>
-                        <td class="cell-muted"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <Loading :loading="loading">
+                <div class="flex-1 max-h-screen overflow-y-auto">
+                    <table class="font-medium w-full">
+                        <thead>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Von</th>
+                            <th>An</th>
+                            <th>Datum</th>
+                            <th>Ort</th>
+                            <th>Typ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="letter in letters" :key="letter.number" @click="goToLetter(letter)">
+                            <td v-text="letter.number"></td>
+                            <td v-text="letter.sent.person.ref"></td>
+                            <td v-text="letter.received.person.ref"></td>
+                            <td class="cell-muted" v-text="letter.date"></td>
+                            <td class="cell-muted" v-text="letter.sent.place.ref"></td>
+                            <td class="cell-muted"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </Loading>
         </div>
     </div>
 </template>
@@ -41,15 +43,18 @@
 import axios from 'axios'
 
 import ListFilter from './ListFilter'
+import Loading from './../Loading'
 
 export default {
     name: 'LetterList',
     components: {
-        ListFilter
+        ListFilter,
+        Loading
     },
     data () {
         return {
-            letters: []
+            letters: [],
+            loading: true
         }
     },
     props: {
@@ -65,6 +70,7 @@ export default {
         // Check if the given letters should be used
         if (this.lettersLocal.length > 0) {
             this.letters = this.lettersLocal
+            this.loading = false
             return
         }
 
@@ -77,6 +83,9 @@ export default {
             })
             .catch(function (err) {
                 that.displayAxiosError(err)
+            })
+            .then(function () {
+                that.loading = false
             })
     },
     mounted () {

@@ -1,32 +1,35 @@
 <template>
     <div>
-        <div class="flex flex-wrap lg:flex-no-wrap justify-between">
-            <h2 v-if="details" class="flex-grow">{{ details.title }}</h2>
+        <Loading :loading="loading">
+            <div class="flex flex-wrap lg:flex-no-wrap justify-between">
+                <h2 v-if="details" class="flex-grow">{{ details.title }}</h2>
 
-            <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">
-                <LetterHighlighter></LetterHighlighter>
-            </div>
-        </div>
-
-        <div class="flex flex-wrap lg:-mx-6 pb-24">
-            <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
-                <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles"></LetterFacsimile>
+                <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">
+                    <LetterHighlighter></LetterHighlighter>
+                </div>
             </div>
 
-            <div class="w-full lg:w-1/2 lg:px-6">
-                <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized"></LetterNormalized>
-                <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic"></LetterDiplomatic>
-                <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
-            </div>
-        </div>
+            <div class="flex flex-wrap lg:-mx-6 pb-24">
+                <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
+                    <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles"></LetterFacsimile>
+                </div>
 
-        <LetterToolbar :active="activeView" v-on:change-view="changeView"></LetterToolbar>
+                <div class="w-full lg:w-1/2 lg:px-6">
+                    <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized"></LetterNormalized>
+                    <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic"></LetterDiplomatic>
+                    <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
+                </div>
+            </div>
+
+            <LetterToolbar :active="activeView" v-on:change-view="changeView"></LetterToolbar>
+        </Loading>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 
+import Loading from './../../Loading'
 import LetterFacsimile from './Facsimile'
 import LetterNormalized from './Normalized'
 import LetterDiplomatic from './Diplomatic'
@@ -37,6 +40,7 @@ import LetterHighlighter from './Highlighter'
 export default {
     name: 'LetterDetail',
     components: {
+        Loading,
         LetterFacsimile,
         LetterNormalized,
         LetterDiplomatic,
@@ -57,8 +61,8 @@ export default {
             facsimiles: null,
             // Which views are active
             activeView: 'normalized',
-            // If data was loaded
-            loaded: false
+            // If data is loading
+            loading: true
         }
     },
     props: {
@@ -73,20 +77,13 @@ export default {
             type: Object,
             required: false,
             default: function () {
-                return {
-                    loaded: false,
-                    details: {},
-                    xmlContent: '',
-                    htmlNormalized: '',
-                    htmlDiplomatic: '',
-                    facsimiles: []
-                }
+                return null
             }
         }
     },
     created () {
         // Check if the given letter should be used
-        if (this.letterLocal.loaded === true) {
+        if (this.letterLocal !== null) {
             console.debug('Loaded letter details locally')
 
             this.details = this.letterLocal.details
@@ -94,7 +91,7 @@ export default {
             this.htmlNormalized = this.letterLocal.html.norm
             this.htmlDiplomatic = this.letterLocal.html.dipl
             this.facsimiles = this.letterLocal.facsimiles
-            this.loaded = true
+            this.loading = false
             return
         }
 
@@ -113,10 +110,12 @@ export default {
                 that.htmlNormalized = response.data.html.norm
                 that.htmlDiplomatic = response.data.html.dipl
                 that.facsimiles = response.data.facsimiles
-                that.loaded = true
             })
             .catch(function (err) {
                 that.displayAxiosError(err)
+            })
+            .then(function () {
+                that.loading = false
             })
     },
     mounted () {

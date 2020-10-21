@@ -32,6 +32,7 @@
         "eslint-plugin-vue": "^7.0",
         "pdfobject": "^2.2",
         "react-is": "^16.13",
+        "spinkit": "^2.0",
         "storybook-vue-router": "^1.0",
         "tailwindcss": "^1.9",
         "vue": "^2.6",
