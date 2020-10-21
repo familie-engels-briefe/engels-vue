@@ -1,6 +1,6 @@
 <template>
     <Loading :loading="loading">
-        <WordpressPage :html="html"></WordpressPage>
+        <BasePage :html="html"></BasePage>
     </Loading>
 </template>
 
@@ -8,13 +8,13 @@
 import axios from 'axios'
 
 import Loading from './../Loading'
-import WordpressPage from './Page'
+import BasePage from './BasePage'
 
 export default {
     name: 'WordpressFrontPage',
     components: {
         Loading,
-        WordpressPage,
+        BasePage,
     },
     data () {
         return {

@@ -14,13 +14,10 @@
                     <router-link to="/briefe">Briefe</router-link>
                 </li>
                 <li>
-                    <router-link to="/korrespondenzen">Korrespondenzen</router-link>
-                </li>
-                <li>
                     <router-link to="/register">Register</router-link>
                 </li>
                 <li>
-                    <router-link to="/historischer-kontext">Historischer Kontext</router-link>
+                    <router-link to="/kontext">Kontext</router-link>
                 </li>
                 <li>
                     <router-link to="/edition">Edition</router-link>

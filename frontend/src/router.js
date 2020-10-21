@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import LetterList from './components/letter/List'
 import LetterDetail from './components/letter/detail/Detail'
 import FrontPage from './components/wordpress/FrontPage'
-import NotFound from './components/NotFound'
+import Page from './components/wordpress/Page'
 
 Vue.use(VueRouter)
 
@@ -41,10 +41,17 @@ export const routes = [
     {
         // 404
         path: '*',
-        component: NotFound,
-        name: 'not-found',
+        component: Page,
+        name: 'wordpress',
+        props: function (route) {
+            return {
+                slug: route.path.replace('/', '')
+            }
+        },
         meta: {
-            title: 'Die Seite konnte leider nicht gefunden werden' + ROUTE_SUFFIX
+            title: function (to) {
+                return to.path.replace('/', '')
+            }
         }
     }
 ]
