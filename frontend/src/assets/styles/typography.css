@@ -3,3 +3,7 @@ body h2 {
 
     font-weight: 100;
 }
+
+::selection {
+    @apply text-white bg-gray-darker;
+}
