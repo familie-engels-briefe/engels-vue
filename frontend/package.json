@@ -14,8 +14,8 @@
     "devDependencies": {
         "@babel/core": "^7.12",
         "@fortawesome/fontawesome-svg-core": "^1.2",
-        "@fortawesome/pro-regular-svg-icons": "^5.15",
         "@fortawesome/free-brands-svg-icons": "^5.15",
+        "@fortawesome/pro-regular-svg-icons": "^5.15",
         "@fortawesome/vue-fontawesome": "^2.0",
         "@storybook/addon-actions": "^6.0",
         "@storybook/addon-essentials": "^6.0",
