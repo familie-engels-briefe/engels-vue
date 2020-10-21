@@ -14,6 +14,12 @@ The [api](api) caches and serves the xml data and facsimile pdfs. The frontend n
 
 The [frontend](frontend) is a vue single-page-application (spa) which displays the content from the api and wordpress.
 
+## Setup
+
+* Copy the `docker-compose.override.example.yml` file to `docker-compose.override.yml` and adjust the settings. 
+* Create your local nginx config files in `docker/nginx/conf.d.local/` (reference: https://github.com/familie-engels-briefe/webapp/wiki/nginx-Config). 
+* Now you can start every container via `docker-compose up`.
+
 ## Contact
 
 For technical questions: [Tim Helfensdörfer](https://github.com/thelfensdrfer)
