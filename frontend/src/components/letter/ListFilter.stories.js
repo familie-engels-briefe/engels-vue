@@ -11,10 +11,7 @@ const Template = (args, { argTypes }) => ({
     components: {
         ListFilter
     },
-    template: '' +
-        '<div class="w-20">' +
-        '<ListFilter :letters="lettersLocal"></ListFilter>' +
-        '</div>',
+    template: '<ListFilter :letters="lettersLocal"></ListFilter>',
     props: Object.keys(argTypes)
 })
 

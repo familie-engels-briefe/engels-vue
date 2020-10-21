@@ -52,8 +52,10 @@ module.exports = {
                 ],
                 serif: ['Playfair Display', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
             }
-        },
-        variants: {},
-        plugins: []
-    }
+        }
+    },
+    variants: {
+        backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    },
+    plugins: []
 }

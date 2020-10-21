@@ -1,12 +1,17 @@
 <template>
-    <div class="text-gray-dark border border-gray-dark rounded hover:border-gray hover:text-gray px-2 py-1 cursor-pointer">
+    <Button>
         Filter <font-awesome-icon :icon="['far', 'filter']"></font-awesome-icon>
-    </div>
+    </Button>
 </template>
 
 <script>
+import Button from './../Button'
+
 export default {
-    name: 'ListFilter'
+    name: 'ListFilter',
+    components: {
+        Button
+    }
 }
 </script>
 
