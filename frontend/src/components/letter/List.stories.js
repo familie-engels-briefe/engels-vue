@@ -1,6 +1,6 @@
 import './../../mixins/urlbuilder'
 import List from './List'
-import lettersLocal from './../../data/letters.js'
+import lettersLocal from '../../data/letter/all.js'
 
 export default {
     title: 'Letter/List',

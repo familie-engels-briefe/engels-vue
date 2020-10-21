@@ -1,6 +1,6 @@
 import './../../../mixins/urlbuilder'
 import Detail from './Detail'
-import letterLocale from './../../../data/letter-001.js'
+import letterLocale from './../../../data/letter/001.js'
 
 export default {
     title: 'Letter/Detail',

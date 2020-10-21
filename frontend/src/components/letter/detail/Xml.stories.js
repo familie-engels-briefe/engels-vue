@@ -1,6 +1,6 @@
 import './../../../mixins/urlbuilder'
 import XmlComponent from './Xml'
-import letterLocale from './../../../data/letter-001.js'
+import letterLocale from './../../../data/letter/001.js'
 
 export default {
     title: 'Letter/Detail/Tabs',
