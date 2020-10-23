@@ -50,6 +50,7 @@ class LetterController
                 'version' => $letter->data->version,
                 'editor' => $letter->data->editor,
                 'date' => $letter->data->date,
+                'doctype' => $letter->data->doctype,
                 'title' => $letter->data->title,
                 'sent' => $letter->data->sent,
                 'received' => $letter->data->received,

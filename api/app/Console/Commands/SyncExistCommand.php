@@ -141,7 +141,7 @@ class SyncExistCommand extends Command
             throw new InvalidArgumentException('Only "dipl" and "norm" html types are allowed!');
         }
 
-        $url = 'api/letter/fe.' . $number . '/html/' . $type;
+        $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
         $response = $this->replication->createRequest($url, 'GET', [], false);
         if (!isset($response['body'])) {
             $this->error('Could not read body from ' . $type . ' letter html: ' . $url);

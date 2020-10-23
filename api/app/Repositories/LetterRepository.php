@@ -65,7 +65,7 @@ class LetterRepository
             'norm' => Cache::tags(['norm', 'html', $number])->get($number . '-html-norm', function () use ($number) {
                 $type = 'norm';
 
-                $url = 'api/letter/fe.' . $number . '/html/' . $type;
+                $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
                 $response = $this->replication->createRequest($url, 'GET', [], false);
                 if (!isset($response['body'])) {
                     Log::error('Could not read body from ' . $type . ' letter html: ' . $url);
@@ -78,7 +78,7 @@ class LetterRepository
             'dipl' => Cache::tags(['dipl', 'html', $number])->get($number . '-html-dipl', function () use ($number) {
                 $type = 'norm';
 
-                $url = 'api/letter/fe.' . $number . '/html/' . $type;
+                $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
                 $response = $this->replication->createRequest($url, 'GET', [], false);
                 if (!isset($response['body'])) {
                     Log::error('Could not read body from ' . $type . ' letter html: ' . $url);

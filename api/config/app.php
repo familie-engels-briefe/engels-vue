@@ -123,6 +123,11 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    /**
+     * Exist API version
+     */
+    'exist_api_version' => env('APP_EXIST_API_VERSION'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -171,7 +176,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
