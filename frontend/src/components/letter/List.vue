@@ -5,56 +5,55 @@
                 <h2>Übersicht aller Briefe</h2>
 
                 <div>
-                    <ListFilter></ListFilter>
+                    <ListFilter v-if="$store.state.loaded" v-on:filter="applyFilter"></ListFilter>
                 </div>
             </div>
 
-            <Loading :loading="loading">
-                <div class="flex-1 max-h-screen overflow-y-auto">
-                    <table class="font-medium w-full">
-                        <thead>
-                        <tr>
-                            <th>Nr</th>
-                            <th>Von</th>
-                            <th>An</th>
-                            <th>Datum</th>
-                            <th>Ort</th>
-                            <th>Typ</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="letter in letters" :key="letter.number" @click="goToLetter(letter)">
-                            <td v-text="letter.number"></td>
-                            <td v-text="letter.sent.person.ref"></td>
-                            <td v-text="letter.received.person.ref"></td>
-                            <td class="cell-muted" v-text="letter.date"></td>
-                            <td class="cell-muted" v-text="letter.sent.place.ref"></td>
-                            <td class="cell-muted"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </Loading>
+            <div class="flex-1 max-h-screen overflow-y-auto">
+                <table class="font-medium w-full">
+                    <thead>
+                    <tr>
+                        <th>Nr</th>
+                        <th>Von</th>
+                        <th>An</th>
+                        <th>Datum</th>
+                        <th>Ort</th>
+                        <th>Typ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="letter in letters" :key="letter.number" @click="goToLetter(letter)">
+                        <td v-text="letter.number"></td>
+                        <td v-text="personName(letter.sent.person.ref)"></td>
+                        <td v-text="personName(letter.received.person.ref)"></td>
+                        <td class="cell-muted" v-text="formatDate(letter.date)"></td>
+                        <td class="cell-muted" v-text="placeName(letter.sent.place.ref)"></td>
+                        <td class="cell-muted"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import moment from 'moment'
 
 import ListFilter from './ListFilter'
-import Loading from './../Loading'
 
 export default {
     name: 'LetterList',
     components: {
-        ListFilter,
-        Loading
+        ListFilter
     },
     data () {
         return {
-            letters: [],
-            loading: true
+            filter: {
+                sender: [],
+                receiver: [],
+                place: []
+            }
         }
     },
     props: {
@@ -65,28 +64,6 @@ export default {
                 return []
             }
         }
-    },
-    created () {
-        // Check if the given letters should be used
-        if (this.lettersLocal.length > 0) {
-            this.letters = this.lettersLocal
-            this.loading = false
-            return
-        }
-
-        // Otherwise fetch letters from the api
-        let that = this
-
-        axios.get(this.createApiUrl('letters'))
-            .then(function (response) {
-                that.letters = response.data.data.letter
-            })
-            .catch(function (err) {
-                that.displayAxiosError(err)
-            })
-            .then(function () {
-                that.loading = false
-            })
     },
     mounted () {
         console.debug('Mounted Letter/List')
@@ -99,6 +76,42 @@ export default {
                     number: letter.number
                 }
             })
+        },
+        applyFilter (filter) {
+            console.log(filter)
+            this.filter = filter
+        },
+        personName (id) {
+            const person = this.$store.getters.getPersonById(id.replace('#', ''))
+
+            if (person) {
+                return person.name
+            } else {
+                return 'Unbekannt'
+            }
+        },
+        placeName (id) {
+            const place = this.$store.getters.getPlaceById(id.replace('#', ''))
+
+            if (place) {
+                return place.name
+            } else {
+                return 'Unbekannt'
+            }
+        },
+        formatDate (date) {
+            return moment(date).format('DD.MM.YYYY')
+        }
+    },
+    computed: {
+        letters () {
+            // Check if the given letters should be used
+            if (this.lettersLocal.length > 0) {
+                return this.lettersLocal
+            }
+
+            // Otherwise take data from store
+            return this.$store.getters.filterLetters(this.filter)
         }
     }
 }

@@ -20,6 +20,7 @@ export default {
         return {
             id: null,
             html: null,
+            title: null,
             loading: true
         }
     },
@@ -48,6 +49,9 @@ export default {
                     if (data.data && data.data.length > 0) {
                         that.id = data.data[0].id
                         that.html = data.data[0].content.rendered
+                        that.title = data.data[0].title.rendered
+
+                        document.title = that.title
                     } else {
                         that.html = '<p class="font-bold">Die Seite gibt es leider nicht.</p>'
                     }

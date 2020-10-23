@@ -1,5 +1,5 @@
 {
-    "name": "frontend",
+    "name": "engels",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -17,6 +17,7 @@
         "@fortawesome/free-brands-svg-icons": "^5.15",
         "@fortawesome/pro-regular-svg-icons": "^5.15",
         "@fortawesome/vue-fontawesome": "^2.0",
+        "@johmun/vue-tags-input": "^2.1",
         "@storybook/addon-actions": "^6.0",
         "@storybook/addon-essentials": "^6.0",
         "@storybook/addon-links": "^6.0",
@@ -31,6 +32,7 @@
         "core-js": "^3.6",
         "eslint": "^7.11",
         "eslint-plugin-vue": "^7.0",
+        "moment": "^2.29",
         "pdfobject": "^2.2",
         "react-is": "^16.13",
         "spinkit": "^2.0",
@@ -38,7 +40,8 @@
         "tailwindcss": "^1.9",
         "vue": "^2.6",
         "vue-router": "^3.4",
-        "vue-template-compiler": "^2.6"
+        "vue-template-compiler": "^2.6",
+        "vuex": "^3.5"
     },
     "eslintConfig": {
         "root": true,
