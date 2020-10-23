@@ -5,7 +5,7 @@
                 <h2>Übersicht aller Briefe</h2>
 
                 <div>
-                    <ListFilter v-if="$store.state.loaded" v-on:filter="applyFilter"></ListFilter>
+                    <ListFilter v-if="$store.state.loaded"></ListFilter>
                 </div>
             </div>
 
@@ -22,13 +22,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="letter in letters" :key="letter.number" @click="goToLetter(letter)">
+                    <tr v-for="letter in $store.getters.filterdLetters" :key="letter.number" @click="goToLetter(letter)">
                         <td v-text="letter.number"></td>
-                        <td v-text="personName(letter.sent.person.ref)"></td>
-                        <td v-text="personName(letter.received.person.ref)"></td>
+                        <td v-text="letter.sent.person.name"></td>
+                        <td v-text="letter.received.person.name"></td>
                         <td class="cell-muted" v-text="formatDate(letter.date)"></td>
-                        <td class="cell-muted" v-text="placeName(letter.sent.place.ref)"></td>
-                        <td class="cell-muted"></td>
+                        <td class="cell-muted" v-text="letter.sent.place.name"></td>
+                        <td class="cell-muted" v-text="letter.doctypeName"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -47,24 +47,6 @@ export default {
     components: {
         ListFilter
     },
-    data () {
-        return {
-            filter: {
-                sender: [],
-                receiver: [],
-                place: []
-            }
-        }
-    },
-    props: {
-        lettersLocal: {
-            type: Array,
-            required: false,
-            default: function () {
-                return []
-            }
-        }
-    },
     mounted () {
         console.debug('Mounted Letter/List')
     },
@@ -77,41 +59,8 @@ export default {
                 }
             })
         },
-        applyFilter (filter) {
-            console.log(filter)
-            this.filter = filter
-        },
-        personName (id) {
-            const person = this.$store.getters.getPersonById(id.replace('#', ''))
-
-            if (person) {
-                return person.name
-            } else {
-                return 'Unbekannt'
-            }
-        },
-        placeName (id) {
-            const place = this.$store.getters.getPlaceById(id.replace('#', ''))
-
-            if (place) {
-                return place.name
-            } else {
-                return 'Unbekannt'
-            }
-        },
         formatDate (date) {
             return moment(date).format('DD.MM.YYYY')
-        }
-    },
-    computed: {
-        letters () {
-            // Check if the given letters should be used
-            if (this.lettersLocal.length > 0) {
-                return this.lettersLocal
-            }
-
-            // Otherwise take data from store
-            return this.$store.getters.filterLetters(this.filter)
         }
     }
 }

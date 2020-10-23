@@ -61,13 +61,3 @@ export const getPersonName = function (person) {
         return null
     }
 }
-
-export const getAutocompletePersons = function (state) {
-    return state.persons.map(function (person) {
-            return {
-                id: person['xml:id'],
-                text: person.name
-            }
-        })
-}
-

@@ -24,24 +24,28 @@
                     name="sender"
                     placeholder="Absender..."
                     title="Absender"
-                    :autocomplete-items="autocompletePersons"
-                    v-on:changed-tags="setFilter">
+                    :autocomplete-items="$store.getters.senders">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
                     name="receiver"
                     placeholder="Empfänger..."
                     title="Empfänger"
-                    :autocomplete-items="autocompletePersons"
-                    v-on:changed-tags="setFilter">
+                    :autocomplete-items="$store.getters.receivers">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
                     name="place"
                     placeholder="Schreibort..."
                     title="Schreibort"
-                    :autocomplete-items="autocompletePlaces"
-                    v-on:changed-tags="setFilter">
+                    :autocomplete-items="$store.getters.places">
+                </ListFilterSearch>
+                <div class="my-2 border-b border-gray-light"></div>
+                <ListFilterSearch
+                    name="doctype"
+                    placeholder="Typ..."
+                    title="Typ"
+                    :autocomplete-items="$store.getters.doctypes">
                 </ListFilterSearch>
             </div>
         </transition>
@@ -60,21 +64,7 @@ export default {
     },
     data () {
         return {
-            showFilter: false,
-            filter: {
-                sender: [],
-                receiver: [],
-                place: []
-            },
-            autocompletePersons: this.$store.getters.autocompletePersons,
-            autocompletePlaces: this.$store.getters.autocompletePlaces
-        }
-    },
-    methods: {
-        setFilter (filter) {
-            this.filter[filter.type] = filter.tags
-
-            this.$emit('filter', this.filter)
+            showFilter: false
         }
     }
 }

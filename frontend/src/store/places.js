@@ -6,11 +6,6 @@ export const getPlaceName = function (place) {
     }
 }
 
-export const getAutocompletePlaces = function (state) {
-    return state.places.map(function (place) {
-            return {
-                id: place['xml:id'],
-                text: place.name
-            }
-        })
+export const getAutocompletePlaces = function () {
+    return []
 }

@@ -38,7 +38,7 @@ export default {
     },
     watch: {
         facsimiles () {
-            console.log('Changed facs')
+            console.debug('Changed facsimile')
 
             this.displayPdf()
         }

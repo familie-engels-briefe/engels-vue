@@ -33,6 +33,7 @@
 
 <script>
 import VueTagsInput from '@johmun/vue-tags-input'
+import _ from 'lodash'
 
 export default {
     name: 'ListFilterSearch',
@@ -78,26 +79,21 @@ export default {
 
             return icon
         },
-        /**
-         * Filter already used tags.
-         *
-         * @returns {Array}
-         */
         unusedTags () {
             const that = this
 
-            return this.autocompleteItems.filter(function (usedTag) {
-                if (typeof usedTag.text !== 'string') {
+            return _.cloneDeep(this.autocompleteItems.filter(function (usedTag) {
+                if (typeof usedTag.text === 'undefined') {
                     return false
                 }
 
                 return usedTag.text.toLowerCase().indexOf(that.tag.toLowerCase()) !== -1
-            })
+            }))
         }
     },
     methods: {
         changedTags (tags) {
-            this.$emit('changed-tags', {
+            this.$store.commit('updateFilter', {
                 type: this.name,
                 tags: tags
             })
