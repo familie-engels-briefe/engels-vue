@@ -27,6 +27,7 @@ let $letters :=
             let $uri := concat($data-collection, "/", $resource-name)
             let $doc := doc($uri)
             let $number := replace($doc/tei:TEI/@xml:id, "[fe.^]*", "")
+            let $doctype := if ($doc/tei:TEI/@*[name()='engels:doctype']) then $doc/tei:TEI/@*[name()='engels:doctype'] else ""
             (: Filter xml documents in collection :)
             where fn:substring-after($resource-name, ".") = 'xml'
             (: Filter by person send/receive :)
@@ -46,7 +47,8 @@ let $letters :=
                     version="{if ($doc/tei:TEI/@n) then $doc/tei:TEI/@n else ""}"
                     (: editor="{extract:getEditorName($doc)}" :)
                     name="{util:unescape-uri($resource-name, "UTF-8")}"
-                    date="{extract:getSenderDate($doc)}">
+                    date="{extract:getSenderDate($doc)}"
+                    doctype="{$doctype}">
                     {
                         $doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()
                     }
