@@ -14,7 +14,7 @@
             @enter="enter"
             @after-enter="afterEnter"
             @leave="leave">
-            <div class="relative will-change-height" v-show="active">
+            <div class="relative will-change-height" :class="classes" v-show="active">
                 <span class="absolute icon-input">
                     <font-awesome-icon :icon="['far', 'search']"></font-awesome-icon>
                 </span>
@@ -55,6 +55,9 @@ export default {
         },
         autocompleteItems: {
             type: Array,
+            required: true
+        },
+        classes: {
             required: true
         }
     },
@@ -157,6 +160,10 @@ input[type="search"]::placeholder {
 
 /deep/ .ti-tag {
     @apply text-base;
+}
+
+/deep/ .ti-input {
+    @apply rounded relative z-10;
 }
 
 .expand-enter-active,

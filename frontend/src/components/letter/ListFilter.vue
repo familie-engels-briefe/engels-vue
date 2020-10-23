@@ -24,28 +24,32 @@
                     name="sender"
                     placeholder="Absender..."
                     title="Absender"
-                    :autocomplete-items="$store.getters.senders">
+                    :autocomplete-items="$store.getters.senders"
+                    :classes="'z-40'">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
                     name="receiver"
                     placeholder="Empfänger..."
                     title="Empfänger"
-                    :autocomplete-items="$store.getters.receivers">
+                    :autocomplete-items="$store.getters.receivers"
+                    :classes="'z-30'">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
                     name="place"
                     placeholder="Schreibort..."
                     title="Schreibort"
-                    :autocomplete-items="$store.getters.places">
+                    :autocomplete-items="$store.getters.places"
+                    :classes="'z-20'">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
                     name="doctype"
                     placeholder="Typ..."
                     title="Typ"
-                    :autocomplete-items="$store.getters.doctypes">
+                    :autocomplete-items="$store.getters.doctypes"
+                    :classes="'z-10'">
                 </ListFilterSearch>
             </div>
         </transition>
