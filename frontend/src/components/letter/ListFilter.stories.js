@@ -1,4 +1,5 @@
 import './../../mixins/urlbuilder'
+import store from './../../store/index'
 import ListFilter from './ListFilter'
 import lettersLocal from '../../data/letter/all.js'
 
@@ -11,6 +12,7 @@ const Template = (args, { argTypes }) => ({
     components: {
         ListFilter
     },
+    store: store,
     template: '' +
         '<div class="w-96">' +
         '<ListFilter :letters="lettersLocal"></ListFilter>' +

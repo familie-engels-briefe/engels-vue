@@ -3,7 +3,7 @@ import FacsimileComponent from './Facsimile'
 import letterLocale from './../../../data/letter/001.js'
 
 export default {
-    title: 'Letter/Detail/Tabs',
+    title: 'Letter/Detail/Facsimile',
     component: FacsimileComponent,
 }
 
@@ -18,8 +18,8 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Facsimile = Template.bind({})
+export const Default = Template.bind({})
 
-Facsimile.args = {
+Default.args = {
     facsimiles: letterLocale.facsimiles
 }

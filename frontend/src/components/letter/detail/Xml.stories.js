@@ -3,7 +3,7 @@ import XmlComponent from './Xml'
 import letterLocale from './../../../data/letter/001.js'
 
 export default {
-    title: 'Letter/Detail/Tabs',
+    title: 'Letter/Detail/Xml',
     component: XmlComponent,
 }
 
@@ -18,8 +18,8 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Xml = Template.bind({})
+export const Default = Template.bind({})
 
-Xml.args = {
+Default.args = {
     xml: letterLocale.xml
 }

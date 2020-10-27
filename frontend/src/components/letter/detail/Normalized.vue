@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-html="html"></div>
+        <div v-html="html" class="letter letter-normalized"></div>
     </div>
 </template>
 
@@ -17,5 +17,11 @@ export default {
 </script>
 
 <style scoped>
+.letter-normalized {
+    @apply font-letter-serif;
+}
 
+/deep/ [rendition="#g.rend.script.latin"] {
+    @apply font-letter-sans;
+}
 </style>

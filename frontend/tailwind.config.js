@@ -48,9 +48,38 @@ module.exports = {
                     '"Apple Color Emoji"',
                     '"Segoe UI Emoji"',
                     '"Segoe UI Symbol"',
-                    '"Noto Color Emoji"',
+                    '"Noto Color Emoji"'
                 ],
-                serif: ['Playfair Display', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+                serif: [
+                    'Playfair Display',
+                    'Georgia',
+                    'Cambria',
+                    '"Times New Roman"',
+                    'Times',
+                    'serif'
+                ],
+                'letter-sans': [
+                    'system-ui',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    '"Segoe UI"',
+                    'Roboto',
+                    '"Helvetica Neue"',
+                    'Arial',
+                    '"Noto Sans"',
+                    'sans-serif',
+                    '"Apple Color Emoji"',
+                    '"Segoe UI Emoji"',
+                    '"Segoe UI Symbol"',
+                    '"Noto Color Emoji"'
+                ],
+                'letter-serif': [
+                    'Georgia',
+                    'Cambria',
+                    '"Times New Roman"',
+                    'Times',
+                    'serif'
+                ]
             }
         }
     },

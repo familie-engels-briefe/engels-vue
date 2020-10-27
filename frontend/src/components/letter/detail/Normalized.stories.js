@@ -3,7 +3,7 @@ import NormalizedComponent from './Normalized'
 import letterLocale from './../../../data/letter/001.js'
 
 export default {
-    title: 'Letter/Detail/Tabs',
+    title: 'Letter/Detail/Normalized',
     component: NormalizedComponent,
 }
 
@@ -18,8 +18,8 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Normalized = Template.bind({})
+export const Default = Template.bind({})
 
-Normalized.args = {
+Default.args = {
     html: letterLocale.html.norm
 }
