@@ -11,12 +11,46 @@ export const concatFullName = function (name) {
         return null
     }
 
-    const forname = Array.isArray(name.forename)
+    let forename = Array.isArray(name.forename)
         ? name.forename.join(' ')
         : name.forename
-    const surname = name.surname
+    if (forename === null) {
+        forename = ''
+    }
 
-    return [forname, surname].join(' ')
+    let surname = Array.isArray(name.surname)
+        ? name.surname.join(' ')
+        : name.surname
+    if (surname === null) {
+        surname = ''
+    }
+
+    if (typeof forename === 'object') {
+        if (Array.isArray(forename['#text'])) {
+            forename['#text'] = forename['#text'].join(' ').trim()
+        }
+
+        forename = (forename['#text'] + forename['am']).replace('\n', '').trim()
+    }
+
+    if (typeof surname === 'object') {
+        if (!surname['#text']) {
+            surname['#text'] = ''
+        }
+        if (!surname['am']) {
+            surname['am'] = ''
+        }
+
+        surname = (surname['#text'] + surname['am']).replace('\n', '').trim()
+    }
+
+    let link = ''
+
+    if (name.nameLink) {
+        link = name.nameLink
+    }
+
+    return [forename, link, surname].join(' ').trim()
 }
 
 export const getPersonName = function (person) {
@@ -43,6 +77,7 @@ export const getPersonName = function (person) {
         })
 
         if (!reg) {
+            // If "reg" does not exist search for "full" name
             const full = names.find(function (name) {
                 return name.type && name.type === 'full'
             })

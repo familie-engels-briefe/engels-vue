@@ -3,6 +3,8 @@
 @import 'fonts.css';
 @import 'typography.css';
 @import 'wordpress.css';
+@import 'forms.css';
+@import 'tables.css';
 
 @tailwind components;
 

@@ -139,10 +139,6 @@ export default {
 </script>
 
 <style scoped>
-input[type="search"]::placeholder {
-    @apply text-gray-darker;
-}
-
 .icon-input {
     @apply text-gray-light;
 

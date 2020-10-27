@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import _ from 'lodash'
 import { getPersonName } from './persons'
 import { getPlaceName } from './places'
+import { getOrganisationName } from './organisations'
 
 Vue.use(Vuex)
 
@@ -10,6 +11,56 @@ const personDictionary = {}
 const placeDictionary = {}
 const doctypesDictionary = {
     'letter': 'Brief'
+}
+
+/**
+ * @param {String|Array} note
+ * @returns {Array}
+ */
+function getBacklinksFromNote (note) {
+    if (Array.isArray(note)) {
+        note = note.map(function (noteText) {
+            return noteText.replace('\n', '').trim()
+        }).join(',')
+    }
+
+    return note.split(',').map(function (backlink) {
+        return backlink.trim()
+    })
+}
+
+/**
+ * @param {object} element
+ * @returns {[]}
+ */
+function getBacklinks (element) {
+    if (!element.note) {
+        return []
+    }
+
+    if (typeof element.note === 'object' && element.note['#text']) {
+        return getBacklinksFromNote(element.note['#text'])
+    }
+
+    if (Array.isArray(element.note)) {
+        const backlinks = element.note.filter(function (note) {
+            return note.type === 'backlinks'
+        })
+
+        if (backlinks.length > 0 && backlinks[0]['#text']) {
+            return getBacklinksFromNote(backlinks[0]['#text'])
+        }
+    }
+
+    console.error('Could not read backlinks from', element)
+
+    return []
+}
+
+function getBacklinsFiltered (element) {
+    return getBacklinks(element).filter(function (backlink) {
+        return backlink.trim() !== ''
+    })
 }
 
 const store = new Vuex.Store({
@@ -203,11 +254,19 @@ const store = new Vuex.Store({
             state.letters.push(...letters)
         },
         setOrganisations (state, organisations) {
+            organisations = organisations.map(function (organisation) {
+                organisation.name = getOrganisationName(organisation) ?? 'Unbekannt'
+                organisation.letters = getBacklinsFiltered(organisation) ?? []
+
+                return organisation
+            })
+
             state.organisations.push(...organisations)
         },
         setPersons (state, persons) {
             persons = persons.map(function (person) {
                 person.name = getPersonName(person) ?? 'Unbekannt'
+                person.letters = getBacklinsFiltered(person) ?? []
 
                 return person
             })
@@ -217,6 +276,7 @@ const store = new Vuex.Store({
         setPlaces (state, places) {
             places = places.map(function (place) {
                 place.name = getPlaceName(place) ?? 'Unbekannt'
+                place.letters = getBacklinsFiltered(place) ?? []
 
                 return place
             })

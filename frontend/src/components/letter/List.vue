@@ -1,14 +1,14 @@
 <template>
-    <div>
-        <div class="flex flex-col">
-            <div class="flex lg:flex-row justify-between">
-                <h2>Übersicht aller Briefe</h2>
+    <div class="flex flex-col">
+        <div class="flex lg:flex-row justify-between">
+            <h2>Übersicht aller Briefe</h2>
 
-                <div>
-                    <ListFilter v-if="$store.state.loaded"></ListFilter>
-                </div>
+            <div>
+                <ListFilter v-if="$store.state.loaded"></ListFilter>
             </div>
+        </div>
 
+        <Loading :loading="!$store.state.loaded">
             <div class="flex-1 max-h-screen overflow-y-auto">
                 <table class="font-medium w-full">
                     <thead>
@@ -33,7 +33,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </Loading>
     </div>
 </template>
 
@@ -41,10 +41,12 @@
 import moment from 'moment'
 
 import ListFilter from './ListFilter'
+import Loading from "./../Loading"
 
 export default {
     name: 'LetterList',
     components: {
+        Loading,
         ListFilter
     },
     mounted () {
@@ -67,28 +69,7 @@ export default {
 </script>
 
 <style scoped>
-tr {
-    @apply border-b border-gray-light;
-}
-
-th {
-    @apply text-gray-dark font-medium p-2 text-left;
-}
-
-th,
-td {
-    @apply px-5 py-3;
-}
-
 tbody tr {
     @apply cursor-pointer;
-}
-
-tbody tr:hover {
-    @apply bg-gray-lighter;
-}
-
-.cell-muted {
-    @apply text-sm text-gray-dark;
 }
 </style>

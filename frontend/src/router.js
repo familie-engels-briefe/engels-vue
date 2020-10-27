@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import LetterList from './components/letter/List'
 import LetterDetail from './components/letter/detail/Detail'
+import RegisterList from './components/register/List'
 import FrontPage from './components/wordpress/FrontPage'
 import Page from './components/wordpress/Page'
 
@@ -36,6 +37,14 @@ export const routes = [
             title: function (to) {
                 return 'Brief ' + to.params.number + ROUTE_SUFFIX
             }
+        }
+    },
+    {
+        path: '/register',
+        component: RegisterList,
+        name: 'registers',
+        meta: {
+            title: 'Register' + ROUTE_SUFFIX
         }
     },
     {
