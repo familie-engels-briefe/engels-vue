@@ -13,6 +13,10 @@
 
 Route::get('/', 'DocumentationController@index')->name('documentation');
 
+Route::get('/debug-sentry', function () {
+    throw new Exception('Debug Sentry!');
+});
+
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'sync'], function () {
         Route::get('/', 'SyncController@index')->name('sync.index');

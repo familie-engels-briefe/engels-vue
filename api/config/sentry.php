@@ -4,8 +4,7 @@ return [
 
     'dsn' => env('SENTRY_LARAVEL_DSN'),
 
-    // capture release as git sha
-    // 'release' => trim(exec('git --git-dir ' . base_path('.git') . ' log --pretty="%h" -n1 HEAD')),
+    'environment' => env('SENTRY_ENVIRONMENT'),
 
     'breadcrumbs' => [
         // Capture Laravel logs in breadcrumbs
@@ -24,7 +23,10 @@ return [
         'command_info' => true,
     ],
 
-    // @see: https://docs.sentry.io/error-reporting/configuration/?platform=php#send-default-pii
     'send_default_pii' => false,
+
+    'traces_sample_rate' => (float)(env('SENTRY_TRACES_SAMPLE_RATE', 0.0)),
+
+    'controllers_base_namespace' => env('SENTRY_CONTROLLERS_BASE_NAMESPACE', 'App\\Http\\Controllers'),
 
 ];
