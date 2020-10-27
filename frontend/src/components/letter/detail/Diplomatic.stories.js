@@ -3,7 +3,7 @@ import DiplomaticComponent from './Diplomatic'
 import letterLocale from './../../../data/letter/001.js'
 
 export default {
-    title: 'Letter/Detail/Tabs',
+    title: 'Letter/Detail/Diplomatic',
     component: DiplomaticComponent,
 }
 
@@ -18,8 +18,8 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Diplomatic = Template.bind({})
+export const Default = Template.bind({})
 
-Diplomatic.args = {
+Default.args = {
     html: letterLocale.html.dipl
 }
