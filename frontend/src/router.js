@@ -6,10 +6,12 @@ import LetterDetail from './components/letter/detail/Detail'
 import RegisterList from './components/register/List'
 import FrontPage from './components/wordpress/FrontPage'
 import Page from './components/wordpress/Page'
+import DebugSentry from './components/DebugSentry'
 
 Vue.use(VueRouter)
 
-const ROUTE_SUFFIX = ' | Industriegeschichte Privat'
+const ROUTE_BASE_NAME = 'Industriegeschichte Privat'
+const ROUTE_SUFFIX = ' | ' + ROUTE_BASE_NAME
 
 export const routes = [
     {
@@ -48,6 +50,10 @@ export const routes = [
         }
     },
     {
+        path: '/debug-sentry',
+        component: DebugSentry
+    },
+    {
         // 404
         path: '*',
         component: Page,
@@ -71,6 +77,10 @@ const router = new VueRouter({
 
 router.afterEach((to) => {
     Vue.nextTick(() => {
+        if (!to.meta.title) {
+            document.title = ROUTE_BASE_NAME
+        }
+
         if (typeof to.meta.title === 'string') {
             document.title = to.meta.title
         } else {
