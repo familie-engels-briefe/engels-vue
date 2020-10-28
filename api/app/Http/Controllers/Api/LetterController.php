@@ -44,6 +44,10 @@ class LetterController
         return Cache::tags('api')->rememberForever('letter-index-' . $id, function () use ($repository, $id) {
             $letter = $repository->one($id)->getData();
 
+            if ($letter->success === false) {
+                abort($letter->code, $letter->error);
+            }
+
             $data = [];
             $data['details'] = [
                 'number' => $letter->data->number,
