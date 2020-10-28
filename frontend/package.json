@@ -9,7 +9,7 @@
         "lint": "vue-cli-service lint",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook",
-        "chromatic": "npx chromatic"
+        "chromatic": "npx chromatic --exit-zero-on-changes"
     },
     "devDependencies": {
         "@babel/core": "^7.12",

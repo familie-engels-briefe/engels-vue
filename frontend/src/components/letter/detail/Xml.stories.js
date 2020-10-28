@@ -21,5 +21,5 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({})
 
 Default.args = {
-    xml: letterLocale.xml
+    xml: letterLocale.xml.substring(0, 500)
 }
