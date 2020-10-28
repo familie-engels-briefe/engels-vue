@@ -25,15 +25,23 @@ export default {
     @apply font-letter-sans;
 }
 
-/deep/ [data-rend="underline"] {
+/deep/ [data-rend*="underline"] {
     @apply underline;
 }
 
-/deep/ .tei_expan[data-n="com"]::before {
-    content: ' [';
+/deep/ [data-rend*="sup"] {
+    vertical-align: super;
 }
 
-/deep/ .tei_expan[data-n="com"]::after {
+/deep/ [data-rend*="sub"] {
+    vertical-align: sub;
+}
+
+/deep/ .tei_ex::before {
+    content: '[';
+}
+
+/deep/ .tei_ex::after {
     content: ']';
 }
 
@@ -66,10 +74,6 @@ export default {
 }
 /deep/ .tei_choice[data-rendition="#g.enc.tagsdecl.suspension.type3"] .tei_expan {
     @apply hidden;
-}
-
-/deep/ [data-rend="sup"] {
-    vertical-align: super;
 }
 
 /deep/ .tei_unclear {
