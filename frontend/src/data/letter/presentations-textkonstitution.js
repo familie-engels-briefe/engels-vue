@@ -658,3 +658,41 @@ export const TexteingriffeInterpunktionHtml = `
     <span class="engels_lemmaExpl" data-annotId="annot.001" data-type="com" data-subtype="b">
         <span class="engels_topic" data-topicId="mark.003" data-type="rel"> 20.</span>
     </span>`
+
+export const TexteingriffeBedingteExpansionHtml = TexteingriffeInterpunktionHtml
+
+export const TexteingriffeErlaeuterndeExpansionenHtml = `
+    <span class="tei_choice">
+        <span class="tei_abbr" data-type="currency">
+            <span xmlns:v="http://exist-db.org/versioning" class="tei_g" data-ref="#enc.chardecl.currency.sr">
+                <span class="engels_lemmaExpl" data-annotId="annot.010" data-type="com" data-subtype="W">
+                    <span class="engels_topic" data-topicId="mark.001" data-type="W">Sr</span>
+                </span>
+            </span>
+        </span>
+        <span class="tei_expan" data-n="com">
+            <span class="engels_lemmaExpl" data-annotId="annot.010" data-type="com" data-subtype="W">
+                <span class="engels_topic" data-topicId="mark.001" data-type="W">Stüber</span>
+            </span>
+        </span>
+    </span>`
+
+export const TexteingriffeRekonstruierteZeichenHtml = `
+    Äußerlich ist es aber nun ungemein unruhig hier
+    <span data-info="WIP-GENERIC-SPAN" class="tei_damage" data-corresp="#enc.damageinterp.siegelausriss001">
+        <span xmlns:v="http://exist-db.org/versioning" class="tei_gap" data-reason="damage" data-quantity="1" data-unit="word" data-corresp="#supplied.text001"></span>
+        <span class="tei_supplied" data-id="supplied.text001" data-cert="high" data-reason="siegelausriss" data-resp="#pers.ed.rummel-ulrich">mein</span>
+    </span>
+    <span class="tei_rs" data-type="person" data-ref="#pers.partic.engels-johann-caspar-II">Bester</span>!
+    ich bin mitten im packen und werde
+    <span data-info="WIP-GENERIC-SPAN" class="tei_damage" data-corresp="#enc.damageinterp.siegelausriss001">
+        <span xmlns:v="http://exist-db.org/versioning" class="tei_gap" data-reason="siegelausriss" data-quantity="1" data-unit="word">
+            <span class="ed">Textverlust</span>
+        </span>
+    </span>
+    schwerlich
+    <span class="tei_choice">
+        <span class="tei_orig">heüte</span>
+        <span class="tei_corr" data-type="ortho">heute</span>
+    </span>
+    damit fertig werden;`

@@ -17,6 +17,9 @@ export default {
 </script>
 
 <style scoped>
+/**
+ * Simple formatting
+ */
 .letter-normalized {
     @apply font-letter-serif;
 }
@@ -37,11 +40,17 @@ export default {
     vertical-align: sub;
 }
 
-/deep/ .tei_ex::before {
+/**
+ * <choice></choice>
+ */
+
+/deep/ .tei_ex::before,
+/deep/ .tei_expan::before {
     content: '[';
 }
 
-/deep/ .tei_ex::after {
+/deep/ .tei_ex::after,
+/deep/ .tei_expan::after {
     content: ']';
 }
 
@@ -57,7 +66,8 @@ export default {
     @apply hidden;
 }
 
-/deep/ .tei_choice .tei_abbr:only-child {
+/deep/ .tei_choice .tei_abbr:only-child,
+/deep/ .tei_abbr[data-type="currency"] {
     @apply inline;
 }
 
@@ -76,6 +86,10 @@ export default {
     @apply hidden;
 }
 
+/**
+ * Missing / added content
+ */
+
 /deep/ .tei_unclear {
     @apply text-gray;
 }
@@ -89,5 +103,9 @@ export default {
 
 /deep/ .tei_gap {
     @apply italic;
+}
+
+/deep/ .tei_del {
+    @apply hidden;
 }
 </style>

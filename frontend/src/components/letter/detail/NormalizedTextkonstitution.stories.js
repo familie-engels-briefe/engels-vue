@@ -1,6 +1,5 @@
 import './../../../mixins/urlbuilder'
 import letterLocale from './../../../data/letter/001.js'
-import './../../../data/letter/presentations.js'
 import {
     AbbrevationenExpansionHtml,
     AbbrevationenSpezialHtml,
@@ -15,15 +14,18 @@ import {
     Suspensionszeichen1Html,
     Suspensionszeichen2Html,
     Suspensionszeichen3Html,
+    TexteingriffeBedingteExpansionHtml,
     TexteingriffeEmendationenHtml,
+    TexteingriffeErlaeuterndeExpansionenHtml,
     TexteingriffeInterpunktionHtml,
     TexteingriffeNormalisierungHtml,
+    TexteingriffeRekonstruierteZeichenHtml,
     TextverlustAllgemeinHtml,
     UnvollstaendigeZeichenHtml,
     WaehrungssysmboleHtml,
     ZeichenAndererOrtHtml,
     ZeichenHistorischHtml
-} from './../../../data/letter/presentations'
+} from './../../../data/letter/presentations-textkonstitution'
 import NormalizedComponent from './Normalized'
 
 function addCitationEllipsis(html) {
@@ -31,7 +33,7 @@ function addCitationEllipsis(html) {
 }
 
 export default {
-    title: 'Letter/Detail/Normalized',
+    title: 'Letter/Detail/Normalisiert/Textkonstitution',
     component: NormalizedComponent,
 }
 
@@ -176,4 +178,22 @@ export const TexteingriffeInterpunktion = Template.bind({})
 TexteingriffeInterpunktion.storyName = '1.10.2.2 Normalisierung von Interpunktionszeichen'
 TexteingriffeInterpunktion.args = {
     html: addCitationEllipsis(TexteingriffeInterpunktionHtml)
+}
+
+export const TexteingriffeBedingteExpansion = Template.bind({})
+TexteingriffeBedingteExpansion.storyName = '1.10.2.3 Bedingte Darstellung von Expansionen'
+TexteingriffeBedingteExpansion.args = {
+    html: addCitationEllipsis(TexteingriffeBedingteExpansionHtml)
+}
+
+export const TexteingriffeErlaeuterndeExpansionen = Template.bind({})
+TexteingriffeErlaeuterndeExpansionen.storyName = '1.10.2.4 Erläuternde Expansionen'
+TexteingriffeErlaeuterndeExpansionen.args = {
+    html: addCitationEllipsis(TexteingriffeErlaeuterndeExpansionenHtml)
+}
+
+export const TexteingriffeRekonstruierteZeichen = Template.bind({})
+TexteingriffeRekonstruierteZeichen.storyName = '1.10.3 Rekonstruierte Zeichen'
+TexteingriffeRekonstruierteZeichen.args = {
+    html: addCitationEllipsis(TexteingriffeRekonstruierteZeichenHtml)
 }
