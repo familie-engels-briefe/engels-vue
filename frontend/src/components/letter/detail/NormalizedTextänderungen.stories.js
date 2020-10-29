@@ -1,6 +1,9 @@
 import './../../../mixins/urlbuilder'
 import {
-    TilgungHtml
+    TextaenderungErsetzenHtml,
+    TextaenderungHinzufuegenHtml,
+    TextaenderungTilgungHtml,
+    TextaenderungUmstellungHtml
 } from '../../../data/letter/presentations-textänderungen'
 import NormalizedComponent from './Normalized'
 
@@ -24,8 +27,26 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Tilgung = Template.bind({})
-Tilgung.storyName = '2.1 Tilgungen'
-Tilgung.args = {
-    html: addCitationEllipsis(TilgungHtml)
+export const TextaenderungTilgung = Template.bind({})
+TextaenderungTilgung.storyName = '2.1 Tilgungen'
+TextaenderungTilgung.args = {
+    html: addCitationEllipsis(TextaenderungTilgungHtml)
+}
+
+export const TextaenderungUmstellung = Template.bind({})
+TextaenderungUmstellung.storyName = '2.2 Umstellungen'
+TextaenderungUmstellung.args = {
+    html: addCitationEllipsis(TextaenderungUmstellungHtml)
+}
+
+export const TextaenderungHinzufuegen = Template.bind({})
+TextaenderungHinzufuegen.storyName = '2.3 Hinzufügungen und ihre Position'
+TextaenderungHinzufuegen.args = {
+    html: addCitationEllipsis(TextaenderungHinzufuegenHtml)
+}
+
+export const TextaenderungErsetzen = Template.bind({})
+TextaenderungErsetzen.storyName = '2.3 Hinzufügungen und ihre Position'
+TextaenderungErsetzen.args = {
+    html: TextaenderungErsetzenHtml
 }

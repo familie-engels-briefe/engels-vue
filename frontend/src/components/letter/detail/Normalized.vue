@@ -44,13 +44,11 @@ export default {
  * <choice></choice>
  */
 
-/deep/ .tei_ex::before,
-/deep/ .tei_expan::before {
+/deep/ .tei_expan .tei_ex::before {
     content: '[';
 }
 
-/deep/ .tei_ex::after,
-/deep/ .tei_expan::after {
+/deep/ .tei_expan .tei_ex::after {
     content: ']';
 }
 
