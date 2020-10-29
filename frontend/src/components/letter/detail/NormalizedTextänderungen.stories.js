@@ -46,7 +46,7 @@ TextaenderungHinzufuegen.args = {
 }
 
 export const TextaenderungErsetzen = Template.bind({})
-TextaenderungErsetzen.storyName = '2.3 Hinzufügungen und ihre Position'
+TextaenderungErsetzen.storyName = '2.4 Ersetzungen'
 TextaenderungErsetzen.args = {
     html: TextaenderungErsetzenHtml
 }
