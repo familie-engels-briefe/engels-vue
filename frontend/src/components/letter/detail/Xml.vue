@@ -1,8 +1,12 @@
 <template>
-    <pre class="overflow-x-auto bg-gray-lighter p-4"><code v-text="xml"></code></pre>
+    <pre class="overflow-x-auto bg-gray-lighter p-4"><code v-text="xml" class="language-xml"></code></pre>
 </template>
 
 <script>
+import Prism from 'prismjs';
+import 'prismjs/components/prism-markup'
+import 'prismjs/themes/prism-tomorrow.css'
+
 export default {
     name: 'LetterXml',
     props: {
@@ -10,6 +14,11 @@ export default {
             type: String,
             required: true
         }
+    },
+    mounted () {
+        console.debug('Mounted Letter/Detail/Xml')
+
+        Prism.highlightAll()
     }
 }
 </script>
