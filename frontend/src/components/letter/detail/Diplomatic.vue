@@ -12,6 +12,9 @@ export default {
             type: String,
             required: true
         }
+    },
+    mounted () {
+        console.debug('Mounted Letter/Detail/Diplomatic')
     }
 }
 </script>
