@@ -52,7 +52,6 @@ class LetterController
             $data['details'] = [
                 'number' => $letter->data->number,
                 'version' => $letter->data->version,
-                'editor' => $letter->data->editor,
                 'date' => $letter->data->date,
                 'doctype' => $letter->data->doctype,
                 'title' => $letter->data->title,

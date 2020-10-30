@@ -21,7 +21,6 @@ return
     <letter
         number="{$number}"
         version="{if ($doc/tei:TEI/@n) then $doc/tei:TEI/@n else ""}"
-        editor="{extract:getEditorName($doc)}"
         date="{extract:getSenderDate($doc)}"
         doctype="{if ($doc/tei:TEI/@*[name()='engels:doctype']) then $doc/tei:TEI/@*[name()='engels:doctype'] else ""}">
         <title>{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()}</title>
