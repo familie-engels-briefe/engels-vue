@@ -40,7 +40,7 @@
         "moment": "^2.29",
         "pdfobject": "^2.2",
         "prismjs": "^1.22",
-        "react-is": "^16.13",
+        "react-is": "^17.0",
         "spinkit": "^2.0",
         "storybook-vue-router": "^1.0",
         "tailwindcss": "^1.9",
