@@ -50,7 +50,6 @@ export default {
 /deep/ .tei_expan .tei_ex::before {
     content: '[';
 }
-
 /deep/ .tei_expan .tei_ex::after {
     content: ']';
 }
@@ -108,5 +107,21 @@ export default {
 
 /deep/ .tei_del {
     @apply hidden;
+}
+
+/**
+ * Tables
+ */
+
+/deep/ table tr {
+    @apply border-0;
+}
+
+/deep/ table tr:hover {
+    @apply bg-transparent;
+}
+
+/deep/ table tr td {
+    @apply border border-dashed border-black;
 }
 </style>
