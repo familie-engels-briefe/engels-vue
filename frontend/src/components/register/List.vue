@@ -24,7 +24,7 @@
                         </td>
                         <td v-text="person.name"></td>
                         <td>
-                            <a v-for="letter in person.letters" :key="letter" class="cursor-pointer" @click="goToLetter(letter)">
+                            <a v-for="letter in person.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}
                             </a>
                         </td>
@@ -35,7 +35,7 @@
                         </td>
                         <td v-text="place.name"></td>
                         <td>
-                            <a v-for="letter in place.letters" :key="letter" class="cursor-pointer" @click="goToLetter(letter)">
+                            <a v-for="letter in place.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}
                             </a>
                         </td>
@@ -46,7 +46,7 @@
                         </td>
                         <td v-text="org.name"></td>
                         <td>
-                            <a v-for="letter in org.letters" :key="letter" class="cursor-pointer" @click="goToLetter(letter)">
+                            <a v-for="letter in org.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}
                             </a>
                         </td>
@@ -123,5 +123,10 @@ export default {
 </script>
 
 <style scoped>
-
+.backlink {
+    @apply inline-block py-1 px-2 my-1 mx-1 transition-colors duration-200;
+}
+.backlink:hover {
+    @apply cursor-pointer bg-gray-darker text-white transition-colors;
+}
 </style>
