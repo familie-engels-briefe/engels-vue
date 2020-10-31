@@ -76,10 +76,10 @@ export default {
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-    transition: opacity 0.5s ease-out;
+    @apply transition-opacity duration-200;
 }
 
 .fade-enter, .fade-leave-to {
-    opacity: 0;
+    @apply opacity-0;
 }
 </style>

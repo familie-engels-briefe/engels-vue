@@ -1,10 +1,12 @@
 <template>
     <div>
-        <div v-html="html" class="letter letter-normalized"></div>
+        <component :is="processedHtml" class="letter letter-normalized"></component>
     </div>
 </template>
 
 <script>
+import Person from './Person'
+
 export default {
     name: 'LetterNormalized',
     props: {
@@ -15,6 +17,34 @@ export default {
     },
     mounted () {
         console.debug('Mounted Letter/Detail/Normalized')
+    },
+    computed: {
+        processedHtml () {
+            const wrapper = document.createElement('div')
+            wrapper.innerHTML = this.html
+
+            // Replace persons with correcesponding components
+            Array.from(wrapper.querySelectorAll('.tei_persName')).forEach(function (person) {
+                const personNode = document.createElement('component')
+                personNode.setAttribute('is', 'Person')
+                personNode.setAttribute('id', person.getAttribute('data-ref'))
+                personNode.innerHTML = person.innerHTML
+
+                person.replaceWith(personNode)
+            })
+
+            return {
+                template: wrapper.outerHTML,
+                components: {
+                    Person
+                },
+                data () {
+                    return {
+                        Person
+                    }
+                }
+            }
+        }
     }
 }
 </script>

@@ -2,7 +2,7 @@ import Page from './Page'
 import frontpage from '../../data/wordpress/frontpage'
 
 export default {
-    title: 'Wordpress/BasePage',
+    title: 'Page/Wordpress/BasePage',
     component: Page,
 }
 

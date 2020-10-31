@@ -19,6 +19,7 @@
         "@fortawesome/pro-regular-svg-icons": "^5.15",
         "@fortawesome/vue-fontawesome": "^2.0",
         "@johmun/vue-tags-input": "^2.1",
+        "@popperjs/core": "^2.5",
         "@sentry/browser": "^5.27",
         "@sentry/integrations": "^5.27",
         "@sentry/tracing": "^5.27",

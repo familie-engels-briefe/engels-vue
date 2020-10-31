@@ -2,7 +2,7 @@
     <header class="flex flex-row py-4 mb-12">
         <div>
             <h1 class="text-2xl font-medium tracking-wide">
-                <router-link to="/">
+                <router-link to="/" title="Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)">
                     Industriegeschichte Privat
                 </router-link>
             </h1>

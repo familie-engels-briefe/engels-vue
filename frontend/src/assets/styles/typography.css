@@ -8,6 +8,10 @@ body h2 {
     font-weight: 100;
 }
 
+body p + p {
+    @apply mt-4;
+}
+
 ::selection {
     @apply text-white bg-gray-darker;
 }

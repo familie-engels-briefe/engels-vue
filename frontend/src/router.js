@@ -10,7 +10,7 @@ import DebugSentry from './components/DebugSentry'
 
 Vue.use(VueRouter)
 
-const ROUTE_BASE_NAME = 'Industriegeschichte Privat'
+const ROUTE_BASE_NAME = 'Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)'
 const ROUTE_SUFFIX = ' | ' + ROUTE_BASE_NAME
 
 export const routes = [
