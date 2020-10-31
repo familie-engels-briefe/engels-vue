@@ -7,12 +7,6 @@ import { getOrganisationName } from './organisations'
 
 Vue.use(Vuex)
 
-const personDictionary = {}
-const placeDictionary = {}
-const doctypesDictionary = {
-    'letter': 'Brief'
-}
-
 /**
  * @param {String|Array} note
  * @returns {Array}
@@ -76,6 +70,11 @@ const store = new Vuex.Store({
             receiver: [],
             place: [],
             doctype: []
+        },
+        personDictionary: {},
+        placeDictionary: {},
+        doctypesDictionary: {
+            'letter': 'Brief'
         }
     },
     getters: {
@@ -103,11 +102,11 @@ const store = new Vuex.Store({
                 }
             }), 'id')
         },
-        doctypes () {
-            return Object.keys(doctypesDictionary).map(function (id) {
+        doctypes (state) {
+            return Object.keys(state.doctypesDictionary).map(function (id) {
                 return {
                     id: id,
-                    text: doctypesDictionary[id]
+                    text: state.doctypesDictionary[id]
                 }
             })
         },
@@ -172,7 +171,7 @@ const store = new Vuex.Store({
             if (doctypes.length) {
                 for (let i = 0; i < doctypes.length; i++) {
                     filteredLetters.push(...letters.filter(function (letter) {
-                        return typeof doctypesDictionary[letter.doctype] !== 'undefined'
+                        return typeof state.doctypesDictionary[letter.doctype] !== 'undefined'
                     }))
                 }
             } else {
@@ -182,13 +181,26 @@ const store = new Vuex.Store({
 
             return letters
         },
+        getPersonByRef(state) {
+            return function (ref) {
+                ref = ref.replace('#', '')
+                console.log(ref, state.personDictionary, state.personDictionary[ref])
+                return state.personDictionary[ref] || null
+            }
+        }
     },
     mutations: {
-        setLoaded (state) {
-            const loaded = (state.letters.length > 0 &&
-                state.organisations.length > 0 &&
-                state.persons.length > 0 &&
-                state.places.length > 0)
+        setLoaded (state, force) {
+            let loaded
+
+            if (!force) {
+                loaded = (state.letters.length > 0 &&
+                    state.organisations.length > 0 &&
+                    state.persons.length > 0 &&
+                    state.places.length > 0)
+            } else {
+                loaded = true
+            }
 
             if (loaded) {
                 // When all data is loaded
@@ -199,13 +211,18 @@ const store = new Vuex.Store({
                 })))
 
                 // Create dictionaries for faster access
+                const persDict = {}
+                const placeDict = {}
+
                 for (let i = 0; i < state.persons.length; i++) {
-                    personDictionary[state.persons[i]['xml:id']] = state.persons[i]
+                    persDict[state.persons[i]['xml:id']] = state.persons[i]
                 }
+                Vue.set(state, 'personDictionary', persDict)
 
                 for (let i = 0; i < state.places.length; i++) {
-                    placeDictionary[state.places[i]['xml:id']] = state.places[i]
+                    state.placeDictionary[state.places[i]['xml:id']] = state.places[i]
                 }
+                Vue.set(state, 'placeDictionary', placeDict)
 
                 const letters = []
 
@@ -214,31 +231,31 @@ const store = new Vuex.Store({
                     const letter = state.letters[i]
 
                     // Set sender name
-                    const personSend = personDictionary[state.letters[i].sent.person.ref.replace('#', '')] || {
+                    const personSend = state.personDictionary[state.letters[i].sent.person.ref.replace('#', '')] || {
                         'name': 'Unbekannt'
                     }
                     letter.sent.person.name = personSend.name
 
                     // Set receiver name
-                    const personReceived = personDictionary[state.letters[i].received.person.ref.replace('#', '')] || {
+                    const personReceived = state.personDictionary[state.letters[i].received.person.ref.replace('#', '')] || {
                         'name': 'Unbekannt'
                     }
                     letter.received.person.name = personReceived.name
 
                     // Set sender place
-                    const placeSend = placeDictionary[state.letters[i].sent.place.ref.replace('#', '')] || {
+                    const placeSend = state.placeDictionary[state.letters[i].sent.place.ref.replace('#', '')] || {
                         'name': 'Unbekannt'
                     }
                     letter.sent.place.name = placeSend.name
 
                     // Set receiver place
-                    const placeReceived = placeDictionary[state.letters[i].received.place.ref.replace('#', '')] || {
+                    const placeReceived = state.placeDictionary[state.letters[i].received.place.ref.replace('#', '')] || {
                         'name': 'Unbekannt'
                     }
                     letter.received.place.name = placeReceived.name
 
                     // Set doctype
-                    letter.doctypeName = doctypesDictionary[state.letters[i].doctype] || 'Unbekannt'
+                    letter.doctypeName = state.doctypesDictionary[state.letters[i].doctype] || 'Unbekannt'
 
                     letters.push(letter)
                 }
@@ -246,6 +263,8 @@ const store = new Vuex.Store({
                 Vue.set(state, 'letters', letters)
 
                 console.debug('Data loaded')
+            } else {
+                console.warn('Not all data loaded yet!')
             }
 
             state.loaded = loaded

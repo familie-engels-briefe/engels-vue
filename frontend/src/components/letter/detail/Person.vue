@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="tooltip">{{ name }}</Tooltip>
+        <Tooltip :content="person.name || ''"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -13,17 +13,9 @@ export default {
         Tooltip
     },
     props: {
-        id: {
-            type: String,
+        person: {
+            type: Object,
             required: true
-        }
-    },
-    data () {
-        console.debug('Mounting person', this.id)
-
-        return {
-            tooltip: 'Details über ' + this.id,
-            name: this.id
         }
     }
 }

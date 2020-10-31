@@ -28,8 +28,6 @@ export default {
         }
     },
     mounted () {
-        console.log(this.$el)
-
         this.tooltip = createPopper(
             this.$el.querySelector('.tooltip-button'),
             this.$el.querySelector('.tooltip-content'),
@@ -62,13 +60,9 @@ export default {
     },
     methods: {
         showTooltip () {
-            console.debug('Show tooltip')
-
             this.visibleTooltip = true
         },
         hideTooltip () {
-            console.debug('Hide tooltip')
-
             this.visibleTooltip = false
         }
     }

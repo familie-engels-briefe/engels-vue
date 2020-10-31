@@ -20,6 +20,7 @@ export default {
     },
     computed: {
         processedHtml () {
+            const that = this
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
@@ -27,7 +28,16 @@ export default {
             Array.from(wrapper.querySelectorAll('.tei_persName')).forEach(function (person) {
                 const personNode = document.createElement('component')
                 personNode.setAttribute('is', 'Person')
-                personNode.setAttribute('id', person.getAttribute('data-ref'))
+                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
+                personNode.innerHTML = person.innerHTML
+
+                person.replaceWith(personNode)
+            })
+
+            Array.from(wrapper.querySelectorAll('.tei_rs[data-type="person"]')).forEach(function (person) {
+                const personNode = document.createElement('component')
+                personNode.setAttribute('is', 'Person')
+                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
                 personNode.innerHTML = person.innerHTML
 
                 person.replaceWith(personNode)
@@ -71,6 +81,10 @@ export default {
 
 /deep/ [data-rend*="sub"] {
     vertical-align: sub;
+}
+
+/deep/ .tooltip-button {
+    @apply border-b border-dashed border-gray;
 }
 
 /**
