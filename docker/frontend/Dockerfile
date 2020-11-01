@@ -24,6 +24,7 @@ ARG NPM_AUTH_TOKEN
 RUN touch .npmrc && \
     echo "@fortawesome:registry=https://npm.fontawesome.com/" >> .npmrc && \
     echo "//npm.fontawesome.com/:_authToken=$NPM_AUTH_TOKEN" >> .npmrc && \
+    cat .npmrc && \
     yarn install && \
     rm .npmrc
 
