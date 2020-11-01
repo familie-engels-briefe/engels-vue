@@ -1,12 +1,15 @@
 import './../../../mixins/urlbuilder'
+import store from './../../../store/index'
 import {
     TextverteilungAbsatzstrukturenHtml,
     TextverteilungBeschriftungUmschlaegeHtml,
     TextverteilungCloserDatumHtml,
     TextverteilungCloserHtml,
-    TextverteilungCloserInlineHtml, TextverteilungEinzuegeHtml,
+    TextverteilungCloserInlineHtml,
+    TextverteilungEinzuegeHtml,
     TextverteilungInterlinearHtml,
-    TextverteilungKustodenHtml, TextverteilungLeerraumHtml,
+    TextverteilungKustodenHtml,
+    TextverteilungLeerraumHtml,
     TextverteilungNichtLinearMarginalHtml,
     TextverteilungNichtLinearTextEinweisungHtml,
     TextverteilungNichtLinearTextLinearHtml,
@@ -15,7 +18,8 @@ import {
     TextverteilungOpenerAllgemeinHtml,
     TextverteilungOpenerInlineHtml,
     TextverteilungOpenerInlineSignifikantHtml,
-    TextverteilungPostskriptumHtml, TextverteilungSchreibrichtungHtml,
+    TextverteilungPostskriptumHtml,
+    TextverteilungSchreibrichtungHtml,
     TextverteilungTabellenHtml,
     TextverteilungWorttrennungenHtml,
     TextverteilungWritingSessionHtml
@@ -35,6 +39,7 @@ const Template = (args, { argTypes }) => ({
     components: {
         NormalizedComponent
     },
+    store: store,
     template: '' +
         '<div class="flex-grow max-w-6xl mx-auto px-8 md:px-4 lg:px-0">' +
         '<NormalizedComponent :html="html"></NormalizedComponent>' +

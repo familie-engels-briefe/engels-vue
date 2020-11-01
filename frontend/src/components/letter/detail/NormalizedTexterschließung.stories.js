@@ -1,7 +1,8 @@
 import './../../../mixins/urlbuilder'
 import store from './../../../store/index'
 import {
-    TexterschliessungPersonenHtml, TexterschliessungPersonenVerweisHtml
+    TexterschliessungPersonenHtml,
+    TexterschliessungPersonenVerweisHtml
 } from '../../../data/letter/presentations-texterschließung'
 import NormalizedComponent from './Normalized'
 
