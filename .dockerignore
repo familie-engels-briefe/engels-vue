@@ -12,7 +12,9 @@ api/storage/framework/views/
 api/storage/logs/
 api/storage/xquery/
 api/vendor/
+api/*.env*
 
+frontend/.env*
 frontend/dist/
 frontend/node_modules/
 frontend/.storybook/

@@ -17,7 +17,7 @@ The [frontend](frontend) is a vue single-page-application (spa) which displays t
 ## Setup
 
 * Copy the `docker-compose.override.example.yml` file to `docker-compose.override.yml` and adjust the settings. 
-* Create your local nginx config files in `docker/nginx/conf.d.local/` (reference: https://github.com/familie-engels-briefe/webapp/wiki/nginx-Config). 
+* Create your local nginx config files in `docker/nginx/conf.d/` (reference: https://github.com/familie-engels-briefe/webapp/wiki/nginx-Config). 
 * Now you can start every container via `docker-compose up`.
 
 ## Contact

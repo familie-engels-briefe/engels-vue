@@ -70,7 +70,7 @@ services:
     image: famileengelsbriefe/frontend:latest
     restart: "no"
     volumes:
-      - frontend-dist:/frontend/dist
+      - frontend-dist:/dist
 
   # Webserver proxy
   nginx:

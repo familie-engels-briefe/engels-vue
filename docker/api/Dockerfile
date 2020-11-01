@@ -58,4 +58,4 @@ USER engels
 VOLUME /api/storage/framework
 VOLUME /api/storage/logs
 
-CMD php-fpm
+CMD /api/start.sh

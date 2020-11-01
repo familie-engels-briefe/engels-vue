@@ -22,6 +22,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
+    volumes:
+      - ./api/.env:/api/.env:ro
 
   wordpress-mysql:
     ports:
@@ -41,17 +43,18 @@ services:
     command: redis-server --appendonly yes --requirepass secret
 
   frontend:
-    environment:
-      VUE_APP_API_BASE_URL: "http://api.familie-engels-briefe.de:8070"
-      VUE_APP_WORDPRESS_BASE_URL: "http://wordpress.familie-engels-briefe.de:8080"
-      VUE_APP_SENTRY_DSN: ""
-      VUE_APP_SENTRY_TRACE_SAMPLE_RATE: "0.01"
-      VUE_APP_ENVIRONMENT: "local"
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+      args:
+        VUE_APP_API_BASE_URL: "http://api.familie-engels-briefe.de:8070"
+        VUE_APP_WORDPRESS_BASE_URL: "http://wordpress.familie-engels-briefe.de:8080"
+        VUE_APP_SENTRY_DSN: ""
+        VUE_APP_SENTRY_TRACE_SAMPLE_RATE: "0.01"
+        VUE_APP_ENVIRONMENT: "local"
 
   nginx:
     volumes:
-      - ./docker/nginx/conf.d.local:/etc/nginx/conf.d:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
-      - 8070:8070
       - 8080:8080
-      - 8090:8090
