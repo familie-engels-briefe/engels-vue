@@ -10,13 +10,15 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-if (mix.inProduction()) {
-    console.log('Compiling for production...');
 
-    mix.setResourceRoot('/api');
-}
-
-mix.js('resources/js/app.js', 'public/js')
-    mix.postCss('resources/css/main.css', 'public/css', [
+mix
+    .setResourceRoot('../')
+    .js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/main.css', 'public/css', [
         require('tailwindcss'),
-    ]);
+    ])
+    .options({
+        terser: {
+            extractComments: false
+        }
+    });

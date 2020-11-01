@@ -20,6 +20,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "^7.17",
+        "laravel/ui": "^2.0",
         "sentry/sentry-laravel": "^2.1"
     },
     "require-dev": {
@@ -27,7 +28,6 @@
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9",
         "laravel/tinker": "^2.4",
-        "laravel/ui": "^2.0",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^4.2",
         "phpunit/phpunit": "^8.5"

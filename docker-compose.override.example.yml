@@ -1,9 +1,14 @@
 version: '3'
 
+# The override file extends/changes the original file in the following ways:
+# - Set multiple passwords
+# - Publish ports (for development)
+# - Use local nginx config
 services:
   exist:
     ports:
       - 8081:8080
+
   api-mysql:
     ports:
       - 3306:3306
@@ -12,6 +17,12 @@ services:
       MYSQL_USER: 'engels'
       MYSQL_PASSWORD: 'secret'
       MYSQL_ROOT_PASSWORD: 'secret'
+
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+
   wordpress-mysql:
     ports:
       - 3307:3306
@@ -20,8 +31,23 @@ services:
       MYSQL_USER: 'engels'
       MYSQL_PASSWORD: 'secret'
       MYSQL_ROOT_PASSWORD: 'secret'
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: ./docker/wordpress/Dockerfile
+
   redis:
     command: redis-server --appendonly yes --requirepass secret
+
+  frontend:
+    environment:
+      VUE_APP_API_BASE_URL: "http://api.familie-engels-briefe.de:8070"
+      VUE_APP_WORDPRESS_BASE_URL: "http://wordpress.familie-engels-briefe.de:8080"
+      VUE_APP_SENTRY_DSN: ""
+      VUE_APP_SENTRY_TRACE_SAMPLE_RATE: "0.01"
+      VUE_APP_ENVIRONMENT: "local"
+
   nginx:
     volumes:
       - ./docker/nginx/conf.d.local:/etc/nginx/conf.d:ro

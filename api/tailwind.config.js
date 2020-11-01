@@ -1,4 +1,7 @@
 module.exports = {
+    future: {
+        purgeLayersByDefault: true
+    },
     theme: {
         extend: {}
     },

@@ -9,6 +9,7 @@ volumes:
   api-storage-framework:
   api-storage-logs:
   api-mysql:
+  frontend-dist:
 
 services:
   # XML database
@@ -28,9 +29,7 @@ services:
 
   # Wordpress php
   wordpress:
-    build:
-      context: .
-      dockerfile: ./docker/wordpress/Dockerfile
+    image: famileengelsbriefe/wordpress:latest
     restart: unless-stopped
     depends_on:
       - wordpress-mysql
@@ -48,12 +47,9 @@ services:
 
   # Engels API
   api:
-    build:
-      context: .
-      dockerfile: ./docker/api/Dockerfile
+    image: famileengelsbriefe/api:latest
     restart: unless-stopped
     volumes:
-      - ./api:/api
       - api-storage-framework:/api/storage/framework
       - api-storage-logs:/api/storage/logs
     depends_on:
@@ -69,11 +65,19 @@ services:
     volumes:
       - redis-data:/data
 
+  # Build production ready frontend
+  frontend:
+    image: famileengelsbriefe/frontend:latest
+    restart: "no"
+    volumes:
+      - frontend-dist:/frontend/dist
+
   # Webserver proxy
   nginx:
     image: nginx:1.19-alpine
     restart: unless-stopped
     depends_on:
+      - frontend
       - wordpress
       - api
     volumes:
@@ -81,4 +85,4 @@ services:
       - ./wordpress:/wordpress:ro
       - wordpress-uploads:/wordpress/wp-content/uploads:ro
       - ./api/public:/api:ro
-      - ./frontend/dist:/frontend:ro
+      - frontend-dist:/frontend:ro
