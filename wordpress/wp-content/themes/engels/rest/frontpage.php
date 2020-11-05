@@ -4,7 +4,8 @@ add_action( 'rest_api_init', function () {
 	register_rest_route( 'engels/v1', '/frontpage/',
 		[
 			'methods'  => 'GET',
-			'callback' => 'engels_rest_frontpage'
+			'callback' => 'engels_rest_frontpage',
+			'permission_callback' => '__return_true',
 		]
 	);
 } );
@@ -17,7 +18,7 @@ function engels_rest_frontpage() {
 	$post = ( $pid > 0 ) ? get_post( $pid ) : null;
 
 	// No static frontpage is set
-	if ( ! is_a( $post, 'WP_Post' ) ) {
+	if ( ! $post instanceof \WP_Post ) {
 		return new WP_Error( 'wpse-error',
 			esc_html__( 'No Static Frontpage', 'wpse' ), [ 'status' => 404 ] );
 	}
