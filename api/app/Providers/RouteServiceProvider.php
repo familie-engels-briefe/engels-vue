@@ -6,6 +6,7 @@ use App\ExistDb\ExistDb;
 use App\Repositories\LetterRepository;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::pattern('letter', '[0-9]{3}');
+
+        URL::forceRootUrl(config('app.url'));
     }
 
     /**
