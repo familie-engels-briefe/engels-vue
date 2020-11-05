@@ -30,6 +30,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::pattern('letter', '[0-9]{3}');
 
+        if (config('app.env') === 'production') {
+            URL::forceScheme( 'https' );
+        }
+
         URL::forceRootUrl(config('app.url'));
     }
 
