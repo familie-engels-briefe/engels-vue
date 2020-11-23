@@ -84,5 +84,5 @@ services:
       -  ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./wordpress:/wordpress:ro
       - wordpress-uploads:/wordpress/wp-content/uploads:ro
-      - ./api/public:/api:ro
+      - ./api/public:/api/public:ro
       - frontend-dist:/frontend:ro

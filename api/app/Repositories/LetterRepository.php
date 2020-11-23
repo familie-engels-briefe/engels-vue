@@ -76,7 +76,7 @@ class LetterRepository
                 return null;
             }),
             'dipl' => Cache::tags(['dipl', 'html', $number])->get($number . '-html-dipl', function () use ($number) {
-                $type = 'norm';
+                $type = 'dipl';
 
                 $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
                 $response = $this->replication->createRequest($url, 'GET', [], false);

@@ -146,6 +146,8 @@ class SyncExistCommand extends Command
         if (!isset($response['body'])) {
             $this->error('Could not read body from ' . $type . ' letter html: ' . $url);
             $this->comment('');
+
+            Log::error('Could not read body from response: ' . serialize($response));
         } else {
             if (!$this->option('dry-run')) {
                 $key = $number . '-html-' . $type;

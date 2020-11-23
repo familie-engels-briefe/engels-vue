@@ -1,5 +1,5 @@
 <template>
-    <div class="text-gray-dark border border-gray-dark rounded hover:border-gray hover:text-gray px-2 py-1 cursor-pointer whitespace-no-wrap">
+    <div class="text-gray-dark border border-gray-dark rounded hover:border-gray hover:text-gray px-2 py-1 cursor-pointer whitespace-nowrap">
         Hervorhebungen <font-awesome-icon :icon="['far', 'highlighter']"></font-awesome-icon>
     </div>
 </template>

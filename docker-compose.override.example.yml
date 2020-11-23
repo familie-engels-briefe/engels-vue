@@ -55,7 +55,5 @@ services:
         NPM_AUTH_TOKEN: ""
 
   nginx:
-    volumes:
-      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
     ports:
       - 8080:8080

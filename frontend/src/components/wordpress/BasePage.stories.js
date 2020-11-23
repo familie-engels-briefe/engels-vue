@@ -1,16 +1,16 @@
-import Page from './Page'
+import BasePage from './BasePage'
 import frontpage from '../../data/wordpress/frontpage'
 
 export default {
-    title: 'Page/Wordpress/BasePage',
-    component: Page,
+    title: 'Page/Wordpress',
+    component: BasePage,
 }
 
 const Template = (args, { argTypes }) => ({
     components: {
-        Page
+        BasePage
     },
-    template: '<Page :html="html"></Page>',
+    template: '<BasePage :html="html"></BasePage>',
     props: Object.keys(argTypes)
 })
 

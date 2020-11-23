@@ -5,26 +5,26 @@ import {
     TextaenderungHinzufuegenHtml,
     TextaenderungTilgungHtml,
     TextaenderungUmstellungHtml
-} from '../../../data/letter/norm/presentations-textänderungen'
-import NormalizedComponent from './Normalized'
+} from '../../../data/letter/dipl/presentations-textänderungen'
+import DiplomaticComponent from './Diplomatic'
 
 function addCitationEllipsis(html) {
     return '[...] ' + html + ' [...]'
 }
 
 export default {
-    title: 'Letter/Detail/Normalisiert/Textänderungen',
-    component: NormalizedComponent,
+    title: 'Letter/Detail/Diplomatisch/Textänderungen',
+    component: DiplomaticComponent,
 }
 
 const Template = (args, { argTypes }) => ({
     components: {
-        NormalizedComponent
+        DiplomaticComponent
     },
     store: store,
     template: '' +
         '<div class="flex-grow max-w-6xl mx-auto px-8 md:px-4 lg:px-0">' +
-        '<NormalizedComponent :html="html"></NormalizedComponent>' +
+        '<DiplomaticComponent :html="html"></DiplomaticComponent>' +
         '</div>',
     props: Object.keys(argTypes)
 })

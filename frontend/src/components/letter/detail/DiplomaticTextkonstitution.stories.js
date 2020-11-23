@@ -28,26 +28,26 @@ import {
     ZeichenHistorischHtml,
     VarianteSchreibungenHtml,
     SperrungHtml
-} from '../../../data/letter/norm/presentations-textkonstitution'
-import NormalizedComponent from './Normalized'
+} from '../../../data/letter/dipl/presentations-textkonstitution'
+import DiplomaticComponent from './Diplomatic'
 
 function addCitationEllipsis(html) {
     return '[...] ' + html + ' [...]'
 }
 
 export default {
-    title: 'Letter/Detail/Normalisiert/Textkonstitution',
-    component: NormalizedComponent,
+    title: 'Letter/Detail/Diplomatisch/Textkonstitution',
+    component: DiplomaticComponent,
 }
 
 const Template = (args, { argTypes }) => ({
     components: {
-        NormalizedComponent
+        DiplomaticComponent
     },
     store: store,
     template: '' +
         '<div class="flex-grow max-w-6xl mx-auto px-8 md:px-4 lg:px-0">' +
-        '<NormalizedComponent :html="html"></NormalizedComponent>' +
+        '<DiplomaticComponent :html="html"></DiplomaticComponent>' +
         '</div>',
     props: Object.keys(argTypes)
 })
@@ -55,7 +55,7 @@ const Template = (args, { argTypes }) => ({
 export const Fonts = Template.bind({})
 Fonts.storyName = '1.2 Schrift'
 Fonts.args = {
-    html: letterLocale.html.norm
+    html: letterLocale.html.dipl
 }
 
 export const Waehrungssysmbole = Template.bind({})
@@ -109,7 +109,7 @@ VarianteSchreibungen.args = {
 export const NichtEindeutigeZeichen = Template.bind({})
 NichtEindeutigeZeichen.storyName = '1.4 Nicht eindeutig gelesene Zeichen'
 NichtEindeutigeZeichen.args = {
-    html: addCitationEllipsis(NichtEindeutigeZeichenHtml)
+    html: NichtEindeutigeZeichenHtml
 }
 
 export const NichtEntzifferbareZeichen = Template.bind({})

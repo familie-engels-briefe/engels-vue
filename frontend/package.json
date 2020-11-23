@@ -30,6 +30,7 @@
         "@vue/cli-plugin-babel": "^4.5",
         "@vue/cli-plugin-eslint": "^4.5",
         "@vue/cli-service": "^4.5",
+        "autoprefixer": "^9.8",
         "axios": "^0.21",
         "babel-eslint": "^10.1",
         "babel-loader": "^8.1",
@@ -40,11 +41,12 @@
         "lodash": "^4.17",
         "moment": "^2.29",
         "pdfobject": "^2.2",
+        "postcss": "^7.0",
         "prismjs": "^1.22",
         "react-is": "^17.0",
         "spinkit": "^2.0",
         "storybook-vue-router": "^1.0",
-        "tailwindcss": "^1.9",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat",
         "vue": "^2.6",
         "vue-router": "^3.4",
         "vue-template-compiler": "^2.6",
@@ -68,6 +70,5 @@
         "> 1%",
         "last 2 versions",
         "not dead"
-    ],
-    "dependencies": {}
+    ]
 }

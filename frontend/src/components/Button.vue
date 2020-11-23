@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="text-gray-dark border border-gray-dark bg-transparent rounded hover:bg-gray-lighter active:bg-gray px-2 py-1 cursor-pointer focus:outline-none focus:shadow-outline" :class="classes">
+    <button type="button" class="text-gray-dark border border-gray-dark bg-transparent rounded hover:bg-gray-lighter active:bg-gray px-2 py-1 cursor-pointer focus:outline-none focus:ring" :class="classes">
         <slot></slot>
     </button>
 </template>

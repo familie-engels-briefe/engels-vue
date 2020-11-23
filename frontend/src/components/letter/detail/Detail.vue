@@ -1,7 +1,7 @@
 <template>
     <div>
         <Loading :loading="loading">
-            <div class="flex flex-wrap lg:flex-no-wrap justify-between">
+            <div class="flex flex-wrap lg:flex-nowrap justify-between">
                 <h2 v-if="details" class="flex-grow">{{ details.title }}</h2>
 
                 <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">

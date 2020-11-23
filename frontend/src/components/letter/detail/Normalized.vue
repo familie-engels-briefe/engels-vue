@@ -43,6 +43,13 @@ export default {
                 person.replaceWith(personNode)
             })
 
+            // Show abbreviations when the expen part is "no" or "com"
+            Array.from(wrapper.querySelectorAll('.tei_choice .tei_expan[data-n="no"],.tei_choice .tei_expan[data-n="com"]')).forEach(function (expan) {
+                if (expan.closest('.tei_choice') && expan.closest('.tei_choice').querySelector('.tei_abbr')) {
+                    expan.closest('.tei_choice').querySelector('.tei_abbr').setAttribute('data-show', 'true')
+                }
+            })
+
             return {
                 template: wrapper.outerHTML,
                 components: {
@@ -91,57 +98,60 @@ export default {
  * <choice></choice>
  */
 
-/deep/ .tei_expan .tei_ex::before {
-    content: '[';
+/deep/ .tei_choice .tei_expan[data-n="com"]::before {
+    content: ' [';
 }
-/deep/ .tei_expan .tei_ex::after {
-    content: ']';
+/deep/ .tei_choice .tei_expan[data-n="com"]::after {
+    content: '] ';
+}
+
+/deep/ .tei_choice .tei_expan[data-n="no"] {
+    @apply hidden;
 }
 
 /deep/ .tei_choice .tei_orig {
     @apply hidden;
 }
 
-/deep/ .tei_choice .tei_orig:only-child {
-    @apply inline;
-}
-
 /deep/ .tei_choice .tei_abbr {
     @apply hidden;
 }
 
-/deep/ .tei_choice .tei_abbr:only-child,
-/deep/ .tei_abbr[data-type="currency"] {
+/deep/ .tei_choice .tei_abbr[data-show="true"] {
     @apply inline;
 }
 
-/deep/ .tei_choice[data-rendition="#g.enc.tagsdecl.suspension.type1"] .tei_abbr {
-    @apply hidden;
-}
-
-/deep/ .tei_choice[data-rendition="#g.enc.tagsdecl.suspension.type2"] .tei_abbr {
-    @apply hidden;
-}
-
-/deep/ .tei_choice[data-rendition="#g.enc.tagsdecl.suspension.type3"] .tei_abbr {
+/deep/ .tei_choice .tei_abbr[data-rendition="#g.enc.tagsdecl.suspension.type3"] {
     @apply inline;
-}
-/deep/ .tei_choice[data-rendition="#g.enc.tagsdecl.suspension.type3"] .tei_expan {
-    @apply hidden;
 }
 
 /**
  * Missing / added content
  */
 
+/deep/ .tei_g[data-ref="#g.enc.chardecl.lparen.type1"] > *,
+/deep/ .tei_g[data-ref="#g.enc.chardecl.rparen.type1"] > * {
+    @apply hidden;
+}
+/deep/ .tei_g[data-ref="#g.enc.chardecl.lparen.type1"]:after {
+    @apply inline;
+
+    content: '(';
+}
+/deep/ .tei_g[data-ref="#g.enc.chardecl.rparen.type1"]:after {
+    @apply inline;
+
+    content: ')';
+}
+
 /deep/ .tei_unclear {
     @apply text-gray;
 }
 
-/deep/ .tei_supplied::before {
+/deep/ .tei_supplied[data-reason="siegelausriss"]::before {
     content: '[';
 }
-/deep/ .tei_supplied::after {
+/deep/ .tei_supplied[data-reason="siegelausriss"]::after {
     content: ']';
 }
 
@@ -151,6 +161,10 @@ export default {
 
 /deep/ .tei_del {
     @apply hidden;
+}
+
+/deep/ .tei_lb:after {
+    content: ' ';
 }
 
 /**
