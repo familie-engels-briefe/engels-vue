@@ -15,14 +15,15 @@ import {
     TextverteilungNichtLinearTextLinearHtml,
     TextverteilungNichtLinearTextNichtLinearHtml,
     TextverteilungNichtLinearTextReferenzHtml,
-    TextverteilungOpenerAllgemeinHtml,
+    TextverteilungOpenerAllgemeinHtml, TextverteilungOpenerAnredeHtml, TextverteilungOpenerDatumHtml,
     TextverteilungOpenerInlineHtml,
     TextverteilungOpenerInlineSignifikantHtml,
     TextverteilungPostskriptumHtml,
     TextverteilungSchreibrichtungHtml,
     TextverteilungTabellenHtml,
     TextverteilungWorttrennungenHtml,
-    TextverteilungWritingSessionHtml
+    TextverteilungWritingSessionHtml,
+    TextverteilungZeilenumbruchHtml
 } from '../../../data/letter/dipl/presentations-textverteilung'
 import DiplomaticComponent from './Diplomatic'
 
@@ -59,6 +60,12 @@ TextverteilungAbsatzstrukturen.args = {
     html: TextverteilungAbsatzstrukturenHtml
 }
 
+export const TextverteilungZeilenumbruch = Template.bind({})
+TextverteilungZeilenumbruch.storyName = '3.3 Zeilen- und Seitenumbruch'
+TextverteilungZeilenumbruch.args = {
+    html: TextverteilungZeilenumbruchHtml
+}
+
 export const TextverteilungWorttrennungen = Template.bind({})
 TextverteilungWorttrennungen.storyName = '3.4 Worttrennung'
 TextverteilungWorttrennungen.args = {
@@ -81,6 +88,18 @@ export const TextverteilungOpenerInlineSignifikant = Template.bind({})
 TextverteilungOpenerInlineSignifikant.storyName = '3.5 Opener / Brieferöffnung (Inline - Signifikant)'
 TextverteilungOpenerInlineSignifikant.args = {
     html: TextverteilungOpenerInlineSignifikantHtml
+}
+
+export const TextverteilungOpenerDatum = Template.bind({})
+TextverteilungOpenerDatum.storyName = '3.5.1 Datumszeile'
+TextverteilungOpenerDatum.args = {
+    html: TextverteilungOpenerDatumHtml
+}
+
+export const TextverteilungOpenerAnrede = Template.bind({})
+TextverteilungOpenerAnrede.storyName = '3.5.2 Anrede'
+TextverteilungOpenerAnrede.args = {
+    html: TextverteilungOpenerAnredeHtml
 }
 
 export const TextverteilungCloser = Template.bind({})

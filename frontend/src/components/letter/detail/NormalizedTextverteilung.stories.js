@@ -16,6 +16,8 @@ import {
     TextverteilungNichtLinearTextNichtLinearHtml,
     TextverteilungNichtLinearTextReferenzHtml,
     TextverteilungOpenerAllgemeinHtml,
+    TextverteilungOpenerAnredeHtml,
+    TextverteilungOpenerDatumHtml,
     TextverteilungOpenerInlineHtml,
     TextverteilungOpenerInlineSignifikantHtml,
     TextverteilungPostskriptumHtml,
@@ -81,6 +83,18 @@ export const TextverteilungOpenerInlineSignifikant = Template.bind({})
 TextverteilungOpenerInlineSignifikant.storyName = '3.5 Opener / Brieferöffnung (Inline - Signifikant)'
 TextverteilungOpenerInlineSignifikant.args = {
     html: TextverteilungOpenerInlineSignifikantHtml
+}
+
+export const TextverteilungOpenerDatum = Template.bind({})
+TextverteilungOpenerDatum.storyName = '3.5.1 Datumszeile'
+TextverteilungOpenerDatum.args = {
+    html: TextverteilungOpenerDatumHtml
+}
+
+export const TextverteilungOpenerAnrede = Template.bind({})
+TextverteilungOpenerAnrede.storyName = '3.5.2 Anrede'
+TextverteilungOpenerAnrede.args = {
+    html: TextverteilungOpenerAnredeHtml
 }
 
 export const TextverteilungCloser = Template.bind({})

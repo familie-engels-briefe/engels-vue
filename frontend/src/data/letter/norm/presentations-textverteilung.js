@@ -132,6 +132,10 @@ export const TextverteilungOpenerInlineSignifikantHtml = `
         [...]
     </p>`
 
+export const TextverteilungOpenerDatumHtml = ``
+
+export const TextverteilungOpenerAnredeHtml = TextverteilungOpenerDatumHtml
+
 export const TextverteilungCloserHtml = `
 <p class="tei_closer">
     <span class="tei_salute">

@@ -75,6 +75,47 @@ export default {
                 damage.innerHTML = 'Textverlust'
             })
 
+            // Replace spacing with css values
+            Array.from(wrapper.querySelectorAll('.tei_space')).forEach(function (space) {
+                const dim = space.getAttribute('data-dim')
+                const unit = space.getAttribute('data-unit')
+                let quantity = parseInt(space.getAttribute('data-quantity'))
+                let calc = null
+                let style = ''
+
+                if (space.getAttribute('data-rend') === 'unclear') {
+                    return
+                }
+
+                if (dim === 'horizontal') {
+                    style += 'width'
+                } else if (dim === 'vertical') {
+                    style += 'height'
+                } else {
+                    console.error('Unknown space dim: ', dim)
+                    return
+                }
+
+                if (isNaN(quantity)) {
+                    console.warn('Could not parse space quantity, assuming 1: ', quantity)
+                    quantity = 1
+                } else if (quantity < 0) {
+                    console.error('Space quantity is negative: ', quantity)
+                    return
+                }
+
+                if (unit === 'word' || unit === 'words') {
+                    calc = quantity * 2
+                } else if (unit === 'char' || unit === 'chars') {
+                    calc = quantity * 0.5
+                } else {
+                    console.error('Unknown space unit: ', unit)
+                    return
+                }
+
+                space.style[style] = calc + 'rem'
+            })
+
             return {
                 template: wrapper.outerHTML,
                 components: {
@@ -99,8 +140,16 @@ export default {
     @apply font-letter-serif;
 }
 
+/deep/ p + p {
+    @apply mt-0;
+}
+
 /deep/ [data-rendition="#g.rend.script.latin"] {
     @apply font-letter-sans;
+}
+
+/deep/ [data-rend="strikethrough"] {
+    @apply line-through;
 }
 
 /deep/ .tei_hi[data-rend*="underline"],
@@ -151,8 +200,18 @@ export default {
     @apply italic;
 }
 
-/deep/ .tei_add {
+/deep/ .tei_add:not([data-place]) {
     @apply font-bold;
+}
+/deep/ .tei_add[data-place="above"] {
+    @apply relative;
+
+    top: -.5rem;
+}
+/deep/ .tei_add[data-place="below"] {
+    @apply relative;
+
+    bottom: -.5rem;
 }
 
 /deep/ .tei_damage .tei_supplied[data-reason="damage"]:before {
@@ -160,5 +219,19 @@ export default {
 }
 /deep/ .tei_damage .tei_supplied[data-reason="damage"]:after {
     content: '}';
+}
+
+/deep/ .tei_subst .tei_del[data-rend="overwritten"] {
+    font-size: .75rem;
+}
+/deep/ .tei_subst .tei_add {
+    @apply font-bold;
+}
+
+/**
+ * Spacing
+ */
+/deep/ .tei_space {
+    @apply inline-block;
 }
 </style>

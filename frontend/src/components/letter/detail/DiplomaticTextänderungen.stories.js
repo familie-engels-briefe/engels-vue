@@ -44,7 +44,7 @@ TextaenderungUmstellung.args = {
 export const TextaenderungHinzufuegen = Template.bind({})
 TextaenderungHinzufuegen.storyName = '2.3 Hinzufügungen und ihre Position'
 TextaenderungHinzufuegen.args = {
-    html: addCitationEllipsis(TextaenderungHinzufuegenHtml)
+    html: TextaenderungHinzufuegenHtml
 }
 
 export const TextaenderungErsetzen = Template.bind({})
