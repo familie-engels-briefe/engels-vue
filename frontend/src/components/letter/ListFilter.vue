@@ -2,7 +2,7 @@
     <div class="relative">
         <transition name="fade">
             <Button v-show="!showFilter" v-on:click.native="showFilter = !showFilter"
-                    :classes="['absolute', 'w-20', 'right-0']">
+                    :classes="['absolute', 'right-0']">
                 Filter
                 <font-awesome-icon :icon="['far', 'filter']"></font-awesome-icon>
             </Button>

@@ -1,5 +1,5 @@
 <template>
-    <div class="inline" @mouseenter="showTooltip()" @mouseleave="hideTooltip()" @focus="showTooltip()" @blur="hideTooltip()" aria-describedby="tooltip">
+    <div class="inline" :class="classes" @mouseenter="showTooltip()" @mouseleave="hideTooltip()" @focus="showTooltip()" @blur="hideTooltip()" aria-describedby="tooltip">
         <span class="tooltip-button"><slot></slot></span><Transition name="fade"><div class="tooltip-content" role="tooltip" v-show="visibleTooltip" v-html="content"></div></Transition>
     </div>
 </template>
@@ -15,6 +15,13 @@ export default {
             required: false,
             default () {
                 return 'Unbekannt'
+            }
+        },
+        classes: {
+            type: String,
+            required: false,
+            default () {
+                return ''
             }
         }
     },

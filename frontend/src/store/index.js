@@ -71,8 +71,10 @@ const store = new Vuex.Store({
             place: [],
             doctype: []
         },
+        organisationDictionary: {},
         personDictionary: {},
         placeDictionary: {},
+        letterDictionary: {},
         doctypesDictionary: {
             'letter': 'Brief'
         }
@@ -184,10 +186,29 @@ const store = new Vuex.Store({
         getPersonByRef(state) {
             return function (ref) {
                 ref = ref.replace('#', '')
-                console.log(ref, state.personDictionary, state.personDictionary[ref])
                 return state.personDictionary[ref] || null
             }
-        }
+        },
+        getPlaceByRef(state) {
+            return function (ref) {
+                ref = ref.replace('#', '')
+                return state.placeDictionary[ref] || null
+            }
+        },
+        getOrganisationByRef(state) {
+            return function (ref) {
+                ref = ref.replace('#', '')
+                return state.organisationDictionary[ref] || null
+            }
+        },
+        getLetterByRef(state) {
+            return function (ref) {
+                ref = ref
+                    .replace('#', '')
+                    .replace('fe.', '')
+                return state.letterDictionary[ref] || null
+            }
+        },
     },
     mutations: {
         setLoaded (state, force) {
@@ -211,8 +232,15 @@ const store = new Vuex.Store({
                 })))
 
                 // Create dictionaries for faster access
+                const orgDict = {}
                 const persDict = {}
                 const placeDict = {}
+                const letterDict = {}
+
+                for (let i = 0; i < state.organisations.length; i++) {
+                    orgDict[state.organisations[i]['xml:id']] = state.organisations[i]
+                }
+                Vue.set(state, 'organisationDictionary', orgDict)
 
                 for (let i = 0; i < state.persons.length; i++) {
                     persDict[state.persons[i]['xml:id']] = state.persons[i]
@@ -220,9 +248,14 @@ const store = new Vuex.Store({
                 Vue.set(state, 'personDictionary', persDict)
 
                 for (let i = 0; i < state.places.length; i++) {
-                    state.placeDictionary[state.places[i]['xml:id']] = state.places[i]
+                    placeDict[state.places[i]['xml:id']] = state.places[i]
                 }
                 Vue.set(state, 'placeDictionary', placeDict)
+
+                for (let i = 0; i < state.letters.length; i++) {
+                    letterDict[state.letters[i]['number']] = state.letters[i]
+                }
+                Vue.set(state, 'letterDictionary', letterDict)
 
                 const letters = []
 
@@ -261,8 +294,6 @@ const store = new Vuex.Store({
                 }
 
                 Vue.set(state, 'letters', letters)
-
-                console.debug('Data loaded')
             } else {
                 console.warn('Not all data loaded yet!')
             }

@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="person.name || ''"><slot></slot></Tooltip>
+        <Tooltip :content="org.name || 'Unbekannt'"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -8,19 +8,15 @@
 import Tooltip from '../../Tooltip'
 
 export default {
-    name: 'Person',
+    name: 'OrganisationTooltip',
     components: {
         Tooltip
     },
     props: {
-        person: {
+        org: {
             type: Object,
             required: true
         }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

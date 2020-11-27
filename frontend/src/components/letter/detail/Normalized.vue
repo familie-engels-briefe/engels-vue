@@ -5,7 +5,12 @@
 </template>
 
 <script>
-import Person from './Person'
+import PersonTooltip from './PersonTooltip'
+import PlaceTooltip from './PlaceTooltip'
+import OrganisationTooltip from './OrganisationTooltip'
+import LetterTooltip from './LetterTooltip'
+
+import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './register_helper'
 
 export default {
     name: 'LetterNormalized',
@@ -20,28 +25,13 @@ export default {
     },
     computed: {
         processedHtml () {
-            const that = this
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
-            // Replace persons with correcesponding components
-            Array.from(wrapper.querySelectorAll('.tei_persName')).forEach(function (person) {
-                const personNode = document.createElement('component')
-                personNode.setAttribute('is', 'Person')
-                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
-                personNode.innerHTML = person.innerHTML
-
-                person.replaceWith(personNode)
-            })
-
-            Array.from(wrapper.querySelectorAll('.tei_rs[data-type="person"]')).forEach(function (person) {
-                const personNode = document.createElement('component')
-                personNode.setAttribute('is', 'Person')
-                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
-                personNode.innerHTML = person.innerHTML
-
-                person.replaceWith(personNode)
-            })
+            replacePersons(wrapper, this.$store)
+            replacePlaces(wrapper, this.$store)
+            replaceOrganisations(wrapper, this.$store)
+            replaceLetters(wrapper, this.$store)
 
             // Show abbreviations when the expen part is "no" or "com"
             Array.from(wrapper.querySelectorAll('.tei_choice .tei_expan[data-n="no"],.tei_choice .tei_expan[data-n="com"]')).forEach(function (expan) {
@@ -53,11 +43,17 @@ export default {
             return {
                 template: wrapper.outerHTML,
                 components: {
-                    Person
+                    PersonTooltip,
+                    PlaceTooltip,
+                    OrganisationTooltip,
+                    LetterTooltip,
                 },
                 data () {
                     return {
-                        Person
+                        PersonTooltip,
+                        PlaceTooltip,
+                        OrganisationTooltip,
+                        LetterTooltip,
                     }
                 }
             }

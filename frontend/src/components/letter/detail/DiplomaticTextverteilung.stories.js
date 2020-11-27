@@ -15,7 +15,9 @@ import {
     TextverteilungNichtLinearTextLinearHtml,
     TextverteilungNichtLinearTextNichtLinearHtml,
     TextverteilungNichtLinearTextReferenzHtml,
-    TextverteilungOpenerAllgemeinHtml, TextverteilungOpenerAnredeHtml, TextverteilungOpenerDatumHtml,
+    TextverteilungOpenerAllgemeinHtml,
+    TextverteilungOpenerAnredeHtml,
+    TextverteilungOpenerDatumHtml,
     TextverteilungOpenerInlineHtml,
     TextverteilungOpenerInlineSignifikantHtml,
     TextverteilungPostskriptumHtml,
@@ -147,7 +149,7 @@ TextverteilungKustoden.args = {
 export const TextverteilungSchreibrichtung = Template.bind({})
 TextverteilungSchreibrichtung.storyName = '3.9 Schreibrichtung'
 TextverteilungSchreibrichtung.args = {
-    html: TextverteilungSchreibrichtungHtml
+    html: addCitationEllipsis(TextverteilungSchreibrichtungHtml)
 }
 
 export const TextverteilungLeerraum = Template.bind({})
@@ -207,5 +209,5 @@ TextverteilungBeschriftungUmschlaege.args = {
 export const TextverteilungTabellen = Template.bind({})
 TextverteilungTabellen.storyName = '3.15 Tabellenstrukturen'
 TextverteilungTabellen.args = {
-    html: TextverteilungTabellenHtml
+    html: addCitationEllipsis(TextverteilungTabellenHtml)
 }

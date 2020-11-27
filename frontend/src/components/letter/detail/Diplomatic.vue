@@ -5,7 +5,12 @@
 </template>
 
 <script>
-import Person from './Person'
+import PersonTooltip from './PersonTooltip'
+import PlaceTooltip from './PlaceTooltip'
+import OrganisationTooltip from './OrganisationTooltip'
+import LetterTooltip from './LetterTooltip'
+
+import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './register_helper'
 
 export default {
     name: 'LetterDiplomatic',
@@ -20,28 +25,13 @@ export default {
     },
     computed: {
         processedHtml () {
-            const that = this
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
-            // Replace persons with correcesponding components
-            Array.from(wrapper.querySelectorAll('.tei_persName')).forEach(function (person) {
-                const personNode = document.createElement('component')
-                personNode.setAttribute('is', 'Person')
-                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
-                personNode.innerHTML = person.innerHTML
-
-                person.replaceWith(personNode)
-            })
-
-            Array.from(wrapper.querySelectorAll('.tei_rs[data-type="person"]')).forEach(function (person) {
-                const personNode = document.createElement('component')
-                personNode.setAttribute('is', 'Person')
-                personNode.setAttribute(':person', JSON.stringify(that.$store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
-                personNode.innerHTML = person.innerHTML
-
-                person.replaceWith(personNode)
-            })
+            replacePersons(wrapper, this.$store)
+            replacePlaces(wrapper, this.$store)
+            replaceOrganisations(wrapper, this.$store)
+            replaceLetters(wrapper, this.$store)
 
             // Replace uncertain text with element with highest certainty
             Array.from(wrapper.querySelectorAll('.tei_choice')).forEach(function (choice) {
@@ -108,6 +98,8 @@ export default {
                     calc = quantity * 2
                 } else if (unit === 'char' || unit === 'chars') {
                     calc = quantity * 0.5
+                } else if (unit === 'line' || unit === 'lines') {
+                    calc = quantity
                 } else {
                     console.error('Unknown space unit: ', unit)
                     return
@@ -119,11 +111,17 @@ export default {
             return {
                 template: wrapper.outerHTML,
                 components: {
-                    Person
+                    PersonTooltip,
+                    PlaceTooltip,
+                    OrganisationTooltip,
+                    LetterTooltip,
                 },
                 data () {
                     return {
-                        Person
+                        PersonTooltip,
+                        PlaceTooltip,
+                        OrganisationTooltip,
+                        LetterTooltip,
                     }
                 }
             }
@@ -167,6 +165,20 @@ export default {
 
 /deep/ [data-rend*="sub"] {
     vertical-align: sub;
+}
+
+/deep/ [data-rendition="#g.enc.tagsdecl.indent-small"] {
+    text-indent: 1rem;
+}
+/deep/ [data-rendition="#g.enc.tagsdecl.indent-medium"] {
+    text-indent: 2rem;
+}
+/deep/ [data-rendition="#g.enc.tagsdecl.indent-large"] {
+    text-indent: 3rem;
+}
+
+/deep/ .tei_pb {
+    @apply block w-full border-t border-black my-4;
 }
 
 /deep/ .tooltip-button {
@@ -228,10 +240,32 @@ export default {
     @apply font-bold;
 }
 
+/deep/ .tei_metamark[data-function="insertion"][data-place="above"] {
+    @apply relative;
+
+    top: -.5rem;
+}
+
 /**
  * Spacing
  */
 /deep/ .tei_space {
     @apply inline-block;
+}
+
+/**
+ * Tables
+ */
+
+/deep/ table tr {
+    @apply border-0;
+}
+
+/deep/ table tr:hover {
+    @apply bg-transparent;
+}
+
+/deep/ table tr td {
+    @apply border border-dashed border-black;
 }
 </style>

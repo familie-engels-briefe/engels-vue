@@ -12,7 +12,7 @@ const Template = (args, { argTypes }) => ({
         Highlighter
     },
     template: '' +
-        '<div class="w-40">' +
+        '<div class="w-96">' +
         '<Highlighter :letter="letter"></Highlighter>' +
         '</div>',
     props: Object.keys(argTypes)

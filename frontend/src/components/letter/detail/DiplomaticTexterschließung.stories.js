@@ -1,8 +1,18 @@
 import './../../../mixins/urlbuilder'
 import store from './../../../store/index'
 import {
+    TexterschliessungBriefNichtReferenzierbarHtml,
+    TexterschliessungBriefReferenzierbarHtml,
+    TexterschliessungDatumAllgemeinHtml,
+    TexterschliessungDatumFehlerhaftHtml, TexterschliessungFremdeHaendeHtml,
+    TexterschliessungOrganisationHtml,
+    TexterschliessungOrganisationVerweisHtml,
+    TexterschliessungOrtHtml,
+    TexterschliessungOrtVerweisHtml,
     TexterschliessungPersonenHtml,
-    TexterschliessungPersonenVerweisHtml
+    TexterschliessungPersonenVerweisHtml,
+    TexterschliessungStellenerlaeuterungHtml,
+    TexterschliessungTextkritischerKommentarHtml, TexterschliessungThematischeMarkierungHtml
 } from '../../../data/letter/dipl/presentations-texterschließung'
 import DiplomaticComponent from './Diplomatic'
 
@@ -110,11 +120,83 @@ store.commit('setLoaded', true)
 export const TexterschliessungPersonen = Template.bind({})
 TexterschliessungPersonen.storyName = '4.1 Personennamen oder Verweise auf Personen (Personennamen)'
 TexterschliessungPersonen.args = {
-    html: TexterschliessungPersonenHtml
+    html: addCitationEllipsis(TexterschliessungPersonenHtml)
 }
 
 export const TexterschliessungPersonenVerweis = Template.bind({})
 TexterschliessungPersonenVerweis.storyName = '4.1 Personennamen oder Verweise auf Personen (Verweis)'
 TexterschliessungPersonenVerweis.args = {
     html: TexterschliessungPersonenVerweisHtml
+}
+
+export const TexterschliessungOrt = Template.bind({})
+TexterschliessungOrt.storyName = '4.2 Ortsbezeichnungen oder Verweise auf Orte (Ortsbezeichnungen)'
+TexterschliessungOrt.args = {
+    html: TexterschliessungOrtHtml
+}
+
+export const TexterschliessungOrtVerweis = Template.bind({})
+TexterschliessungOrtVerweis.storyName = '4.2 Ortsbezeichnungen oder Verweise auf Orte (Verweis)'
+TexterschliessungOrtVerweis.args = {
+    html: TexterschliessungOrtVerweisHtml
+}
+
+export const TexterschliessungOrganisation = Template.bind({})
+TexterschliessungOrganisation.storyName = '4.3 Organisationsnamen oder Verweise auf Organisationen (Organisationsname)'
+TexterschliessungOrganisation.args = {
+    html: TexterschliessungOrganisationHtml
+}
+
+export const TexterschliessungOrganisationVerweis = Template.bind({})
+TexterschliessungOrganisationVerweis.storyName = '4.3 Organisationsnamen oder Verweise auf Organisationen (Verweis)'
+TexterschliessungOrganisationVerweis.args = {
+    html: TexterschliessungOrganisationVerweisHtml
+}
+
+export const TexterschliessungDatumAllgemein = Template.bind({})
+TexterschliessungDatumAllgemein.storyName = '4.4 Datumsangaben (Allgemein)'
+TexterschliessungDatumAllgemein.args = {
+    html: TexterschliessungDatumAllgemeinHtml
+}
+
+export const TexterschliessungDatumFehlerhaft = Template.bind({})
+TexterschliessungDatumFehlerhaft.storyName = '4.4 Datumsangaben (Fehlerhaft)'
+TexterschliessungDatumFehlerhaft.args = {
+    html: TexterschliessungDatumFehlerhaftHtml
+}
+
+export const TexterschliessungBriefReferenzierbar = Template.bind({})
+TexterschliessungBriefReferenzierbar.storyName = '4.5 Verweise auf andere Briefdokumente (referenzierbar)'
+TexterschliessungBriefReferenzierbar.args = {
+    html: TexterschliessungBriefReferenzierbarHtml
+}
+
+export const TexterschliessungBriefNichtReferenzierbar = Template.bind({})
+TexterschliessungBriefNichtReferenzierbar.storyName = '4.5 Verweise auf andere Briefdokumente (nicht referenzierbar)'
+TexterschliessungBriefNichtReferenzierbar.args = {
+    html: TexterschliessungBriefNichtReferenzierbarHtml
+}
+
+export const TexterschliessungStellenerlaeuterung = Template.bind({})
+TexterschliessungStellenerlaeuterung.storyName = '4.6.1 Stellenerläuterungen'
+TexterschliessungStellenerlaeuterung.args = {
+    html: TexterschliessungStellenerlaeuterungHtml
+}
+
+export const TexterschliessungTextkritischerKommentar = Template.bind({})
+TexterschliessungTextkritischerKommentar.storyName = '4.6.2 Textkritischer Kommentar'
+TexterschliessungTextkritischerKommentar.args = {
+    html: TexterschliessungTextkritischerKommentarHtml
+}
+
+export const TexterschliessungThematischeMarkierung = Template.bind({})
+TexterschliessungThematischeMarkierung.storyName = '4.7 Thematische Markierung von Textpassagen'
+TexterschliessungThematischeMarkierung.args = {
+    html: TexterschliessungThematischeMarkierungHtml
+}
+
+export const TexterschliessungFremdeHaende = Template.bind({})
+TexterschliessungFremdeHaende.storyName = '4.8 Fremde Hände'
+TexterschliessungFremdeHaende.args = {
+    html: addCitationEllipsis(TexterschliessungFremdeHaendeHtml)
 }
