@@ -60,6 +60,7 @@ function getBacklinsFiltered (element) {
 const store = new Vuex.Store({
     state: {
         loaded: false,
+        error: null,
         letters: [],
         organisations: [],
         persons: [],
@@ -342,7 +343,16 @@ const store = new Vuex.Store({
          */
         updateFilter (state, payload) {
             Vue.set(state.filter, payload.type, payload.tags)
-        }
+        },
+
+        /**
+         *
+         * @param state
+         * @param {Object} payload
+         */
+        setError (state, payload) {
+            state.error = payload.message
+        },
     }
 })
 
