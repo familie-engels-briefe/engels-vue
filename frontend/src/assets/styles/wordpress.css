@@ -1,11 +1,7 @@
-.wordpress h1 {
-    @apply text-gold text-6xl font-bold leading-tight font-serif mb-8;
+.wordpress > * {
+    @apply mb-8;
 }
 
-.wp-block-columns {
-    @apply flex flex-row -mx-4;
-}
-
-.wp-block-columns .wp-block-column {
-    @apply flex-1 px-4;
+.wordpress img {
+    @apply block;
 }
