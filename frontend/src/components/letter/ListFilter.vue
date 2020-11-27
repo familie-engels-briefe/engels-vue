@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="relative w-24">
         <transition name="fade">
             <Button v-show="!showFilter" v-on:click.native="showFilter = !showFilter"
                     :classes="['absolute', 'right-0']">
@@ -15,7 +15,7 @@
                         <font-awesome-icon :icon="['far', 'filter']"></font-awesome-icon>
                         <span class="uppercase text-lg pl-2">Filter</span>
                     </div>
-                    <div v-on:click="showFilter = false" class="cursor-pointer hover:text-gray-darker">
+                    <div v-on:click="showFilter = false" class="cursor-pointer hover:text-gray-darker" style="margin-top: .15rem">
                         <font-awesome-icon :icon="['far', 'times']" size="lg"></font-awesome-icon>
                     </div>
                 </div>

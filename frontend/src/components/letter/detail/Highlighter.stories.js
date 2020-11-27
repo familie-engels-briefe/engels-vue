@@ -12,8 +12,8 @@ const Template = (args, { argTypes }) => ({
         Highlighter
     },
     template: '' +
-        '<div class="w-96">' +
-        '<Highlighter :letter="letter"></Highlighter>' +
+        '<div class="w-96 float-right">' +
+        '<Highlighter :html="dipl"></Highlighter>' +
         '</div>',
     props: Object.keys(argTypes)
 })
@@ -21,5 +21,5 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({})
 
 Default.args = {
-    letter: letterLocale
+    dipl: letterLocale.html.dipl
 }

@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import PersonTooltip from './PersonTooltip'
-import PlaceTooltip from './PlaceTooltip'
-import OrganisationTooltip from './OrganisationTooltip'
-import LetterTooltip from './LetterTooltip'
+import PersonTooltip from './tooltip/PersonTooltip'
+import PlaceTooltip from './tooltip/PlaceTooltip'
+import OrganisationTooltip from './tooltip/OrganisationTooltip'
+import LetterTooltip from './tooltip/LetterTooltip'
 
-import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './register_helper'
+import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
+import { highlightTopics } from './helper_highlights'
 
 export default {
     name: 'LetterNormalized',
@@ -18,7 +19,14 @@ export default {
         html: {
             type: String,
             required: true
-        }
+        },
+        highlights: {
+            type: Object,
+            required: false,
+            default () {
+                return {}
+            },
+        },
     },
     mounted () {
         console.debug('Mounted Letter/Detail/Normalized')
@@ -32,6 +40,8 @@ export default {
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
+
+            highlightTopics(wrapper, this.highlights && this.highlights.topics ? this.highlights.topics : [])
 
             // Show abbreviations when the expen part is "no" or "com"
             Array.from(wrapper.querySelectorAll('.tei_choice .tei_expan[data-n="no"],.tei_choice .tei_expan[data-n="com"]')).forEach(function (expan) {
@@ -160,13 +170,14 @@ export default {
 }
 
 /deep/ .tei_lb:after {
+    @apply block;
+
     content: ' ';
 }
 
 /**
  * Tables
  */
-
 /deep/ table tr {
     @apply border-0;
 }
@@ -177,5 +188,12 @@ export default {
 
 /deep/ table tr td {
     @apply border border-dashed border-black;
+}
+
+/**
+ * Signature
+ */
+/deep/ .tei_signed {
+    @apply block text-right;
 }
 </style>

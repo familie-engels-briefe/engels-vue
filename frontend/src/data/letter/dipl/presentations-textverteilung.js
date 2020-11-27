@@ -81,14 +81,12 @@ export const TextverteilungCloserHtml = `<p class="tei_closer"><span class="tei_
                     </span>
                 </p>`
 
-export const TextverteilungCloserInlineHtml = `<p>[...]er kam aber heute Morgen und fand uns, wie Du geleſen haben<br class="tei_lb" />
-                    wirﬅ, im Bette.
-                <span class="tei_closer_inline" data-rend="inline">Jetzt ſind wir im Begriffe, hinzugehen, wir eſſen heute<br class="tei_lb" />
-                    Mittag da, darum ſchließe ich. <span class="tei_salute">Grüße Alle recht herzlich von mir,<br class="tei_lb" />
-                        auch die Großmutter und die Tante, und lebe recht wohl</span>
-                    <span class="tei_signed" data-id="signed.s2.ref.0"><br class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0" />Dein treuer Sohn<span class="tei_space" data-type="margin.right" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="7" data-unit="char"></span>
-                        <br class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0" /><span class="tei_space" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="6" data-unit="char"></span><span class="tei_persName" data-ref="#pers.partic.engels-friedrich-junior">Friedrich</span></span>
-                </span></p>`
+export const TextverteilungCloserInlineHtml = `<span class="tei_closer_inline" data-rend="inline">Jetzt ſind wir im Begriffe, hinzugehen, wir eſſen heute<br class="tei_lb" />
+    Mittag da, darum ſchließe ich. <span class="tei_salute">Grüße Alle recht herzlich von mir,<br class="tei_lb" />
+        auch die Großmutter und die Tante, und lebe recht wohl</span>
+    <span class="tei_signed" data-id="signed.s2.ref.0"><br class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0" />Dein treuer Sohn<span class="tei_space" data-type="margin.right" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="7" data-unit="char"></span>
+        <br class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0" /><span class="tei_space" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="6" data-unit="char"></span><span class="tei_persName" data-ref="#pers.partic.engels-friedrich-junior">Friedrich</span></span>
+</span>`
 
 export const TextverteilungCloserDatumHtml = `<p class="tei_closer"><span class="tei_salute">Nun nim̅ noch diese<span class="tei_damage" data-corresp="#enc.damageinterp.siegelausriss002"><span class="tei_gap" data-quantity="4" data-unit="char" data-reason="damage" data-corresp="#supplied.text002"></span><span class="tei_supplied" data-id="supplied.text002" data-cert="medium" data-resp="#pers.ed.rummel-ulrich">n zär</span></span>tlichen Kuß von</span> <span class="tei_signed" data-id="signed.s1.ref.0">Deine<span class="tei_space" data-type="margin.right" data-corresp="#signed.s1.ref.0" data-dim="horizontal" data-quantity="5" data-unit="char"></span></span>
     <br class="tei_lb" /><span class="tei_dateline"><span class="tei_placeName" data-ref="#place.ruhrort">Ruhrorth</span> am <span class="tei_date" data-when="1792-09-10">10 <span class="tei_hi" data-rend="sup"><span class="tei_hi" data-n="2" data-rend="underline">ten</span></span>

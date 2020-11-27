@@ -7,6 +7,8 @@
 <script>
 import PDFObject from 'pdfobject'
 
+import './../../../mixins/urlbuilder'
+
 export default {
     name: 'LetterFacsimile',
     props: {

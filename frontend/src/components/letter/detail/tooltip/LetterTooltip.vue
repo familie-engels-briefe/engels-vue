@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Tooltip from '../../Tooltip'
+import Tooltip from '../../../Tooltip'
 import moment from 'moment'
 
 export default {

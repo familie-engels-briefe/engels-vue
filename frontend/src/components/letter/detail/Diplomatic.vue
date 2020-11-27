@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import PersonTooltip from './PersonTooltip'
-import PlaceTooltip from './PlaceTooltip'
-import OrganisationTooltip from './OrganisationTooltip'
-import LetterTooltip from './LetterTooltip'
+import PersonTooltip from './tooltip/PersonTooltip'
+import PlaceTooltip from './tooltip/PlaceTooltip'
+import OrganisationTooltip from './tooltip/OrganisationTooltip'
+import LetterTooltip from './tooltip/LetterTooltip'
 
-import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './register_helper'
+import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
 
 export default {
     name: 'LetterDiplomatic',
@@ -267,5 +267,12 @@ export default {
 
 /deep/ table tr td {
     @apply border border-dashed border-black;
+}
+
+/**
+ * Signature
+ */
+/deep/ .tei_signed {
+    @apply block text-right;
 }
 </style>

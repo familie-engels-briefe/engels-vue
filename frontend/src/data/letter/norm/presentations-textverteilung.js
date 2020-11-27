@@ -235,16 +235,11 @@ export const TextverteilungCloserHtml = `
     </span>
 </p>`
 
-export const TextverteilungCloserInlineHtml = `
-<span class="tei_closer_inline" data-rend="inline">
-    Jetzt sind wir im Begriffe, hinzugehen, wir essen heute Mittag da, darum schließe ich.
-    <span class="tei_salute">Grüße Alle recht herzlich von mir, auch die Großmutter und die Tante, und lebe recht wohl
-    </span>
-    <span class="tei_signed" data-id="signed.s2.ref.0">Dein treuer Sohn
-        <span class="tei_space" data-type="margin.right" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="7" data-unit="char"></span>
-        <span class="tei_space" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="6" data-unit="char"></span>
-        <span class="tei_persName" data-ref="#pers.partic.engels-friedrich-junior">Friedrich</span>
-    </span>
+export const TextverteilungCloserInlineHtml = `<span class="tei_closer_inline" data-rend="inline">Jetzt sind wir im Begriffe, hinzugehen, wir essen heute<span class="tei_lb"></span>
+    Mittag da, darum schließe ich. <span class="tei_salute">Grüße Alle recht herzlich von mir,<span class="tei_lb"></span>
+        auch die Großmutter und die Tante, und lebe recht wohl</span>
+    <span class="tei_signed" data-id="signed.s2.ref.0"><span class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0"></span>Dein treuer Sohn<span class="tei_space" data-type="margin.right" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="7" data-unit="char"></span>
+        <span class="tei_lb" data-rend="align.left" data-corresp="#signed.s2.ref.0"></span><span class="tei_space" data-corresp="#signed.s2.ref.0" data-dim="horizontal" data-quantity="6" data-unit="char"></span><span class="tei_persName" data-ref="#pers.partic.engels-friedrich-junior">Friedrich</span></span>
 </span>`
 
 export const TextverteilungCloserDatumHtml = `<p class="tei_closer">

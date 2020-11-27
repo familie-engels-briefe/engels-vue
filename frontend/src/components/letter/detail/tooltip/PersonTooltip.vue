@@ -1,19 +1,19 @@
 <template>
     <span>
-        <Tooltip :content="place.name || 'Unbekannt'"><slot></slot></Tooltip>
+        <Tooltip :content="person.name || 'Unbekannte Person'"><slot></slot></Tooltip>
     </span>
 </template>
 
 <script>
-import Tooltip from '../../Tooltip'
+import Tooltip from '../../../Tooltip'
 
 export default {
-    name: 'PlaceTooltip',
+    name: 'PersonTooltip',
     components: {
         Tooltip
     },
     props: {
-        place: {
+        person: {
             type: Object,
             required: true
         }

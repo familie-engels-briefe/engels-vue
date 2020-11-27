@@ -20,10 +20,10 @@ const Template = (args, { argTypes }) => ({
     props: Object.keys(argTypes)
 })
 
-export const Complete = Template.bind({})
+export const Default = Template.bind({})
 
 letterLocale.loaded = true
 
-Complete.args = {
+Default.args = {
     letterLocale: letterLocale
 }

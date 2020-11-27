@@ -2,10 +2,10 @@
     <div>
         <Loading :loading="loading">
             <div class="flex flex-wrap lg:flex-nowrap justify-between">
-                <h2 v-if="details" class="flex-grow">{{ details.title }}</h2>
+                <h2 v-if="details">{{ details.title }}</h2>
 
                 <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">
-                    <LetterHighlighter></LetterHighlighter>
+                    <LetterHighlighter v-on:update-highlights="updateHighlights" :html="htmlDiplomatic"></LetterHighlighter>
                 </div>
             </div>
 
@@ -15,8 +15,8 @@
                 </div>
 
                 <div class="w-full lg:w-1/2 lg:px-6">
-                    <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized"></LetterNormalized>
-                    <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic"></LetterDiplomatic>
+                    <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized" :highlights="highlights"></LetterNormalized>
+                    <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic" :highlights="highlights"></LetterDiplomatic>
                     <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
                 </div>
             </div>
@@ -59,10 +59,20 @@ export default {
             htmlDiplomatic: null,
             // URLs to facsimiles
             facsimiles: null,
+            // Which parts of the letter will be highlighted
+            highlights: {
+                topics: [],
+                persons: [],
+                places: [],
+                organisations: [],
+                letters: [],
+                dates: [],
+                comments: []
+            },
             // Which views are active
             activeView: 'normalized',
             // If data is loading
-            loading: true
+            loading: true,
         }
     },
     props: {
@@ -124,11 +134,78 @@ export default {
     methods: {
         changeView (view) {
             this.activeView = view
-        }
+        },
+        updateHighlights (event) {
+            this.highlights = event.selected
+        },
     }
 }
 </script>
 
 <style scoped>
+/**
+ * Topics
+ */
+/deep/ .engels_topic.has-highlight {
+    @apply text-white;
 
+    background-blend-mode: multiply;
+}
+/deep/ .engels_topic[data-type="W"] {
+    @apply bg-blue-600;
+}
+/deep/ .engels_topic[data-type="R"] {
+    @apply bg-purple-600;
+}
+/deep/ .engels_topic[data-type="P"] {
+    @apply bg-red-600;
+}
+/deep/ .engels_topic[data-type="G"] {
+    @apply bg-green-600;
+}
+/deep/ .engels_topic[data-type="E"] {
+    @apply bg-yellow-600;
+}
+/deep/ .engels_topic[data-type="K"] {
+    @apply bg-orange-600;
+}
+/deep/ .engels_topic[data-type="EB"] {
+    @apply bg-amber-600;
+}
+/deep/ .engels_topic[data-type="H"] {
+    @apply bg-lime-600;
+}
+/deep/ .engels_topic[data-type="M"] {
+    @apply bg-teal-600;
+}
+/deep/ .engels_topic[data-type="F"] {
+    @apply bg-cyan-600;
+}
+/deep/ .engels_topic[data-type="B"] {
+    @apply bg-fuchsia-600;
+}
+/deep/ .engels_topic[data-type="L"] {
+    @apply bg-rose-600;
+}
+/deep/ .engels_topic[data-type="KR"] {
+    @apply bg-pink-600;
+}
+/deep/ .engels_topic[data-type="J"] {
+    @apply bg-violet-600;
+}
+/deep/ .engels_topic[data-type="FEG"] {
+    @apply bg-lightBlue-600;
+}
+/deep/ .engels_topic[data-type="FEK"] {
+    @apply bg-lightBlue-700;
+}
+/deep/ .engels_topic[data-type="FEJ"] {
+    @apply bg-lightBlue-800;
+}
+/deep/ .engels_topic[data-type="FEM"] {
+    @apply bg-lightBlue-900;
+}
+/deep/ .engels_topic:not(.has-highlight) {
+    @apply bg-transparent !important;
+}
 </style>

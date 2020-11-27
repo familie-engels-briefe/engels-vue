@@ -1,11 +1,11 @@
 <template>
     <span>
-        <Tooltip :content="org.name || 'Unbekannt'"><slot></slot></Tooltip>
+        <Tooltip :content="org.name || 'Unbekannte Organisation'"><slot></slot></Tooltip>
     </span>
 </template>
 
 <script>
-import Tooltip from '../../Tooltip'
+import Tooltip from '../../../Tooltip'
 
 export default {
     name: 'OrganisationTooltip',
