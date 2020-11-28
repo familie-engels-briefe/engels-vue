@@ -11,6 +11,7 @@ import OrganisationTooltip from './tooltip/OrganisationTooltip'
 import LetterTooltip from './tooltip/LetterTooltip'
 
 import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
+import { highlightTopics } from './helper_highlights'
 
 export default {
     name: 'LetterDiplomatic',
@@ -18,7 +19,14 @@ export default {
         html: {
             type: String,
             required: true
-        }
+        },
+        highlights: {
+            type: Object,
+            required: false,
+            default () {
+                return {}
+            },
+        },
     },
     mounted () {
         console.debug('Mounted Letter/Detail/Diplomatic')
@@ -32,6 +40,8 @@ export default {
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
+
+            highlightTopics(wrapper, this.highlights && this.highlights.topics ? this.highlights.topics : [])
 
             // Replace uncertain text with element with highest certainty
             Array.from(wrapper.querySelectorAll('.tei_choice')).forEach(function (choice) {
