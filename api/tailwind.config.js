@@ -1,9 +1,12 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-    future: {
-        purgeLayersByDefault: true
-    },
     theme: {
-        extend: {}
+        extend: {
+            colors: {
+                teal: colors.teal,
+            }
+        }
     },
     variants: {},
     plugins: [],

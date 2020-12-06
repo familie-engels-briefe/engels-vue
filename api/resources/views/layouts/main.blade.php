@@ -6,7 +6,7 @@
     <title>{{ config('app.name') }}</title>
 
     <link rel="stylesheet" href="{{ asset(mix('css/main.css')) }}">
-    <script src="{{ asset(mix('js/app.js')) }}" async defer></script>
+    <script src="{{ asset(mix('js/app.js')) }}"></script>
 </head>
 <body class="h-full">
     <div class="flex flex-col min-h-full items-stretch">

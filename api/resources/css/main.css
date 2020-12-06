@@ -1,5 +1,6 @@
 @import "~@fortawesome/fontawesome-free/css/fontawesome.css";
 @import "~@fortawesome/fontawesome-free/css/solid.css";
+@import "~highlight.js/styles/monokai-sublime.css";
 
 @tailwind base;
 
@@ -65,15 +66,15 @@ code {
 }
 
 table {
-    @apply w-full text-left mt-4 mb-4 border-t border-gray-300;
+    @apply w-full text-left mt-4 mb-4 border-t border-gray-200;
 }
 
 table th {
-    @apply bg-gray-100 font-semibold text-sm text-gray-700 p-2;
+    @apply bg-gray-50 font-semibold text-sm uppercase text-gray-700 p-2;
 }
 
 table td {
-    @apply p-2 border-t border-gray-300;
+    @apply p-2 border-t border-gray-200;
 }
 
 #navigation a,
@@ -125,7 +126,7 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    @apply outline-none shadow-outline;
+    @apply outline-none ring;
 }
 
 button:not(.no-button),
@@ -135,7 +136,7 @@ button:not(.no-button),
 }
 button:not(.no-button):focus,
 .button:focus {
-    @apply outline-none shadow-outline;
+    @apply outline-none ring;
 }
 button:not(.no-button):hover,
 .button:hover {
