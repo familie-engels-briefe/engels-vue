@@ -12,7 +12,8 @@ import {
     faAngleDown,
     faAngleUp,
     faGlobeStand,
-    faBuilding
+    faBuilding,
+    faExternalLink,
 } from '@fortawesome/pro-regular-svg-icons'
 import { faUser as faSolidUser } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
@@ -30,6 +31,7 @@ library.add(faAngleDown)
 library.add(faAngleUp)
 library.add(faGlobeStand)
 library.add(faBuilding)
+library.add(faExternalLink)
 
 // Solid
 library.add(faSolidUser)

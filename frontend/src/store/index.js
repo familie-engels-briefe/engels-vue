@@ -46,7 +46,7 @@ function getBacklinks (element) {
         }
     }
 
-    console.error('Could not read backlinks from', element)
+    console.warn('Could not read backlinks from', element)
 
     return []
 }

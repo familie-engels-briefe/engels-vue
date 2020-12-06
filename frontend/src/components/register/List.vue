@@ -22,7 +22,9 @@
                         <td title="Person">
                             <font-awesome-icon :icon="['fas', 'user']"></font-awesome-icon>
                         </td>
-                        <td v-text="person.name"></td>
+                        <td>
+                            <router-link :to="{ name: 'register.person', params: { id: person['xml:id'] } }" v-text="person.name"></router-link>
+                        </td>
                         <td>
                             <a v-for="letter in person.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}
@@ -33,7 +35,9 @@
                         <td title="Ort">
                             <font-awesome-icon :icon="['far', 'globe-stand']"></font-awesome-icon>
                         </td>
-                        <td v-text="place.name"></td>
+                        <td>
+                            <router-link :to="{ name: 'register.place', params: { id: place['xml:id'] } }" v-text="place.name"></router-link>
+                        </td>
                         <td>
                             <a v-for="letter in place.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}
@@ -44,7 +48,9 @@
                         <td title="Organisation">
                             <font-awesome-icon :icon="['far', 'building']"></font-awesome-icon>
                         </td>
-                        <td v-text="org.name"></td>
+                        <td>
+                            <router-link :to="{ name: 'register.org', params: { id: org['xml:id'] } }" v-text="org.name"></router-link>
+                        </td>
                         <td>
                             <a v-for="letter in org.letters" :key="letter" class="backlink" @click="goToLetter(letter)">
                                 {{ letter }}

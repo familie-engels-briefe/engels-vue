@@ -4,6 +4,9 @@ import VueRouter from 'vue-router'
 import LetterList from './components/letter/List'
 import LetterDetail from './components/letter/detail/Detail'
 import RegisterList from './components/register/List'
+import RegisterPerson from './components/register/Person'
+import RegisterPlace from './components/register/Place'
+import RegisterOrg from './components/register/Org'
 import FrontPage from './components/wordpress/FrontPage'
 import Page from './components/wordpress/Page'
 import DebugSentry from './components/DebugSentry'
@@ -47,6 +50,39 @@ export const routes = [
         name: 'registers',
         meta: {
             title: 'Register' + ROUTE_SUFFIX
+        }
+    },
+    {
+        path: '/register/person/:id',
+        component: RegisterPerson,
+        name: 'register.person',
+        props: true,
+        meta: {
+            title: function (to) {
+                return 'Person ' + to.params.id + ROUTE_SUFFIX
+            }
+        }
+    },
+    {
+        path: '/register/ort/:id',
+        component: RegisterPlace,
+        name: 'register.place',
+        props: true,
+        meta: {
+            title: function (to) {
+                return 'Ort ' + to.params.id + ROUTE_SUFFIX
+            }
+        }
+    },
+    {
+        path: '/register/unternehmen/:id',
+        component: RegisterOrg,
+        name: 'register.org',
+        props: true,
+        meta: {
+            title: function (to) {
+                return 'Unternehmen ' + to.params.id + ROUTE_SUFFIX
+            }
         }
     },
     {
