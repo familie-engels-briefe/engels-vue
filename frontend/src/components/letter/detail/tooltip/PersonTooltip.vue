@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="person.name || 'Unbekannte Person'"><slot></slot></Tooltip>
+        <Tooltip :content="person.name || 'Unbekannte Person'" :url="url"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -17,6 +17,20 @@ export default {
             type: Object,
             required: true
         }
-    }
+    },
+    computed: {
+        url: function () {
+            if (!this.person || !this.person['xml:id']) {
+                return null
+            }
+
+            return {
+                name: 'register.person',
+                params: {
+                    'id': this.person['xml:id']
+                }
+            }
+        },
+    },
 }
 </script>

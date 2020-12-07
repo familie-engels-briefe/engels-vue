@@ -1,6 +1,6 @@
 <template>
     <div class="inline" :class="classes" @mouseenter="showTooltip()" @mouseleave="hideTooltip()" @focus="showTooltip()" @blur="hideTooltip()" aria-describedby="tooltip">
-        <span class="tooltip-button"><slot></slot></span><Transition name="fade"><div class="tooltip-content" role="tooltip" v-show="visibleTooltip" v-html="content"></div></Transition>
+        <span class="tooltip-button"><slot></slot></span><Transition name="fade"><div class="tooltip-content" role="tooltip" v-show="visibleTooltip"><div v-html="content"></div><div v-if="url !== null" class="mt-4"><router-link :to="url" class="underline text-sm uppercase">Mehr Informationen</router-link></div></div></Transition>
     </div>
 </template>
 
@@ -22,6 +22,13 @@ export default {
             required: false,
             default () {
                 return ''
+            }
+        },
+        url: {
+            type: Object,
+            requried: false,
+            default () {
+                return null
             }
         }
     },

@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="place.name || 'Unbekannter Ort'"><slot></slot></Tooltip>
+        <Tooltip :content="place.name || 'Unbekannter Ort'" :url="url"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -16,7 +16,21 @@ export default {
         place: {
             type: Object,
             required: true
-        }
-    }
+        },
+    },
+    computed: {
+        url: function () {
+            if (!this.place || !this.place['xml:id']) {
+                return null
+            }
+
+            return {
+                name: 'register.place',
+                params: {
+                    'id': this.place['xml:id']
+                }
+            }
+        },
+    },
 }
 </script>
