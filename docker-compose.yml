@@ -8,6 +8,8 @@ volumes:
   redis-data:
   api-storage-framework:
   api-storage-logs:
+  api-horizon-storage-framework:
+  api-horizon-storage-logs:
   api-mysql:
   frontend-dist:
 
@@ -63,8 +65,8 @@ services:
     restart: unless-stopped
     entrypoint: php /api/artisan horizon
     volumes:
-      - api-storage-framework:/api/storage/framework
-      - api-storage-logs:/api/storage/logs
+      - api-horizon-storage-framework:/api/storage/framework
+      - api-horizon-storage-logs:/api/storage/logs
     depends_on:
       - exist
       - api-mysql
