@@ -26,7 +26,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
         "facade/ignition": "^2.0",
-        "fzaninotto/faker": "^1.9",
+        "fakerphp/faker": "^1.9",
         "laravel/tinker": "^2.4",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^4.2",
