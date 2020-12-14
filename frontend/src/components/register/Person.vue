@@ -30,11 +30,11 @@ export default {
     mounted () {
         const person = this.$store.getters.getPersonByRef(this.id)
 
-        this.title = person.name
-
         console.debug('Loading details for', person)
 
-        if (person.idno && person.idno['#text']) {
+        if (person && person.idno && person.idno['#text']) {
+            this.title = person.name
+
             if (person.idno.type.toLowerCase() === 'gnd') {
                 this.parseGND(person.idno['#text'])
             } else {

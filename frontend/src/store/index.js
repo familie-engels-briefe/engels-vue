@@ -51,7 +51,7 @@ function getBacklinks (element) {
     return []
 }
 
-function getBacklinsFiltered (element) {
+function getBacklinksFiltered (element) {
     return getBacklinks(element).filter(function (backlink) {
         return backlink.trim() !== ''
     })
@@ -307,7 +307,7 @@ const store = new Vuex.Store({
         setOrganisations (state, organisations) {
             organisations = organisations.map(function (organisation) {
                 organisation.name = getOrganisationName(organisation) ?? 'Unbekannt'
-                organisation.letters = getBacklinsFiltered(organisation) ?? []
+                organisation.letters = getBacklinksFiltered(organisation) ?? []
 
                 return organisation
             })
@@ -317,7 +317,7 @@ const store = new Vuex.Store({
         setPersons (state, persons) {
             persons = persons.map(function (person) {
                 person.name = getPersonName(person) ?? 'Unbekannt'
-                person.letters = getBacklinsFiltered(person) ?? []
+                person.letters = getBacklinksFiltered(person) ?? []
 
                 return person
             })
@@ -327,7 +327,7 @@ const store = new Vuex.Store({
         setPlaces (state, places) {
             places = places.map(function (place) {
                 place.name = getPlaceName(place) ?? 'Unbekannt'
-                place.letters = getBacklinsFiltered(place) ?? []
+                place.letters = getBacklinksFiltered(place) ?? []
 
                 return place
             })
