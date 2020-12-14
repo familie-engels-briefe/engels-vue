@@ -16,7 +16,7 @@ class PersonController
      */
     public function index(PersonRepository $repository)
     {
-        return Cache::tags('api')->rememberForever('person-index', function () use ($repository) {
+        return Cache::tags('api')->remember('person-index', now()->addHour(), function () use ($repository) {
             return $repository->all();
         });
     }

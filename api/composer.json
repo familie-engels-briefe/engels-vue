@@ -20,6 +20,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "^7.17",
+        "laravel/horizon": "^4.3",
         "laravel/ui": "^2.0",
         "sentry/sentry-laravel": "^2.1"
     },
@@ -30,7 +31,8 @@
         "laravel/tinker": "^2.4",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^4.2",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "roave/security-advisories": "dev-master"
     },
     "config": {
         "optimize-autoloader": true,

@@ -154,3 +154,8 @@ button.loading:not(.no-button),
 .button-secondary:hover {
     @apply bg-gray-900 text-white;
 }
+
+.button-disabled,
+.button-disabled:hover {
+    @apply bg-blue-500 cursor-not-allowed;
+}

@@ -7297,6 +7297,12 @@ button.loading:not(.no-button), .button.loading{
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.button-disabled, .button-disabled:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
+  cursor: not-allowed;
+}
+
 @media (min-width: 640px){
 }
 

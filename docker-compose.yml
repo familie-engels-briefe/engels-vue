@@ -57,6 +57,19 @@ services:
       - api-mysql
       - redis
 
+  # Engels API queue worker
+  api-horizon:
+    image: famileengelsbriefe/api:latest
+    restart: unless-stopped
+    entrypoint: php /api/artisan horizon
+    volumes:
+      - api-storage-framework:/api/storage/framework
+      - api-storage-logs:/api/storage/logs
+    depends_on:
+      - exist
+      - api-mysql
+      - redis
+
   # Caching server
   redis:
     image: redis:6.0

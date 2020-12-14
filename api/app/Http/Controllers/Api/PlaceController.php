@@ -16,7 +16,7 @@ class PlaceController
      */
     public function index(PlaceRepository $repository)
     {
-        return Cache::tags('api')->rememberForever('place-index', function () use ($repository) {
+        return Cache::tags('api')->remember('place-index', now()->addHour(), function () use ($repository) {
             return $repository->all();
         });
     }

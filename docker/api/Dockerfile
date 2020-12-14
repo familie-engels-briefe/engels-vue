@@ -24,7 +24,7 @@ FROM php:7.4-fpm
 
 # Install extensions
 RUN apt-get update && apt-get install -y libcurl4-gnutls-dev libxml2-dev libzip-dev && apt-get autoremove -y
-RUN docker-php-ext-install -j$(nproc) pdo_mysql zip
+RUN docker-php-ext-install -j$(nproc) pdo_mysql zip pcntl
 RUN pecl install redis \
 	&& docker-php-ext-enable redis
 

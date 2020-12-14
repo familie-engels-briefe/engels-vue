@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Exception;
 
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 use App\Repositories\LetterRepository;
-use Illuminate\Support\Facades\Redis;
+use App\Jobs\SyncExist;
 
 class SyncController extends Controller
 {
@@ -59,7 +58,7 @@ class SyncController extends Controller
 
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $cacheSize > 0 ? floor(log($cacheSize, 1024)) : 0;
-        $cacheSize = number_format($cacheSize / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+        $cacheSize = number_format( $cacheSize / (1024 ** $power), 2, '.', ',') . ' ' . $units[ $power];
 
         return view('sync.index', [
             'lastSync' => read_setting('last_sync'),
@@ -77,9 +76,7 @@ class SyncController extends Controller
      */
     public function sync()
     {
-        Artisan::call('exist:sync');
-
-        Cache::tags('api')->flush();
+        SyncExist::dispatch();
 
         return redirect()->route('sync.index');
     }

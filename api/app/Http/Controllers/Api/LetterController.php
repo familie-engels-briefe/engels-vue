@@ -18,7 +18,7 @@ class LetterController
      */
     public function index(Request $request, LetterRepository $repository)
     {
-        return Cache::tags('api')->rememberForever('letter-index', function () use ($repository, $request) {
+        return Cache::tags('api')->remember('letter-index', now()->addHour(), function () use ($repository, $request) {
             return $repository->all([
                 'person-sender-receiver' => $request->get('person-sender-receiver', ''),
                 'person-mentioned' => $request->get('person-mentioned', ''),
@@ -41,7 +41,7 @@ class LetterController
         /**
          * @var $response JsonResponse
          */
-        return Cache::tags('api')->rememberForever('letter-index-' . $id, function () use ($repository, $id) {
+        return Cache::tags('api')->remember('letter-index-' . $id, now()->addHour(), function () use ($repository, $id) {
             $letter = $repository->one($id)->getData();
 
             if ($letter->success === false) {

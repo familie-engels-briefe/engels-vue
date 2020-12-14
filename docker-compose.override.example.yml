@@ -25,6 +25,13 @@ services:
     volumes:
       - ./api/.env:/api/.env:ro
 
+  api-horizon:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    volumes:
+      - ./api/.env:/api/.env:ro
+
   wordpress-mysql:
     ports:
       - 3307:3306

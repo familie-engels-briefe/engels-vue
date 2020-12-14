@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use ErrorException;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -57,10 +56,13 @@ class SyncExistCommand extends Command
      * Execute the console command.
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle()
     {
+        // Set last sync time
+        write_setting('last_sync', now('utc')->format('Y-m-d H:i:s'));
+
         // Get letters from replication server
         $index = $this->replication->raw('api/toc-letters');
         $replicationLetters = [];
@@ -69,16 +71,17 @@ class SyncExistCommand extends Command
 
         // Update letters in exist with replication server documents
         foreach ($index->letter as $letter) {
-            $filename = (string)$letter['filename'];
+            $filename = (string) $letter['filename'];
 
-            $document = $this->replication->createRequest('data/' . $filename, 'GET', [], false);
+            $document = $this->replication->createRequest('data/'.$filename,
+                'GET', [], false);
 
             // Sync facsimile
             try {
                 $xml = simplexml_load_string($document['body']);
                 $this->syncFacsimile($xml);
             } catch (Exception $e) {
-                $error = 'Could not parse xml from letter: ' . $filename;
+                $error = 'Could not parse xml from letter: '.$filename;
                 $this->error($error);
                 $this->comment('');
                 Log::error($error);
@@ -86,11 +89,11 @@ class SyncExistCommand extends Command
             }
 
             // Sync html
-            $this->syncHtml('dipl', (string)$letter['n']);
-            $this->syncHtml('norm', (string)$letter['n']);
+            $this->syncHtml('dipl', (string) $letter['n']);
+            $this->syncHtml('norm', (string) $letter['n']);
 
             // Update xml
-            if (!$this->option('dry-run')) {
+            if ( ! $this->option('dry-run')) {
                 $this->exist->updateDocument($filename, $document['body']);
             }
 
@@ -107,14 +110,18 @@ class SyncExistCommand extends Command
 
         // Delete letters from production system which do not exist in replication
         $prodLetters = $this->exist->get('letters.xq');
-        $prodLetters = collect(json_decode($prodLetters->getContent())->data->letter ?? [])->map(function ($letter) {
+        $prodLetters = collect(json_decode($prodLetters->getContent(), true,
+                512, JSON_THROW_ON_ERROR)->data->letter ?? [])->map(function (
+            $letter
+        ) {
             return $letter->name;
         });
 
-        $lettersToDelete = array_diff($prodLetters->toArray(), $replicationLetters);
+        $lettersToDelete = array_diff($prodLetters->toArray(),
+            $replicationLetters);
 
         foreach ($lettersToDelete as $letterToDelete) {
-            if (!$this->option('dry-run')) {
+            if ( ! $this->option('dry-run')) {
                 $this->exist->deleteDocument($letterToDelete);
             }
 
@@ -125,48 +132,47 @@ class SyncExistCommand extends Command
         // Sync registers
         $this->syncRegisters();
 
-        // Set last sync time
-        write_setting('last_sync', now('utc')->format('Y-m-d H:i:s'));
-
         return true;
     }
 
     /**
-     * @param string $type
-     * @param string $number
+     * @param  string  $type
+     * @param  string  $number
      */
-    private function syncHtml(string $type, string $number)
+    private function syncHtml(string $type, string $number): void
     {
-        if (!in_array($type, ['dipl', 'norm'])) {
+        if ( ! in_array($type, ['dipl', 'norm'])) {
             throw new InvalidArgumentException('Only "dipl" and "norm" html types are allowed!');
         }
 
-        $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
+        $url = 'api/'.config('app.exist_api_version').'/letter/fe.'.$number
+               .'/html/'.$type;
         $response = $this->replication->createRequest($url, 'GET', [], false);
-        if (!isset($response['body'])) {
-            $this->error('Could not read body from ' . $type . ' letter html: ' . $url);
+        if ( ! isset($response['body'])) {
+            $this->error('Could not read body from '.$type.' letter html: '
+                         .$url);
             $this->comment('');
 
-            Log::error('Could not read body from response: ' . serialize($response));
-        } else {
-            if (!$this->option('dry-run')) {
-                $key = $number . '-html-' . $type;
-                Cache::tags([$type, 'html', $number])->put($key, $response['body']);
-            }
+            Log::error('Could not read body from response: '
+                       .serialize($response));
+        } elseif ( ! $this->option('dry-run')) {
+            $key = $number.'-html-'.$type;
+            Cache::tags([$type, 'html', $number])->put($key, $response['body']);
         }
     }
 
     /**
-     * @param SimpleXMLElement $xml
+     * @param  SimpleXMLElement  $xml
      */
-    private function syncFacsimile(SimpleXMLElement $xml)
+    private function syncFacsimile(SimpleXMLElement $xml): void
     {
-        if (!$this->option('dry-run') && isset($xml->facsimile)) {
+        if ( ! $this->option('dry-run') && isset($xml->facsimile)) {
             foreach ($xml->facsimile->graphic as $fac) {
-                $url = (string)$fac['url'];
-                $pdf = $this->replication->createRequest(sprintf('facs/%s', $url), 'GET', [], false);
+                $url = (string) $fac['url'];
+                $pdf = $this->replication->createRequest(sprintf('facs/%s',
+                    $url), 'GET', [], false);
 
-                if (!isset($pdf['body'])) {
+                if ( ! isset($pdf['body'])) {
                     Log::error(sprintf('Facsimile does not exist: %s', $url));
                     continue;
                 }
@@ -179,7 +185,7 @@ class SyncExistCommand extends Command
     /**
      *
      */
-    private function syncRegisters()
+    private function syncRegisters(): void
     {
         $this->info('Syncing registers');
 
@@ -191,10 +197,14 @@ class SyncExistCommand extends Command
         ];
 
         foreach ($registers as $register) {
-            $document = $this->replication->createRequest(sprintf('data/register/reg_global_%s.xml', $register), 'GET', [], false);
+            $document
+                =
+                $this->replication->createRequest(sprintf('data/register/reg_global_%s.xml',
+                    $register), 'GET', [], false);
 
-            if (!$this->option('dry-run')) {
-                $this->exist->updateDocument(sprintf('register/reg_global_%s.xml', $register), $document['body']);
+            if ( ! $this->option('dry-run')) {
+                $this->exist->updateDocument(sprintf('register/reg_global_%s.xml',
+                    $register), $document['body']);
             }
 
             $log = sprintf('Updated register %s', $register);
