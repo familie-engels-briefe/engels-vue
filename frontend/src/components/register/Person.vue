@@ -57,8 +57,26 @@ export default {
 
                     that.urls.push({
                         key: 'gnd',
-                        title: 'GND',
-                        href: 'http://d-nb.info/gnd/' + id
+                        title: 'Deutsche Nationalbibliothek',
+                        href: 'https://d-nb.info/gnd/' + id
+                    })
+
+                    that.urls.push({
+                        key: 'db',
+                        title: 'Deutsche Biographie',
+                        href: 'https://www.deutsche-biographie.de/pnd' + id + '.html'
+                    })
+
+                    that.urls.push({
+                        key: 'toolforge',
+                        title: 'Personensuche (Toolforge)',
+                        href: 'https://persondata.toolforge.org/p/gnd/' + id
+                    })
+
+                    that.urls.push({
+                        key: 'beacon',
+                        title: 'Beacon-Findbuchs (PND/BEACON AKS)',
+                        href: 'http://beacon.findbuch.de/seealso/pnd-aks?format=redirect&id=' + id
                     })
 
                     that.content = ''
