@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => env('FILESYSTEM_CLOUD', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,22 +43,10 @@ return [
 
     'disks' => [
 
-        'local' => [
-            'driver' => 'local',
-            'root' => storage_path('app'),
-        ],
-
         'facsimile' => [
             'driver' => 'local',
             'root' => public_path('facsimile'),
             'url' => env('APP_URL').'/facsimile',
-            'visibility' => 'public',
-        ],
-
-        'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 

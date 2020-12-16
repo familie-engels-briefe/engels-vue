@@ -61,6 +61,12 @@ class SyncExistCommand extends Command
      */
     public function handle()
     {
+        Log::info('Starting syncronisation...');
+
+        if ($this->option('dry-run')) {
+            Log::info('This is a dry run.');
+        }
+
         // Set last sync time
         $syncLogId = DB::table('sync_logs')->insertGetId([
             'started_at' => now(),
@@ -139,6 +145,8 @@ class SyncExistCommand extends Command
             'finished_at' => now(),
         ]);
 
+        Log::info('Everything synced.');
+
         return true;
     }
 
@@ -173,7 +181,12 @@ class SyncExistCommand extends Command
      */
     private function syncFacsimile(SimpleXMLElement $xml): void
     {
-        if ( ! $this->option('dry-run') && isset($xml->facsimile)) {
+        if (!isset($xml->facsimile)) {
+            Log::error(sprintf('No facsimile for xml: %s', serialize($xml)));
+            return;
+        }
+
+        if ( ! $this->option('dry-run')) {
             foreach ($xml->facsimile->graphic as $fac) {
                 $url = (string) $fac['url'];
                 $pdf = $this->replication->createRequest(sprintf('facs/%s',
@@ -185,6 +198,14 @@ class SyncExistCommand extends Command
                 }
 
                 Storage::disk('facsimile')->put($url, $pdf['body']);
+
+                if (Storage::disk('facsimile')->exists($url)) {
+                    Log::info(sprintf('Stored facsimile %s in %s: %d bytes',
+                        $url, public_path('facsimile'),
+                        Storage::disk('facsimile')->size($url)));
+                } else {
+                    Log::error(sprintf('Could not store facsimile %s!', $url));
+                }
             }
         }
     }
