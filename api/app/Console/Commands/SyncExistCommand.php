@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 use App\ExistDb\ExistDb;
@@ -61,7 +62,9 @@ class SyncExistCommand extends Command
     public function handle()
     {
         // Set last sync time
-        write_setting('last_sync', now('utc')->format('Y-m-d H:i:s'));
+        $syncLogId = DB::table('sync_logs')->insertGetId([
+            'started_at' => now(),
+        ]);
 
         // Get letters from replication server
         $index = $this->replication->raw('api/toc-letters');
@@ -131,6 +134,10 @@ class SyncExistCommand extends Command
 
         // Sync registers
         $this->syncRegisters();
+
+        DB::table('sync_logs')->where('id', $syncLogId)->update([
+            'finished_at' => now(),
+        ]);
 
         return true;
     }

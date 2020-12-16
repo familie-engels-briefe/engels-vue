@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
@@ -61,7 +62,8 @@ class SyncController extends Controller
         $cacheSize = number_format( $cacheSize / (1024 ** $power), 2, '.', ',') . ' ' . $units[ $power];
 
         return view('sync.index', [
-            'lastSync' => read_setting('last_sync'),
+            'lastSync' => DB::table('sync_logs')->orderBy('id', 'desc')->first(),
+            'lastSyncErrors' => DB::table('failed_jobs')->orderBy('failed_at', 'desc')->where('failed_at', '>', now()->subHours(24))->get(),
             'numberOfDocuments' => $numberOfDocuments,
             'numberOfHtmlFiles' => $numberOfHtmlFiles,
             'cacheSize' => $cacheSize,

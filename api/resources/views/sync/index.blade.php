@@ -3,9 +3,14 @@
 @section('content')
     <div class="w-full px-4">
         <h1 class="mb-4">Sync (
-            Last Sync:
             @if ($lastSync)
-                {{ (new Carbon\Carbon($lastSync))->timezone('Europe/Berlin')->format('d.m.Y H:i') }}
+                {{ (new Carbon\Carbon($lastSync->started_at))->timezone('Europe/Berlin')->format('d.m.Y H:i') }}
+                -
+                @if ($lastSync->finished_at)
+                    {{ (new Carbon\Carbon($lastSync->finished_at))->timezone('Europe/Berlin')->format('d.m.Y H:i') }} ({{ (new Carbon\Carbon($lastSync->finished_at))->longAbsoluteDiffForHumans(new Carbon\Carbon($lastSync->started_at), ) }})
+                @else
+                    Not finished yet
+                @endif
             @else
                 Never
             @endif
@@ -48,5 +53,30 @@
                 </tr>
             </tbody>
         </table>
+
+        @if (count($lastSyncErrors) > 0)
+            <h3>Errors in the last 24 hours</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Payload</th>
+                        <th>Exception</th>
+                        <th>Failed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($lastSyncErrors as $error)
+                        <tr>
+                            <td>{{ $error->id }}</td>
+                            <td class="max-w-sm overflow-x-scroll"><pre class="whitespace-pre-wrap break-words"><code>{{ $error->payload }}</code></pre></td>
+                            <td class="max-w-sm overflow-x-scroll"><pre class="whitespace-pre-wrap break-words"><code>{{ $error->exception }}</code></pre></td>
+                            <td>{{ (new Carbon\Carbon($error->failed_at))->timezone('Europe/Berlin')->format('d.m.Y H:i') }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection
