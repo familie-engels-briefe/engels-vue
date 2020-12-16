@@ -101,4 +101,5 @@ services:
       - ./wordpress:/wordpress:ro
       - wordpress-uploads:/wordpress/wp-content/uploads:ro
       - ./api/public:/api/public:ro
+      - api-public-facsimile:/api/public/facsimile:ro
       - frontend-dist:/frontend:ro
