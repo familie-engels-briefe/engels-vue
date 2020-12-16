@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name') }}</title>
 
+    <meta name="description" content="{{ config('app.description') }}">
+
     <link rel="stylesheet" href="{{ asset(mix('css/main.css')) }}">
-    <script src="{{ asset(mix('js/app.js')) }}"></script>
+    <script src="{{ asset(mix('js/app.js')) }}" async defer></script>
 </head>
 <body class="h-full">
     <div class="flex flex-col min-h-full items-stretch">
-        <div id="navigation" class="bg-teal-500 p-6">
+        <div id="navigation" class="bg-teal-300 p-6">
             <nav class="container mx-auto flex-grow lg:flex lg:items-center lg:w-auto px-4" role="navigation">
                 <div class="lg:flex-grow">
-                    <a href="{{ route('documentation') }}">{{ __('Documentation') }}</a>
+                    <a href="{{ route('documentation') }}"><i class="fas fa-bookmark" aria-hidden="true"></i> {{ __('Documentation') }}</a>
 
                     @auth
-                        <a href="{{ route('sync.index') }}">{{ __('Sync') }}</a>
+                        <a href="{{ route('sync.index') }}"><i class="fas fa-sync" aria-hidden="true"></i> {{ __('Sync') }}</a>
                     @endauth
                 </div>
                 <div>
@@ -41,7 +43,7 @@
 
         <footer class="text-gray-500 flex-shrink-0">
             <div class="container mx-auto px-4 py-8 text-center">
-                &copy; 2018-{{ date('Y') }} Engels Archiv | Impressum | Datenschutz
+                &copy; 2018-{{ date('Y') }} Engels Archiv | <a href="https://familie-engels-briefe.de/impressum">Impressum</a> | <a href="https://familie-engels-briefe.de/datenschutzerkl%C3%A4rung">Datenschutz</a>
             </div>
         </footer>
     </div>

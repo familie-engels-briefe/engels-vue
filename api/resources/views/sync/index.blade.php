@@ -55,7 +55,7 @@
         </table>
 
         @if (count($lastSyncErrors) > 0)
-            <h3>Errors in the last 24 hours</h3>
+            <h2>Errors in the last 24 hours</h2>
 
             <table>
                 <thead>
@@ -69,10 +69,10 @@
                 <tbody>
                     @foreach ($lastSyncErrors as $error)
                         <tr>
-                            <td>{{ $error->id }}</td>
-                            <td class="max-w-sm overflow-x-scroll"><pre class="whitespace-pre-wrap break-words"><code>{{ $error->payload }}</code></pre></td>
-                            <td class="max-w-sm overflow-x-scroll"><pre class="whitespace-pre-wrap break-words"><code>{{ $error->exception }}</code></pre></td>
-                            <td>{{ (new Carbon\Carbon($error->failed_at))->timezone('Europe/Berlin')->format('d.m.Y H:i') }}</td>
+                            <td class="align-top">{{ $error->id }}</td>
+                            <td class="max-w-sm overflow-x-scroll align-top"><pre class="whitespace-pre-wrap break-words"><code class="language-json">{{ json_encode(json_decode($error->payload), JSON_PRETTY_PRINT) }}</code></pre></td>
+                            <td class="max-w-sm overflow-x-scroll align-top"><pre class="whitespace-pre-wrap break-words"><code>{{ $error->exception }}</code></pre></td>
+                            <td class="align-top">{{ (new Carbon\Carbon($error->failed_at))->timezone('Europe/Berlin')->format('d.m.Y H:i') }}</td>
                         </tr>
                     @endforeach
                 </tbody>

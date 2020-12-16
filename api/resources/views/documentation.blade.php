@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="px-4 w-full md:2/3 lg:w-3/4 docs">
+        <div class="bg-purple-200 text-purple-900 font-bold p-4 mb-8">
+            Das ist die API Dokumentation für die <a href="https://familie-engels-briefe.de" target="_blank" class="underline">Brief-Edition der Familie Engels</a>. Für den Quellcode besuchen Sie bitte die entsprechende Dokumentation auf <a href="https://github.com/familie-engels-briefe/" target="_blank" class="underline"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>.
+        </div>
+
         <h1 class="leading-none">Engels Archive API Documentation</h1>
 
         <h2><a id="letters"></a>Letters</h2>

@@ -1,5 +1,6 @@
 @import "~@fortawesome/fontawesome-free/css/fontawesome.css";
 @import "~@fortawesome/fontawesome-free/css/solid.css";
+@import "~@fortawesome/fontawesome-free/css/brands.css";
 @import "~highlight.js/styles/monokai-sublime.css";
 
 @tailwind base;
@@ -25,15 +26,15 @@ body {
 }
 
 h1 {
-    @apply text-3xl leading-none font-light;
+    @apply text-4xl leading-none font-light font-bold;
 }
 
 h2 {
-    @apply text-2xl mt-12 mb-4 leading-none;
+    @apply text-2xl mt-12 mb-4 leading-none uppercase font-bold;
 }
 
 h3 {
-    @apply text-xl mt-10 mb-3 leading-none;
+    @apply text-xl mt-10 mb-3 leading-none uppercase font-bold;
 }
 
 h3 code {
@@ -79,7 +80,7 @@ table td {
 
 #navigation a,
 #navigation button {
-    @apply block mt-4 text-teal-100 text-sm font-bold mr-4;
+    @apply block mt-4 text-teal-900 text-sm font-bold mr-4;
 }
 
 #navigation button {
@@ -95,7 +96,7 @@ table td {
 
 #navigation a:hover,
 #navigation button:hover {
-    @apply text-white;
+    @apply text-teal-700;
 }
 
 #sub-navigation {
