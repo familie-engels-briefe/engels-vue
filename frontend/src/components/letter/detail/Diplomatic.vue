@@ -1,6 +1,12 @@
 <template>
-    <div>
-        <div :is="processedHtml" class="letter letter-diplomatic"></div>
+    <div class="flex flex-wrap lg:-mx-6 pb-24">
+        <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
+            <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles"></LetterFacsimile>
+        </div>
+
+        <div class="w-full lg:w-1/2 lg:px-6">
+            <div :is="processedHtml" class="letter letter-diplomatic"></div>
+        </div>
     </div>
 </template>
 
@@ -9,16 +15,23 @@ import PersonTooltip from './tooltip/PersonTooltip'
 import PlaceTooltip from './tooltip/PlaceTooltip'
 import OrganisationTooltip from './tooltip/OrganisationTooltip'
 import LetterTooltip from './tooltip/LetterTooltip'
+import LetterFacsimile from './Facsimile'
 
 import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
 import { highlightTopics } from './helper_highlights'
 
 export default {
     name: 'LetterDiplomatic',
+    components: {
+        LetterFacsimile,
+    },
     props: {
         html: {
             type: String,
             required: true
+        },
+        facsimiles: {
+            required: false,
         },
         highlights: {
             type: Object,

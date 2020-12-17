@@ -1,5 +1,7 @@
 <template>
-    <pre class="overflow-x-auto bg-gray-lighter p-4"><code v-text="xml" class="language-xml"></code></pre>
+    <div class="pb-24">
+        <pre class="overflow-x-auto bg-gray-lighter p-4"><code v-text="xml" class="language-xml"></code></pre>
+    </div>
 </template>
 
 <script>

@@ -9,17 +9,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap lg:-mx-6 pb-24">
-                <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
-                    <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles"></LetterFacsimile>
-                </div>
-
-                <div class="w-full lg:w-1/2 lg:px-6">
-                    <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized" :highlights="highlights"></LetterNormalized>
-                    <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic" :highlights="highlights"></LetterDiplomatic>
-                    <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
-                </div>
-            </div>
+            <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized" :highlights="highlights" :facsimiles="facsimiles"></LetterNormalized>
+            <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic" :highlights="highlights" :facsimiles="facsimiles"></LetterDiplomatic>
+            <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
 
             <LetterToolbar :active="activeView" v-on:change-view="changeView"></LetterToolbar>
         </Loading>
@@ -30,7 +22,6 @@
 import axios from 'axios'
 
 import Loading from './../../Loading'
-import LetterFacsimile from './Facsimile'
 import LetterNormalized from './Normalized'
 import LetterDiplomatic from './Diplomatic'
 import LetterXml from './Xml'
@@ -41,7 +32,6 @@ export default {
     name: 'LetterDetail',
     components: {
         Loading,
-        LetterFacsimile,
         LetterNormalized,
         LetterDiplomatic,
         LetterXml,
