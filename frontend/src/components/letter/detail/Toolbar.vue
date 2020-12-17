@@ -43,9 +43,18 @@ export default {
             required: true
         }
     },
+    mounted () {
+        const hash = window.location.hash.replace('#', '')
+        console.log(hash)
+        if (hash === 'normalized' || hash === 'diplomatic' || hash === 'xml') {
+            this.changeLetterView(hash)
+        }
+    },
     methods: {
         changeLetterView (view) {
             console.debug('Change letter view to', view)
+
+            window.location.hash = view
 
             this.$emit('change-view', view)
         }
