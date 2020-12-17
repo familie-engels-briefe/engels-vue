@@ -43,8 +43,11 @@ export default {
     },
     props: {
         html: {
-            required: true,
+            required: false,
             type: String,
+            default () {
+                return '<div></div>'
+            }
         }
     },
     data () {
