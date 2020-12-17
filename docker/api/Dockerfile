@@ -20,7 +20,7 @@ RUN yarn production
 #
 # API
 #
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 # Install extensions
 RUN apt-get update && apt-get install -y libcurl4-gnutls-dev libxml2-dev libzip-dev && apt-get autoremove -y

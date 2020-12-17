@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 MAINTAINER Tim Helfensdörfer <thelfensdrfer@gmail.com>
 
@@ -9,8 +9,6 @@ RUN apt-get update && apt-get install \
     libmagickwand-dev \
     libcurl4-openssl-dev pkg-config libssl-dev -y
 RUN docker-php-ext-install -j$(nproc) mysqli zip curl gd exif
-RUN pecl install imagick
-RUN docker-php-ext-enable imagick
 
 # Create php user
 RUN groupadd -g 1000 engels

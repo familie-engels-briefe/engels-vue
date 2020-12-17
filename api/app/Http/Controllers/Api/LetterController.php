@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,11 +15,15 @@ class LetterController
     /**
      * Display a list of all letters.
      *
+     * @param  Request  $request
+     * @param  LetterRepository  $repository
+     *
      * @return Response
+     * @throws Exception
      */
-    public function index(Request $request, LetterRepository $repository)
+    public function index(Request $request, LetterRepository $repository): Response
     {
-        return Cache::tags('api')->remember('letter-index', now()->addHour(), function () use ($repository, $request) {
+        return Cache::tags('api')->remember('letter-index', 3600, function () use ($repository, $request) {
             return $repository->all([
                 'person-sender-receiver' => $request->get('person-sender-receiver', ''),
                 'person-mentioned' => $request->get('person-mentioned', ''),
@@ -33,16 +38,18 @@ class LetterController
     /**
      * Display a single letter.
      *
-     * @param LetterRepository $repository
-     * @param string $id
+     * @param  LetterRepository  $repository
+     * @param  string  $id
+     *
      * @return JsonResponse
+     * @throws Exception
      */
-    public function show(LetterRepository $repository, $id)
+    public function show(LetterRepository $repository, $id): JsonResponse
     {
         /**
          * @var $response JsonResponse
          */
-        return Cache::tags('api')->remember('letter-index-' . $id, now()->addHour(), function () use ($repository, $id) {
+        return Cache::tags('api')->remember('letter-index-' . $id, 3600, function () use ($repository, $id) {
             $letter = $repository->one($id)->getData();
 
             if ($letter->success === false) {

@@ -2,8 +2,12 @@
 
 namespace App\Repositories;
 
+use Exception;
+
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\Response;
 
 use App\ExistDb\ExistDb;
@@ -32,8 +36,10 @@ class LetterRepository
     /**
      * Get all letters.
      *
-     * @param array $filter
+     * @param  array  $filter
+     *
      * @return Response
+     * @throws Exception
      */
     public function all(array $filter = []): Response
     {
@@ -44,9 +50,11 @@ class LetterRepository
      * Get a single letter.
      *
      * @param $id
-     * @return Response
+     *
+     * @return JsonResponse
+     * @throws Exception
      */
-    public function one($id): Response
+    public function one($id): JsonResponse
     {
         return $this->db->get('letter.xq', [
             'id' => $id,
@@ -61,43 +69,38 @@ class LetterRepository
      */
     public function html($number): array
     {
-        return [
-            'norm' => Cache::tags(['norm', 'html', $number])->get($number . '-html-norm', function () use ($number) {
-                $type = 'norm';
-
-                $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
-                $response = $this->replication->createRequest($url, 'GET', [], false);
-                if (!isset($response['body'])) {
-                    Log::error('Could not read body from ' . $type . ' letter html: ' . $url);
-                } else {
-                    return $response['body'];
-                }
-
-                return null;
-            }),
-            'dipl' => Cache::tags(['dipl', 'html', $number])->get($number . '-html-dipl', function () use ($number) {
-                $type = 'dipl';
-
-                $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
-                $response = $this->replication->createRequest($url, 'GET', [], false);
-                if (!isset($response['body'])) {
-                    Log::error('Could not read body from ' . $type . ' letter html: ' . $url);
-                } else {
-                    return $response['body'];
-                }
-
-                return null;
-            }),
+        $response = [];
+        $types = [
+            'norm',
+            'dipl',
         ];
+
+        foreach ($types as $type) {
+            $response[$type] = Cache::tags(['norm', 'html', $number])->get($number . '-html-norm', function () use ($number, $type) {
+                $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
+                $response = $this->replication->createRequest($url, 'GET', [], false);
+                if (!isset($response['body'])) {
+                    Log::error('Could not read body from ' . $type . ' letter html: ' . $url);
+                } else {
+                    return $response['body'];
+                }
+
+                return null;
+            });
+        }
+
+        return $response;
     }
 
     /**
      * Get a single letter in xml format.
      *
      * @param $id
-     * @return \SimpleXMLElement
+     *
+     * @return SimpleXMLElement
+     * @throws Exception
      */
-    public function raw($id): \SimpleXMLElement
+    public function raw($id): SimpleXMLElement
     {
         return $this->db->raw('raw.xq', [
             'id' => $id,

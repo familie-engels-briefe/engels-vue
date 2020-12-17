@@ -17,7 +17,7 @@ class OrganisationController
      */
     public function index(OrganisationRepository $repository)
     {
-        return Cache::tags('api')->remember('organisation-index', now()->addHour(), function () use ($repository) {
+        return Cache::tags('api')->remember('organisation-index', 3600, function () use ($repository) {
             return $repository->all();
         });
     }

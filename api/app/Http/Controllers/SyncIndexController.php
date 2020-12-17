@@ -4,20 +4,18 @@ namespace App\Http\Controllers;
 
 use Exception;
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 use App\Repositories\LetterRepository;
-use App\Jobs\SyncExist;
 
-class SyncController extends Controller
+class SyncIndexController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(LetterRepository $repository)
+    public function __invoke(LetterRepository $repository)
     {
         $error = null;
         try {
@@ -49,7 +47,7 @@ class SyncController extends Controller
                     return 0;
                 }
 
-                return intval($matches[1]);
+                return (int) $matches[1];
             })
             ->sum();
 
@@ -70,24 +68,5 @@ class SyncController extends Controller
             'cacheSize' => $cacheSize,
             'error' => $error,
         ]);
-    }
-
-    /**
-     * Show the edit page for a letter.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function sync()
-    {
-        SyncExist::dispatch();
-
-        return redirect()->route('sync.index');
-    }
-
-    public function clearCache()
-    {
-        Artisan::call('cache:clear');
-
-        return redirect()->route('sync.index');
     }
 }

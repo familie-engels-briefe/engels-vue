@@ -1,5 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\ClearCacheController;
+use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\SyncDataController;
+use App\Http\Controllers\SyncIndexController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,17 +19,17 @@
 |
 */
 
-Route::get('/', 'DocumentationController@index')->name('documentation');
+Route::get('/', DocumentationController::class)->name('documentation');
 
 Route::get('/debug-sentry', function () {
-    throw new Exception('Debug Sentry!');
+    throw new RuntimeException('Debug Sentry!');
 });
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'sync'], function () {
-        Route::get('/', 'SyncController@index')->name('sync.index');
-        Route::post('/', 'SyncController@sync')->name('sync.sync');
-        Route::post('/clear-cache', 'SyncController@clearCache')->name('sync.clear-cache');
+        Route::get('/', SyncIndexController::class)->name('sync.index');
+        Route::post('/', SyncDataController::class)->name('sync.sync');
+        Route::post('/clear-cache', ClearCacheController::class)->name('sync.clear-cache');
     });
 });
 

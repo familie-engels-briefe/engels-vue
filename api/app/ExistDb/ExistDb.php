@@ -3,6 +3,7 @@
 namespace App\ExistDb;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use SimpleXMLElement;
 
 use Illuminate\Support\Facades\Log;
@@ -166,9 +167,9 @@ class ExistDb
      * Create a json response.
      *
      * @param array $response
-     * @return Response
+     * @return JsonResponse
      */
-    protected function createResponse(array $response): Response
+    protected function createResponse(array $response): JsonResponse
     {
         if (isset($response['code']) && $response['code'] === 0) {
             throw new Exception($response['error'] ?? 'Unkonwn exist exception');
@@ -183,10 +184,10 @@ class ExistDb
      * @param string $resource
      * @param array $query
      * @param bool $parse
-     * @return Response
+     * @return JsonResponse
      * @throws Exception
      */
-    public function get(string $resource, array $query = [], $parse = true): Response
+    public function get(string $resource, array $query = [], $parse = true): JsonResponse
     {
         $response = $this->createRequest($resource, 'GET', $query, $parse);
 
