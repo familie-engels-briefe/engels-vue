@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'sync'], function () {
         Route::get('/', 'SyncController@index')->name('sync.index');
         Route::post('/', 'SyncController@sync')->name('sync.sync');
+        Route::post('/clear-cache', 'SyncController@clearCache')->name('sync.clear-cache');
     });
 });
 

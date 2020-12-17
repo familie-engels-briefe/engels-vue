@@ -6895,6 +6895,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.ml-4{
+  margin-left: 1rem;
+}
+
 .mb-6{
   margin-bottom: 1.5rem;
 }
@@ -7350,16 +7354,30 @@ button.loading:not(.no-button), .button.loading{
   opacity: 0.5;
 }
 
-.button-secondary {
+.button.button-secondary {
   --tw-bg-opacity: 1;
   background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
-.button-secondary:hover {
+.button.button-secondary:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.button.button-danger {
+  --tw-bg-opacity: 1;
+  background-color: rgba(185, 28, 28, var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+.button.button-danger:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(127, 29, 29, var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }

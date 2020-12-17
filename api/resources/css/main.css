@@ -149,11 +149,18 @@ button.loading:not(.no-button),
     @apply opacity-50 cursor-not-allowed;
 }
 
-.button-secondary {
+.button.button-secondary {
     @apply bg-gray-700 text-white;
 }
-.button-secondary:hover {
+.button.button-secondary:hover {
     @apply bg-gray-900 text-white;
+}
+
+.button.button-danger {
+    @apply bg-red-700 text-white;
+}
+.button.button-danger:hover {
+    @apply bg-red-900 text-white;
 }
 
 .button-disabled,

@@ -25,6 +25,7 @@ class LetterController
                 'place-sender-receiver' => $request->get('place-sender-receiver', ''),
                 'place-mentioned' => $request->get('place-mentioned', ''),
                 'organisation-mentioned' => $request->get('organisation-mentioned', ''),
+                'time' => now(),
             ]);
         });
     }
@@ -62,6 +63,7 @@ class LetterController
             $data['facsimiles'] = $letter->data->facs->graphic;
             $data['xml'] = $letter->data->xml->content;
             $data['html'] = $repository->html($letter->data->number);
+            $data['time'] = now();
 
             return new JsonResponse($data);
         });

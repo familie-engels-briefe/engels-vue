@@ -27,11 +27,19 @@
             The syncronisation takes a few seconds. It compares the letters and all other relevant files from the current exist 4 database <code>{{ config('database.connections.exist_replication.host') }}:{{ config('database.connections.exist_replication.port') }}/{{ config('database.connections.exist_replication.collection') }}</code> and writes them into the exist 5 database <code>{{ config('database.connections.exist.host') }}:{{ config('database.connections.exist.port') }}/{{ config('database.connections.exist.collection') }}</code> which feeds the api.
         </p>
 
-        <form method="post" action="{{ route('sync.sync') }}">
+        <form method="post" action="{{ route('sync.sync') }}" class="inline-block">
             @csrf
 
             <button type="submit" class="button">
                 <i class="fas fa-sync" aria-hidden="true"></i> {{ __('Sync') }}
+            </button>
+        </form>
+
+        <form method="post" action="{{ route('sync.clear-cache') }}" class="inline-block ml-4">
+            @csrf
+
+            <button type="submit" class="button button-danger">
+                <i class="fas fa-trash" aria-hidden="true"></i> {{ __('Cache') }}
             </button>
         </form>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
@@ -79,6 +80,13 @@ class SyncController extends Controller
     public function sync()
     {
         SyncExist::dispatch();
+
+        return redirect()->route('sync.index');
+    }
+
+    public function clearCache()
+    {
+        Artisan::call('cache:clear');
 
         return redirect()->route('sync.index');
     }
