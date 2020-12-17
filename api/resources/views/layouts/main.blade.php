@@ -26,7 +26,15 @@
                         <form method="post" action="{{ route('logout') }}">
                             @csrf
 
-                            <button type="submit" class="no-button text-sm"><i class="fas fa-sign-out-alt" aria-hidden="true"></i> {{ __('Sign out') }}</button>
+                            <span class="text-sm">
+                                {{ auth()->user()->email }} -
+                            </span>
+
+                            <button type="submit" class="no-button text-sm">
+                                {{ __('Sign out') }}
+
+                                <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            </button>
                         </form>
                     @endauth
 
