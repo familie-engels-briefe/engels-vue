@@ -38,10 +38,10 @@ class LetterRepository
      *
      * @param  array  $filter
      *
-     * @return Response
+     * @return JsonResponse
      * @throws Exception
      */
-    public function all(array $filter = []): Response
+    public function all(array $filter = []): JsonResponse
     {
         return $this->db->get('letters.xq', $filter);
     }
