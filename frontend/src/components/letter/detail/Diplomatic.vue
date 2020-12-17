@@ -298,4 +298,23 @@ export default {
 /deep/ .tei_signed {
     @apply block text-right;
 }
+
+/**
+ * Envelope
+ */
+/deep/ [data-page="envelope wrapper"] {
+    @apply flex flex-col -my-2;
+}
+
+/deep/ [data-page="envelope top"],
+/deep/ [data-page="envelope middle"],
+/deep/ [data-page="envelope bottom"] {
+    @apply flex flex-row w-full -mx-2;
+}
+
+/deep/ [data-page="envelope wrapper"] [data-page^="envelope"] [data-page^="env"] {
+    @apply w-1/3 p-2;
+
+    min-height: 4rem;
+}
 </style>
