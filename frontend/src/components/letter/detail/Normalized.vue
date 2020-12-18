@@ -99,10 +99,8 @@ export default {
                                 break
                             }
                         }
-
-                        console.log('Change fac to', filename)
                     }
-                },
+                }
             }
         }
     }
