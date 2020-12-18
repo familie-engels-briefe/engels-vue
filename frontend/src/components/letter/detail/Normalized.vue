@@ -209,4 +209,13 @@ export default {
 /deep/ .tei_signed {
     @apply block text-right;
 }
+
+/**
+ * Indention
+ */
+/deep/ .tei_p,
+/deep/ .tei_openen,
+/deep/ .tei_closer {
+    text-indent: 2rem;
+}
 </style>
