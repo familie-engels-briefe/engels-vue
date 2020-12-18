@@ -1,11 +1,12 @@
 <template>
     <div class="flex flex-wrap lg:-mx-6 pb-24">
         <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
-            <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles"></LetterFacsimile>
+            <LetterFacsimile v-if="facsimiles" :facsimiles="facsimiles" :index="facsimileIndex"></LetterFacsimile>
         </div>
 
         <div class="w-full lg:w-1/2 lg:px-6">
-            <component :is="processedHtml" class="letter letter-normalized"></component>
+            <component :is="processedHtml"
+                       class="letter letter-normalized"></component>
         </div>
     </div>
 </template>
@@ -15,10 +16,12 @@ import PersonTooltip from './tooltip/PersonTooltip'
 import PlaceTooltip from './tooltip/PlaceTooltip'
 import OrganisationTooltip from './tooltip/OrganisationTooltip'
 import LetterTooltip from './tooltip/LetterTooltip'
+import FacsimileLink from './FacsimileLink'
 import LetterFacsimile from './Facsimile'
 
 import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
 import { highlightTopics } from './helper_highlights'
+import { replaceFacsimiles } from './helper_facsimiles'
 
 export default {
     name: 'LetterNormalized',
@@ -41,11 +44,17 @@ export default {
             },
         },
     },
+    data () {
+        return {
+            facsimileIndex: 0
+        }
+    },
     mounted () {
         console.debug('Mounted Letter/Detail/Normalized')
     },
     computed: {
         processedHtml () {
+            const that = this
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
@@ -53,6 +62,7 @@ export default {
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
+            replaceFacsimiles(wrapper)
 
             highlightTopics(wrapper, this.highlights && this.highlights.topics ? this.highlights.topics : [])
 
@@ -70,6 +80,7 @@ export default {
                     PlaceTooltip,
                     OrganisationTooltip,
                     LetterTooltip,
+                    FacsimileLink,
                 },
                 data () {
                     return {
@@ -77,8 +88,21 @@ export default {
                         PlaceTooltip,
                         OrganisationTooltip,
                         LetterTooltip,
+                        FacsimileLink,
                     }
-                }
+                },
+                methods: {
+                    changeFacsimile (filename) {
+                        for (let i = 0; i < that.facsimiles.length; i++) {
+                            if (that.facsimiles[i].url === filename) {
+                                that.facsimileIndex = i
+                                break
+                            }
+                        }
+
+                        console.log('Change fac to', filename)
+                    }
+                },
             }
         }
     }
@@ -120,6 +144,7 @@ export default {
 /deep/ .tei_choice .tei_expan[data-n="com"]::before {
     content: ' [';
 }
+
 /deep/ .tei_choice .tei_expan[data-n="com"]::after {
     content: '] ';
 }
@@ -152,11 +177,13 @@ export default {
 /deep/ .tei_g[data-ref="#g.enc.chardecl.rparen.type1"] > * {
     @apply hidden;
 }
+
 /deep/ .tei_g[data-ref="#g.enc.chardecl.lparen.type1"]:after {
     @apply inline;
 
     content: '(';
 }
+
 /deep/ .tei_g[data-ref="#g.enc.chardecl.rparen.type1"]:after {
     @apply inline;
 
@@ -170,6 +197,7 @@ export default {
 /deep/ .tei_supplied[data-reason="siegelausriss"]::before {
     content: '[';
 }
+
 /deep/ .tei_supplied[data-reason="siegelausriss"]::after {
     content: ']';
 }

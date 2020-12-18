@@ -15,6 +15,10 @@ export default {
         facsimiles: {
             type: Array,
             required: true
+        },
+        index: {
+            type: Number,
+            required: true
         }
     },
     data () {
@@ -30,7 +34,7 @@ export default {
     methods: {
         displayPdf () {
             if (this.facsimiles.length > 0) {
-                PDFObject.embed(this.createFacsimileUrl(this.facsimiles[0].url), this.$el.querySelector('.pdf-viewer'), {
+                PDFObject.embed(this.createFacsimileUrl(this.facsimiles[this.index].url), this.$el.querySelector('.pdf-viewer'), {
                     fallbackLink: 'Der Browser unterstützt keine Anzeige von PDF Dateien. Sie können die Datei aber <a href="[url]" target="_blank" title="Facsimile herunterladen">herunterladen</a>.'
                 })
             } else {
@@ -39,7 +43,7 @@ export default {
         }
     },
     watch: {
-        facsimiles () {
+        index () {
             console.debug('Changed facsimile')
 
             this.displayPdf()
