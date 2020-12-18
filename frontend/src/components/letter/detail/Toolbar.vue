@@ -45,7 +45,6 @@ export default {
     },
     mounted () {
         const hash = window.location.hash.replace('#', '')
-        console.log(hash)
         if (hash === 'normalized' || hash === 'diplomatic' || hash === 'xml') {
             this.changeLetterView(hash)
         }
