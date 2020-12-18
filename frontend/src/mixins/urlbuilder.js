@@ -7,6 +7,10 @@ import Vue from 'vue'
  * @returns {string}
  */
 function removeLastSlash(url) {
+    if (!url) {
+        return url
+    }
+
     if (url.slice(-1) === '/') {
         return url.slice(0, url.length - 1)
     } else {
