@@ -2,5 +2,5 @@
 
 pwd
 ls -la
-echo "docker build --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN -f $DOCKERFILE_PATH -t $IMAGE_NAME ."
-docker build --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+echo "docker build --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN -t $IMAGE_NAME ."
+docker build --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN -t $IMAGE_NAME .
