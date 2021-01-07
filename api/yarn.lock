@@ -4105,7 +4105,7 @@ klona@^2.0.4:
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
 
-laravel-mix@^6.0.0-beta.15:
+laravel-mix@^6.0.8:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-6.0.8.tgz#24a466c50c9a12d94a45e3497e526d3ea47513fd"
   integrity sha512-gWVWjnvjrsoxUweB0nT81yOEfjk+k3arGELbJKRGcr3s0OmWrtpnx470b07tfx18kh8AR3odcD7T8TO/O93jqA==
@@ -5374,9 +5374,9 @@ postcss@^6.0.9:
     supports-color "^5.4.0"
 
 postcss@^8.1, postcss@^8.1.4, postcss@^8.1.6, postcss@^8.2.1:
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.2.tgz#60613b62297005084fd21024a68637798864fe26"
-  integrity sha512-HM1NDNWLgglJPQQMNwvLxgH2KcrKZklKLi/xXYIOaqQB57p/pDWEJNS83PVICYsn1Dg/9C26TiejNr422/ePaQ==
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.3.tgz#14ed1294850c99661761d9cb68863718eb75690d"
+  integrity sha512-tdmNCCmxJEsLZNj810qlj8QbvnUNKFL9A5doV+uHrGGK/YNKWEslrytnHDWr9M/GgGjfUFwXCRbxd/b6IoRBXQ==
   dependencies:
     colorette "^1.2.1"
     nanoid "^3.1.20"
