@@ -21,14 +21,14 @@ class SyncExistCommand extends Command
      * @var string
      */
     protected $signature = 'exist:sync
-        {--dry-run : Just output which documents should be synced}';
+        {--dry-run : Perform a test run without writing actual data}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Replicate all exist data from the work server to the production server';
+    protected $description = 'Sync all exist data from the exist 4 database with the production exist 5 database.';
 
     /**
      * @var ExistDb
