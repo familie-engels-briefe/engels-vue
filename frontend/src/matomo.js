@@ -5,7 +5,7 @@ import router from './router'
 
 Vue.use(VueMatomo, {
     host: process.env.VUE_APP_MATOMO_URL,
-    siteId: process.env.VUE_APP_MATOMO_SIDE_ID,
+    siteId: process.env.VUE_APP_MATOMO_SITE_ID,
     router: router,
     disableCookies: true,
     enableHeartBeatTimer: true,
