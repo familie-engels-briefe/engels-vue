@@ -11,6 +11,10 @@ volumes:
   api-public-facsimile:
   api-mysql:
   frontend-dist:
+  matomo-db:
+  matomo-config:
+  matomo-logs:
+  matomo-data:
 
 services:
   # XML database
@@ -88,6 +92,24 @@ services:
     volumes:
       - frontend-dist:/dist
 
+  # Matomo - MySQL
+  matomo-mysql:
+    image: mysql:8.0
+    command: --max-allowed-packet=64MB
+    restart: unless-stopped
+    volumes:
+      - matomo-db:/var/lib/mysql
+
+  matomo:
+    image: matomo:fpm-alpine
+    restart: unless-stopped
+    depends_on:
+      - matomo-mysql
+    volumes:
+      - matomo-config:/var/www/html/config:rw
+      - matomo-logs:/var/www/html/logs
+      - matomo-data:/var/www/html
+
   # Webserver proxy
   nginx:
     image: nginx:1.19-alpine
@@ -96,6 +118,7 @@ services:
       - frontend
       - wordpress
       - api
+      - matomo
     volumes:
       -  ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./wordpress:/wordpress:ro
@@ -103,3 +126,4 @@ services:
       - ./api/public:/api/public
       - api-public-facsimile:/api/public/facsimile:ro
       - frontend-dist:/frontend:ro
+      - matomo-data:/var/www/html:ro

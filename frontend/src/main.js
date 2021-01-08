@@ -11,6 +11,7 @@ import './mixins/errors'
 import './mixins/urlbuilder'
 import router from './router'
 import store from './store/index'
+import './matomo'
 
 Vue.config.productionTip = false
 
