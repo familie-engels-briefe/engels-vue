@@ -76,7 +76,7 @@ class LetterRepository
         ];
 
         foreach ($types as $type) {
-            $response[$type] = Cache::tags(['norm', 'html', $number])->get($number . '-html-norm', function () use ($number, $type) {
+            $response[$type] = Cache::tags([$type, 'html', $number])->get($number . '-html-' . $type, function () use ($number, $type) {
                 $url = 'api/' . config('app.exist_api_version') . '/letter/fe.' . $number . '/html/' . $type;
                 $response = $this->replication->createRequest($url, 'GET', [], false);
                 if (!isset($response['body'])) {
