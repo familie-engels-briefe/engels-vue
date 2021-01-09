@@ -3,11 +3,13 @@ import VueMatomo from 'vue-matomo'
 
 import router from './router'
 
-Vue.use(VueMatomo, {
-    host: process.env.VUE_APP_MATOMO_URL,
-    siteId: process.env.VUE_APP_MATOMO_SITE_ID,
-    router: router,
-    disableCookies: true,
-    enableHeartBeatTimer: true,
-    heartBeatTimerInterval: 5
-})
+if (process.env.VUE_APP_MATOMO_URL && process.env.VUE_APP_MATOMO_URL.length > 0) {
+    Vue.use(VueMatomo, {
+        host: process.env.VUE_APP_MATOMO_URL,
+        siteId: process.env.VUE_APP_MATOMO_SITE_ID,
+        router: router,
+        disableCookies: true,
+        enableHeartBeatTimer: true,
+        heartBeatTimerInterval: 5
+    })
+}
