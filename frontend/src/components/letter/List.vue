@@ -13,21 +13,26 @@
                 <table class="font-medium w-full">
                     <thead>
                     <tr>
-                        <th>Nr</th>
-                        <th>Von</th>
-                        <th>An</th>
-                        <th>Datum</th>
-                        <th>Ort</th>
+                        <th></th>
+                        <th>Personen</th>
+                        <th>Orte</th>
                         <th>Typ</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="letter in $store.getters.filterdLetters" :key="letter.number" @click="goToLetter(letter)">
-                        <td v-text="letter.number"></td>
-                        <td v-text="letter.sent.person.name"></td>
-                        <td v-text="letter.received.person.name"></td>
-                        <td class="cell-muted" v-text="formatDate(letter.date)"></td>
-                        <td class="cell-muted" v-text="letter.sent.place.name"></td>
+                        <td>
+                            <span class="cell-muted" v-text="letter.number"></span><br>
+                            {{ formatDate(letter.date) }}
+                        </td>
+                        <td>
+                            {{ letter.sent.person.name }} <span class="relative" style="top: 1px"><font-awesome-icon :icon="['far', 'angle-right']"></font-awesome-icon></span><br>
+                            {{ letter.received.person.name }}
+                        </td>
+                        <td class="cell-muted">
+                            {{ letter.sent.place.name }} <span class="relative" style="top: 1px"><font-awesome-icon :icon="['far', 'angle-right']"></font-awesome-icon></span><br>
+                            {{ letter.received.place.name }}
+                        </td>
                         <td class="cell-muted" v-text="letter.doctypeName"></td>
                     </tr>
                     </tbody>
