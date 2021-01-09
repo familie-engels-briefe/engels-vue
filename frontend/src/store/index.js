@@ -51,10 +51,22 @@ function getBacklinks (element) {
     return []
 }
 
+/**
+ * @param {object} element
+ * @returns {*[]}
+ */
 function getBacklinksFiltered (element) {
     return getBacklinks(element).filter(function (backlink) {
         return backlink.trim() !== ''
     })
+}
+
+/**
+ * @param {Number} i
+ * @returns {String}
+ */
+function formatLetterNumber(i) {
+    return (i + '').padStart(3, '0')
 }
 
 const store = new Vuex.Store({
@@ -294,7 +306,15 @@ const store = new Vuex.Store({
                     letters.push(letter)
                 }
 
-                Vue.set(state, 'letters', letters)
+                let i = 1
+
+                Vue.set(state, 'letters', letters.sort(function (letterA, letterB) {
+                    return new Date(letterA.date) - new Date(letterB.date)
+                }).map(function (letter) {
+                    letter.numberPublic = formatLetterNumber(i++)
+
+                    return letter
+                }))
             } else {
                 console.warn('Not all data loaded yet!')
             }

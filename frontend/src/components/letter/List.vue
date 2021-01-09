@@ -22,7 +22,7 @@
                     <tbody>
                     <tr v-for="letter in $store.getters.filterdLetters" :key="letter.number" @click="goToLetter(letter)">
                         <td>
-                            <span class="cell-muted" v-text="letter.number"></span><br>
+                            <span class="cell-muted" v-text="letter.numberPublic"></span><br>
                             {{ formatDate(letter.date) }}
                         </td>
                         <td>
