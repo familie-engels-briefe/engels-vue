@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         displayPdf () {
-            if (this.facsimiles.length > 0) {
+            if (this.facsimiles.length > 0 && this.facsimiles[this.index]) {
                 PDFObject.embed(this.createFacsimileUrl(this.facsimiles[this.index].url), this.$el.querySelector('.pdf-viewer'), {
                     fallbackLink: 'Der Browser unterstützt keine Anzeige von PDF Dateien. Sie können die Datei aber <a href="[url]" target="_blank" title="Facsimile herunterladen">herunterladen</a>.'
                 })

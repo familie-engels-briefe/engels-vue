@@ -15,9 +15,6 @@ jobs:
         env:
           FONTAWESOME_AUTH_TOKEN: ${{ secrets.FONTAWESOME_AUTH_TOKEN }}
       - run: yarn install
-      - uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          exitZeroOnChanges: true
-          workingDir: 'frontend'
+      - run: |
+          yarn build-storybook
+          CHROMATIC_PROJECT_TOKEN=${{ secrets.CHROMATIC_PROJECT_TOKEN }} npx chromatic --exit-zero-on-changes -d storybook-static/

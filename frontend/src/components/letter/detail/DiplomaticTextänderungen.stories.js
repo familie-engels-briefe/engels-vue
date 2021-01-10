@@ -1,4 +1,5 @@
 import './../../../mixins/urlbuilder'
+import router from './../../../router'
 import store from './../../../store/index'
 import {
     TextaenderungErsetzenHtml,
@@ -21,6 +22,7 @@ const Template = (args, { argTypes }) => ({
     components: {
         DiplomaticComponent
     },
+    router: router,
     store: store,
     template: '' +
         '<div class="flex-grow max-w-6xl mx-auto px-8 md:px-4 lg:px-0">' +

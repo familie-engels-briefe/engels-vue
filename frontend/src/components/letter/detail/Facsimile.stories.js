@@ -13,7 +13,7 @@ const Template = (args, { argTypes }) => ({
     },
     template: '' +
         '<div class="flex-grow max-w-6xl mx-auto px-8 md:px-4 lg:px-0">' +
-        '<FacsimileComponent :facsimiles="facsimiles"></FacsimileComponent>' +
+        '<FacsimileComponent :facsimiles="facsimiles" :index="index"></FacsimileComponent>' +
         '</div>',
     props: Object.keys(argTypes)
 })
@@ -21,5 +21,6 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({})
 
 Default.args = {
-    facsimiles: letterLocale.facsimiles
+    facsimiles: letterLocale.facsimiles,
+    index: 0
 }
