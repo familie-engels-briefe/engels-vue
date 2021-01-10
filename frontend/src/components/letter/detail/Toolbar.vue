@@ -1,35 +1,23 @@
 <template>
     <div class="fixed bottom-0 left-0 right-0 bg-black">
         <div class="max-w-6xl w-full mx-auto px-8 md:px-4 lg:px-0 py-8 text-gray-lighter flex justify-center">
-            <div class="toolbar-item" :class="{ 'toolbar-item-active': active === 'normalized' }" @click="changeLetterView('normalized')">
-                <div>
-                    <font-awesome-icon :icon="['far', 'align-justify']" size="lg"></font-awesome-icon>
-                </div>
+            <a class="toolbar-item" :class="{ 'toolbar-item-active': active === 'normalized' }" @click="changeLetterView('normalized')">
+                <font-awesome-icon :icon="['far', 'align-justify']" size="lg"></font-awesome-icon>
 
-                <div>
-                    Normalisierte Ansicht
-                </div>
-            </div>
+                <span class="toolbar-item-text">Normalisierte Ansicht</span>
+            </a>
 
-            <div class="toolbar-item" :class="{ 'toolbar-item-active': active === 'diplomatic' }" @click="changeLetterView('diplomatic')">
-                <div>
-                    <font-awesome-icon :icon="['far', 'align-left']" size="lg"></font-awesome-icon>
-                </div>
+            <a class="toolbar-item" :class="{ 'toolbar-item-active': active === 'diplomatic' }" @click="changeLetterView('diplomatic')">
+                <font-awesome-icon :icon="['far', 'align-left']" size="lg"></font-awesome-icon>
 
-                <div>
-                    Diplomatische Ansicht
-                </div>
-            </div>
+                <span class="toolbar-item-text">Diplomatische Ansicht</span>
+            </a>
 
-            <div class="toolbar-item" :class="{ 'toolbar-item-active': active === 'xml' }" @click="changeLetterView('xml')">
-                <div>
-                    <font-awesome-icon :icon="['far', 'code']" size="lg"></font-awesome-icon>
-                </div>
+            <a class="toolbar-item" :class="{ 'toolbar-item-active': active === 'xml' }" @click="changeLetterView('xml')">
+                <font-awesome-icon :icon="['far', 'code']" size="lg"></font-awesome-icon>
 
-                <div>
-                    XML Datenansicht
-                </div>
-            </div>
+                <span class="toolbar-item-text">XML Datenansicht</span>
+            </a>
         </div>
     </div>
 </template>
@@ -63,14 +51,15 @@ export default {
 
 <style scoped>
 .toolbar-item {
-    @apply bg-gray-dark2 p-2 mx-6 text-center text-sm flex flex-col justify-around cursor-pointer;
-
-    width: 7rem;
-    height: 7rem;
+    @apply bg-gray-dark2 p-4 mx-6 text-sm cursor-pointer;
 }
 
 .toolbar-item:hover,
 .toolbar-item-active {
-    @apply bg-gray-darker;
+    @apply bg-gray-light text-black;
+}
+
+.toolbar-item-text {
+  @apply inline-block ml-3;
 }
 </style>
