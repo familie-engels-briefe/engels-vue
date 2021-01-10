@@ -2,7 +2,7 @@
     <div>
         <Loading :loading="loading">
             <div class="flex flex-wrap lg:flex-nowrap justify-between">
-                <h2 v-if="details">{{ details.title }}</h2>
+                <h2 v-if="details"><span class="font-normal">{{ numberPublic }}</span> {{ details.title }} ({{ doctypeName }})</h2>
 
                 <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">
                     <LetterHighlighter v-on:update-highlights="updateHighlights" :html="htmlDiplomatic"></LetterHighlighter>
@@ -128,6 +128,24 @@ export default {
         updateHighlights (event) {
             this.highlights = event.selected
         },
+    },
+    computed: {
+        numberPublic () {
+            const letter = this.$store.getters.getLetterByRef(this.details.number)
+            if (!letter) {
+                return null
+            }
+
+            return letter.numberPublic
+        },
+        doctypeName () {
+            const letter = this.$store.getters.getLetterByRef(this.details.number)
+            if (!letter) {
+                return null
+            }
+
+            return letter.doctypeName
+        }
     }
 }
 </script>
