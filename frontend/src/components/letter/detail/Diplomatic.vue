@@ -318,10 +318,16 @@ export default {
 }
 
 /**
- * Signature
+ * Closer
  */
+/deep/ .tei_closer:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
 /deep/ .tei_signed {
-    @apply block text-right;
+    @apply float-right text-left;
 }
 
 /**
