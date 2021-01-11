@@ -135,6 +135,9 @@ export default {
                 element.style.height = 0
             })
         },
+        resetTags () {
+            this.tags = []
+        },
     }
 }
 </script>

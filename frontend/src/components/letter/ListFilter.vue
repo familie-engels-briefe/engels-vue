@@ -25,6 +25,7 @@
                     placeholder="Absender..."
                     title="Absender"
                     :autocomplete-items="$store.getters.senders"
+                    ref="listFilterSearchSender"
                     classes="z-50">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
@@ -33,6 +34,7 @@
                     placeholder="Empfänger..."
                     title="Empfänger"
                     :autocomplete-items="$store.getters.receivers"
+                    ref="listFilterSearchReceiver"
                     classes="z-40">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
@@ -41,6 +43,7 @@
                     placeholder="Schreibort..."
                     title="Schreibort"
                     :autocomplete-items="$store.getters.placeSenders"
+                    ref="listFilterSearchPlaceSender"
                     classes="z-30">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
@@ -49,6 +52,7 @@
                     placeholder="Empfangsort..."
                     title="Empfangsort"
                     :autocomplete-items="$store.getters.placeReceivers"
+                    ref="listFilterSearchPlaceReceiver"
                     classes="z-20">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
@@ -57,6 +61,7 @@
                     placeholder="Typ..."
                     title="Typ"
                     :autocomplete-items="$store.getters.doctypes"
+                    ref="listFilterSearchDoctype"
                     classes="z-10">
                 </ListFilterSearch>
 
@@ -97,6 +102,12 @@ export default {
                     tags: []
                 })
             }
+
+            this.$refs.listFilterSearchSender.resetTags()
+            this.$refs.listFilterSearchReceiver.resetTags()
+            this.$refs.listFilterSearchPlaceSender.resetTags()
+            this.$refs.listFilterSearchPlaceReceiver.resetTags()
+            this.$refs.listFilterSearchDoctype.resetTags()
         },
     },
 }
