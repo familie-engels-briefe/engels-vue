@@ -222,7 +222,11 @@ export default {
 }
 
 /deep/ .tei_pb {
-    @apply block w-full border-t border-black my-4;
+    @apply block w-full border-t border-gray my-4;
+}
+
+/deep/ hr {
+    @apply border-gray;
 }
 
 /deep/ .tooltip-button {
