@@ -18,6 +18,10 @@
                 <label v-for="item in items" :key="item.id" class="block mb-2 px-2 py-1 cursor-pointer engels_topic has-highlight hover:opacity-75" :data-type="item.id">
                     <input :type="type" :name="inputName(item)" v-on:change="toggleItem(item)" class="align-middle"> {{ item.name }}
                 </label>
+
+                <label v-if="type === 'radio'">
+                    <a class="cursor-pointer underline" v-on:click="clearSelectedItems()">Zurücksetzen</a>
+                </label>
             </div>
         </transition>
     </div>
@@ -126,6 +130,14 @@ export default {
             }
 
             return 'highlight-radio-' + this.name
+        },
+        clearSelectedItems () {
+            console.debug('Reset items')
+
+            this.selectedItems.splice(0)
+            this.$el.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+                radio.checked = false
+            })
         },
     }
 }
