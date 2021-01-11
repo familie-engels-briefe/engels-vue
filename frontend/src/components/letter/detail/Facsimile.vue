@@ -35,7 +35,9 @@ export default {
         this.displayPdf()
 
         const pdfViewer = this.$el.querySelector('.pdf-viewer')
-        this.offsetTop = pdfViewer.getBoundingClientRect().top
+        if (pdfViewer.getBoundingClientRect().top > 0) {
+            this.offsetTop = pdfViewer.getBoundingClientRect().top
+        }
 
         document.addEventListener('scroll', this.scrollHandler)
         this.scrollHandler()
@@ -70,6 +72,10 @@ export default {
                 document.documentElement.offsetWidth,
                 document.documentElement.clientWidth
             )
+
+            if (this.offsetTop === 0) {
+                this.offsetTop = pdfViewer.getBoundingClientRect().top
+            }
 
             // Add/remove fixed position of facsimile based on scrolling position
             if (browserWidth >= 1024 && scrollTop >= this.offsetTop && !pdfViewer.classList.contains('fixed')) {
