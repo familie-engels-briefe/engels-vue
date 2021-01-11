@@ -20,7 +20,23 @@
                     <router-link to="/kontext">Kontext</router-link>
                 </li>
                 <li>
-                    <router-link to="/edition">Edition</router-link>
+                    <a class="cursor-pointer">
+                        <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon> Projekt
+
+                        <ul class="absolute z-20">
+                            <li>
+                                <router-link to="/mitwirkende">Mitwirkende</router-link>
+                            </li>
+
+                            <li>
+                                <router-link to="/foerderer">Förderer</router-link>
+                            </li>
+
+                            <li>
+                                <router-link to="/editorischer-bericht">Editorischer Bericht</router-link>
+                            </li>
+                        </ul>
+                    </a>
                 </li>
                 <li>
                     <font-awesome-icon :icon="['far', 'search']"></font-awesome-icon>
@@ -47,5 +63,20 @@ li a {
 
 li a.router-link-active {
     @apply border-gold;
+}
+
+nav ul ul {
+    @apply hidden bg-white pt-2;
+}
+nav a:hover ul,
+nav ul ul:hover {
+    @apply block;
+}
+
+nav ul ul a {
+    @apply block px-4 py-2 bg-white text-brown transition-colors duration-200 border-0;
+}
+nav ul ul a:hover {
+    @apply bg-brown text-white transition-colors duration-200;
 }
 </style>
