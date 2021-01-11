@@ -25,7 +25,8 @@ export default {
     data () {
         return {
             error: '',
-            offsetTop: 0
+            offsetTop: 0,
+            scrollCheckInterval: null
         }
     },
     mounted () {
@@ -41,9 +42,13 @@ export default {
 
         window.addEventListener('resize', this.resizeHandler)
         this.resizeHandler()
+
+        this.scrollCheckInterval = window.setInterval(this.scrollHandler, 1000)
     },
     beforeDestroy () {
         document.removeEventListener('scroll', this.scrollHandler)
+
+        window.clearInterval(this.scrollCheckInterval)
     },
     methods: {
         displayPdf () {
