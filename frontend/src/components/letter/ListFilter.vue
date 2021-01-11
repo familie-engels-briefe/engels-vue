@@ -9,7 +9,7 @@
         </transition>
 
         <transition name="fade">
-            <div class="bg-white w-64 p-3 absolute right-0 shadow" v-show="showFilter">
+            <div class="bg-white w-64 p-3 absolute right-0 shadow z-10" v-show="showFilter">
                 <div class="flex justify-between border-b border-gray pb-2 px-2 mb-2">
                     <div>
                         <font-awesome-icon :icon="['far', 'filter']"></font-awesome-icon>
@@ -25,7 +25,7 @@
                     placeholder="Absender..."
                     title="Absender"
                     :autocomplete-items="$store.getters.senders"
-                    :classes="'z-40'">
+                    classes="z-50">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
@@ -33,15 +33,23 @@
                     placeholder="Empfänger..."
                     title="Empfänger"
                     :autocomplete-items="$store.getters.receivers"
-                    :classes="'z-30'">
+                    classes="z-40">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
-                    name="place"
+                    name="placeSender"
                     placeholder="Schreibort..."
                     title="Schreibort"
-                    :autocomplete-items="$store.getters.places"
-                    :classes="'z-20'">
+                    :autocomplete-items="$store.getters.placeSenders"
+                    classes="z-30">
+                </ListFilterSearch>
+                <div class="my-2 border-b border-gray-light"></div>
+                <ListFilterSearch
+                    name="placeReceiver"
+                    placeholder="Empfangsort..."
+                    title="Empfangsort"
+                    :autocomplete-items="$store.getters.placeReceivers"
+                    classes="z-20">
                 </ListFilterSearch>
                 <div class="my-2 border-b border-gray-light"></div>
                 <ListFilterSearch
@@ -49,8 +57,10 @@
                     placeholder="Typ..."
                     title="Typ"
                     :autocomplete-items="$store.getters.doctypes"
-                    :classes="'z-10'">
+                    classes="z-10">
                 </ListFilterSearch>
+
+                <a class="inline-block mt-4 cursor-pointer float-right border border-gray-dark px-2 py-1 hover:bg-gray-lighter" v-on:click="resetFilter()">Filter zurücksetzen</a>
             </div>
         </transition>
     </div>
@@ -70,7 +80,25 @@ export default {
         return {
             showFilter: false
         }
-    }
+    },
+    methods: {
+        resetFilter () {
+            const types = [
+                'sender',
+                'receiver',
+                'placeSender',
+                'placeReceiver',
+                'doctype',
+            ]
+
+            for (let i = 0; i < types.length; i++) {
+                this.$store.commit('updateFilter', {
+                    type: types[i],
+                    tags: []
+                })
+            }
+        },
+    },
 }
 </script>
 

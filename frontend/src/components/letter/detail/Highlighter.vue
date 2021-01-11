@@ -8,7 +8,7 @@
         </transition>
 
         <transition name="fade">
-            <div class="bg-white w-72 p-3 absolute right-0 shadow" v-show="showHighlighter">
+            <div class="bg-white w-72 p-3 absolute right-0 shadow z-10" v-show="showHighlighter">
                 <div class="flex justify-between border-b border-gray pb-2 px-2 mb-2">
                     <div>
                         <font-awesome-icon :icon="['far', 'highlighter']"></font-awesome-icon>

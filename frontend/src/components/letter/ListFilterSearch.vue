@@ -24,6 +24,7 @@
                     :tags="tags"
                     :autocomplete-items="unusedTags"
                     :placeholder="placeholder"
+                    :autocomplete-min-length="0"
                     v-on:tags-changed="changedTags"
                 ></vue-tags-input>
             </div>

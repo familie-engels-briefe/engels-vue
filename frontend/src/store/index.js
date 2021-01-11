@@ -81,7 +81,8 @@ const store = new Vuex.Store({
         filter: {
             sender: [],
             receiver: [],
-            place: [],
+            placeSender: [],
+            placeReceiver: [],
             doctype: []
         },
         organisationDictionary: {},
@@ -109,11 +110,19 @@ const store = new Vuex.Store({
                 }
             }), 'id')
         },
-        places (state) {
+        placeSenders (state) {
             return _.uniqBy(state.letters.map(function (letter) {
                 return {
                     id: letter.sent.place.ref.replace('#', ''),
                     text: letter.sent.place.name,
+                }
+            }), 'id')
+        },
+        placeReceivers (state) {
+            return _.uniqBy(state.letters.map(function (letter) {
+                return {
+                    id: letter.received.place.ref.replace('#', ''),
+                    text: letter.received.place.name,
                 }
             }), 'id')
         },
@@ -138,7 +147,11 @@ const store = new Vuex.Store({
                 return '#' + receiver.id
             })
 
-            const places = state.filter.place.map(function (place) {
+            const placeSenders = state.filter.placeSender.map(function (place) {
+                return '#' + place.id
+            })
+
+            const placeReceivers = state.filter.placeReceiver.map(function (place) {
                 return '#' + place.id
             })
 
@@ -171,10 +184,23 @@ const store = new Vuex.Store({
             letters = _.uniqBy(filteredLetters, 'number')
 
             filteredLetters = []
-            if (places.length) {
-                for (let i = 0; i < places.length; i++) {
+            console.log(placeSenders)
+            if (placeSenders.length) {
+                for (let i = 0; i < placeSenders.length; i++) {
                     filteredLetters.push(...letters.filter(function (letter) {
-                        return places.indexOf(letter.sent.place.ref) !== -1
+                        return placeSenders.indexOf(letter.sent.place.ref) !== -1
+                    }))
+                }
+            } else {
+                filteredLetters.push(...letters)
+            }
+            letters = _.uniqBy(filteredLetters, 'number')
+
+            filteredLetters = []
+            if (placeReceivers.length) {
+                for (let i = 0; i < placeReceivers.length; i++) {
+                    filteredLetters.push(...letters.filter(function (letter) {
+                        return placeReceivers.indexOf(letter.received.place.ref) !== -1
                     }))
                 }
             } else {

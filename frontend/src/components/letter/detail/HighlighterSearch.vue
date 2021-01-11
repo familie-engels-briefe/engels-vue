@@ -20,7 +20,7 @@
                 </label>
 
                 <label v-if="type === 'radio'">
-                    <a class="cursor-pointer underline" v-on:click="clearSelectedItems()">Zurücksetzen</a>
+                    <a class="inline-block mt-4 cursor-pointer float-right border border-gray-dark px-2 py-1 hover:bg-gray-lighter" v-on:click="clearSelectedItems()">Filter zurücksetzen</a>
                 </label>
             </div>
         </transition>

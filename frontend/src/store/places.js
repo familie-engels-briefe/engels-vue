@@ -11,7 +11,3 @@ export const getPlaceName = function (place) {
         console.error('Could not get place from', place, e)
     }
 }
-
-export const getAutocompletePlaces = function () {
-    return []
-}
