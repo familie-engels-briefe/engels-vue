@@ -22,8 +22,9 @@
                 <HighlighterSearch
                     name="topics"
                     title="Thema"
+                    classes="z-40"
+                    type="radio"
                     :items="topicsWithNames"
-                    :classes="'z-40'"
                     v-on:update-items="updateHighlighter">
                 </HighlighterSearch>
             </div>

@@ -16,7 +16,7 @@
             @leave="leave">
             <div :class="classes" v-show="active">
                 <label v-for="item in items" :key="item.id" class="block mb-2 px-2 py-1 cursor-pointer engels_topic has-highlight hover:opacity-75" :data-type="item.id">
-                    <input type="checkbox" v-on:change="toggleItem(item)" class="align-middle"> {{ item.name }}
+                    <input :type="type" :name="inputName(item)" v-on:change="toggleItem(item)" class="align-middle"> {{ item.name }}
                 </label>
             </div>
         </transition>
@@ -41,6 +41,12 @@ export default {
         },
         classes: {
             required: true
+        },
+        type: {
+            required: false,
+            default () {
+                return 'checkbox'
+            }
         }
     },
     data () {
@@ -66,10 +72,14 @@ export default {
     },
     methods: {
         toggleItem (item) {
-            if (this.selectedItems.indexOf(item.id) >= 0) {
-                this.selectedItems.splice(this.selectedItems.indexOf(item.id), 1)
+            if (this.type === 'checkbox') {
+                if (this.selectedItems.indexOf(item.id) >= 0) {
+                    this.selectedItems.splice(this.selectedItems.indexOf(item.id), 1)
+                } else {
+                    this.selectedItems.push(item.id)
+                }
             } else {
-                this.selectedItems.push(item.id)
+                this.selectedItems = [item.id]
             }
 
             this.$emit('update-items', {
@@ -109,6 +119,13 @@ export default {
             requestAnimationFrame(() => {
                 element.style.height = 0
             })
+        },
+        inputName (item) {
+            if (this.type === 'checkbox') {
+                return 'highlight-checkbox-' + this.name + '-' + item.id
+            }
+
+            return 'highlight-radio-' + this.name
         },
     }
 }
