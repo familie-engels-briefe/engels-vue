@@ -26,8 +26,8 @@
                             {{ formatDate(letter.date) }}
                         </td>
                         <td>
-                            {{ letter.sent.person.name }} <span class="relative" style="top: 1px"><font-awesome-icon :icon="['far', 'angle-right']"></font-awesome-icon></span><br>
-                            {{ letter.received.person.name }}
+                            {{ letter.sent.person.name }} <span class="relative" style="top: 1px"><font-awesome-icon :icon="['far', 'angle-right']"></font-awesome-icon></span>&nbsp;
+                            <span class="block lg:inline">{{ letter.received.person.name }}</span>
                         </td>
                         <td class="cell-muted">
                             {{ letter.sent.place.name }} <span class="relative" style="top: 1px"><font-awesome-icon :icon="['far', 'angle-right']"></font-awesome-icon></span><br>

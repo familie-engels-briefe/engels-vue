@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-40">
+    <div class="relative w-40 mb-8">
         <transition name="fade">
             <Button v-show="!showHighlighter" v-on:click.native="showHighlighter = !showHighlighter"
                     :classes="['absolute', 'right-0']">

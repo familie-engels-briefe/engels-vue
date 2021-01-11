@@ -1,7 +1,3 @@
 .wordpress > * {
     @apply mb-8;
 }
-
-.wordpress img {
-    @apply block;
-}

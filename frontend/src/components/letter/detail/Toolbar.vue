@@ -1,6 +1,6 @@
 <template>
     <div class="fixed bottom-0 left-0 right-0 bg-black">
-        <div class="max-w-6xl w-full mx-auto px-8 md:px-4 lg:px-0 py-8 text-gray-lighter flex justify-center">
+        <div class="max-w-6xl w-full mx-auto px-4 md:px-8 lg:px-0 py-8 text-gray-lighter flex flex-col lg:justify-center lg:flex-row">
             <a class="toolbar-item" :class="{ 'toolbar-item-active': active === 'normalized' }" @click="changeLetterView('normalized')">
                 <font-awesome-icon :icon="['far', 'align-justify']" size="lg"></font-awesome-icon>
 
@@ -51,7 +51,15 @@ export default {
 
 <style scoped>
 .toolbar-item {
-    @apply bg-gray-dark2 p-4 mx-6 text-sm cursor-pointer;
+    @apply block w-full bg-gray-dark2 px-4 py-2 text-sm cursor-pointer mb-2;
+}
+.toolbar-item:last-child {
+    @apply mb-0
+}
+@media (min-width: 1024px) {
+    .toolbar-item {
+        @apply p-4 mx-6 mb-0;
+    }
 }
 
 .toolbar-item:hover,
@@ -60,6 +68,6 @@ export default {
 }
 
 .toolbar-item-text {
-  @apply inline-block ml-3;
+  @apply inline pl-3;
 }
 </style>

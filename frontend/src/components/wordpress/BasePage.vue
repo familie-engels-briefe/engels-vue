@@ -30,6 +30,10 @@ export default {
     @apply w-full px-4 mb-4;
 }
 
+/deep/ img {
+    @apply block w-full;
+}
+
 @media (min-width: 1024px) {
     /deep/ .wp-block-columns .wp-block-column {
         @apply w-auto flex-1 px-4 mb-0;
