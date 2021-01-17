@@ -22,6 +22,26 @@ export default {
     @apply text-gold text-6xl font-bold leading-tight font-serif mb-8;
 }
 
+/deep/ h2 {
+    @apply text-4xl font-bold mb-0;
+}
+
+/deep/ h3 {
+    @apply text-2xl font-bold mb-0;
+}
+
+/deep/ h4 {
+    @apply text-xl font-bold mb-0;
+}
+
+/deep/ h5 {
+    @apply text-lg font-bold mb-0;
+}
+
+/deep/ h6 {
+    @apply font-bold mb-0;
+}
+
 /deep/ img {
     @apply block w-full;
 }
