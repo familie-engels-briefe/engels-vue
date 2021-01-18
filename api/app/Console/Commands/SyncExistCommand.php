@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Letter;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -82,6 +82,8 @@ class SyncExistCommand extends Command
         foreach ($index->letter as $letter) {
             $filename = (string) $letter['filename'];
 
+            $l = Letter::updateOrInsert(['number' => $letter['n']], ['title' => ((array) $letter)[0]])->first();
+
             $document = $this->replication->createRequest('data/' . $filename,
                 'GET', [], false);
 
@@ -98,12 +100,13 @@ class SyncExistCommand extends Command
             }
 
             // Sync html
-            $this->syncHtml('dipl', (string) $letter['n']);
-            $this->syncHtml('norm', (string) $letter['n']);
+            $l = $this->syncHtml('dipl', (string) $letter['n'], $l);
+            $l = $this->syncHtml('norm', (string) $letter['n'], $l);
 
             // Update xml
             if (!$this->option('dry-run')) {
                 $this->exist->updateDocument($filename, $document['body']);
+                $l->save();
             }
 
             $log = sprintf('Updated document %s', $filename);
@@ -153,8 +156,11 @@ class SyncExistCommand extends Command
     /**
      * @param string $type
      * @param string $number
+     * @param Letter $letter
+     *
+     * @return Letter
      */
-    private function syncHtml(string $type, string $number): void
+    private function syncHtml(string $type, string $number, Letter $letter): Letter
     {
         if (!in_array($type, ['dipl', 'norm'])) {
             throw new InvalidArgumentException('Only "dipl" and "norm" html types are allowed!');
@@ -172,9 +178,10 @@ class SyncExistCommand extends Command
             Log::error('Could not read body from response: '
                        . serialize($response));
         } elseif (!$this->option('dry-run')) {
-            $key = $number . '-html-' . $type;
-            Cache::tags([$type, 'html', $number])->put($key, $response['body']);
+            $letter->{$type} = $response['body'];
         }
+
+        return $letter;
     }
 
     /**
@@ -191,8 +198,7 @@ class SyncExistCommand extends Command
         if (!$this->option('dry-run')) {
             foreach ($xml->facsimile->graphic as $fac) {
                 $url = (string) $fac['url'];
-                $pdf = $this->replication->createRequest(sprintf('facs/%s',
-                    $url), 'GET', [], false);
+                $pdf = $this->replication->createRequest(sprintf('facs/%s', $url), 'GET', [], false);
 
                 if (!isset($pdf['body'])) {
                     Log::error(sprintf('Facsimile does not exist: %s', $url));
@@ -202,9 +208,7 @@ class SyncExistCommand extends Command
                 Storage::disk('facsimile')->put($url, $pdf['body']);
 
                 if (Storage::disk('facsimile')->exists($url)) {
-                    Log::info(sprintf('Stored facsimile %s in %s: %d bytes',
-                        $url, public_path('facsimile'),
-                        Storage::disk('facsimile')->size($url)));
+                    Log::info(sprintf('Stored facsimile %s in %s: %d bytes', $url, public_path('facsimile'), Storage::disk('facsimile')->size($url)));
                 } else {
                     Log::error(sprintf('Could not store facsimile %s!', $url));
                 }
@@ -227,14 +231,10 @@ class SyncExistCommand extends Command
         ];
 
         foreach ($registers as $register) {
-            $document
-                =
-                $this->replication->createRequest(sprintf('data/register/reg_global_%s.xml',
-                    $register), 'GET', [], false);
+            $document = $this->replication->createRequest(sprintf('data/register/reg_global_%s.xml', $register), 'GET', [], false);
 
             if (!$this->option('dry-run')) {
-                $this->exist->updateDocument(sprintf('register/reg_global_%s.xml',
-                    $register), $document['body']);
+                $this->exist->updateDocument(sprintf('register/reg_global_%s.xml', $register), $document['body']);
             }
 
             $log = sprintf('Updated register %s', $register);

@@ -9,6 +9,7 @@ import RegisterPlace from './components/register/Place'
 import RegisterOrg from './components/register/Org'
 import FrontPage from './components/wordpress/FrontPage'
 import Page from './components/wordpress/Page'
+import SearchResult from './components/SearchResult'
 import DebugSentry from './components/DebugSentry'
 
 Vue.use(VueRouter)
@@ -82,6 +83,17 @@ export const routes = [
         meta: {
             title: function (to) {
                 return 'Unternehmen ' + to.params.id + ROUTE_SUFFIX
+            }
+        }
+    },
+    {
+        path: '/suche/:term',
+        component: SearchResult,
+        name: 'search',
+        props: true,
+        meta: {
+            title: function (to) {
+                return 'Suche nach "' + to.params.term + '"' + ROUTE_SUFFIX
             }
         }
     },

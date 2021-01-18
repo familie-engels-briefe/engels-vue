@@ -8,6 +8,10 @@ body h2 {
     font-weight: 100;
 }
 
+body h3 {
+    @apply text-2xl mb-2;
+}
+
 body p + p {
     @apply mt-4;
 }

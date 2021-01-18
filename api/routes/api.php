@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\LetterIndexController;
@@ -36,4 +37,6 @@ Route::prefix('/v1')->group(function () {
     Route::prefix('/organisations')->group(function () {
         Route::get('/', OrganisationIndexController::class)->name('api.organisations.index');
     });
+
+    Route::get('/search/{term}', SearchController::class)->name('api.search');
 });

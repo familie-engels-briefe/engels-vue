@@ -4,7 +4,7 @@
             <Navigation></Navigation>
 
             <main>
-                <div class="p-4 bg-red-200 text-red-800 relative alert" v-if="$store.state.error">
+                <div class="p-4 bg-red-200 text-red-800 relative alert border-left-4 border-red-800" v-if="$store.state.error">
                     <span class="font-bold" v-html="$store.state.error"></span>
                     <a class="cursor-pointer absolute right-0 top-0 mr-4 mt-4" title="Fehlermeldung ausblenden" v-on:click="$store.commit('setError', {message: null})">
                         <font-awesome-icon :icon="['far', 'times']"></font-awesome-icon>

@@ -1,15 +1,15 @@
 <template>
     <header class="flex flex-wrap flex-row py-4 mb-12 md:flex-nowrap">
-        <div class="w-full mb-4 md:mb-0">
+        <div class="flex-shrink mb-4 md:mb-0">
             <h1 class="text-2xl font-medium tracking-wide">
                 <router-link to="/"
                              title="Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)">
-                    Industriegeschichte Privat
+                    Industriegeschichte&nbsp;Privat
                 </router-link>
             </h1>
         </div>
 
-        <nav class="w-full flex-grow pt-2">
+        <nav class="flex-grow pt-2">
             <ul class="flex flex-row justify-between md:justify-end">
                 <li>
                     <router-link to="/briefe">Briefe</router-link>
@@ -23,7 +23,6 @@
                 <li>
                     <a class="cursor-pointer dropdown"
                        :class="{ 'dropdown-visible': dropdownVisible }"
-                       v-on:mouseover="showDropdown"
                        v-click-outside="hideDropdown"
                        v-on:click="toggleDropdown">
                         <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon>&nbsp;Projekt
@@ -44,7 +43,7 @@
                     </a>
                 </li>
                 <li>
-                    <font-awesome-icon :icon="['far', 'search']"></font-awesome-icon>
+                    <Search></Search>
                 </li>
             </ul>
         </nav>
@@ -54,17 +53,19 @@
 <script>
 import ClickOutside from 'vue-click-outside'
 
+import Search from './Search'
+
 export default {
     name: 'Navigation',
+    components: {
+        Search
+    },
     data () {
         return {
             dropdownVisible: false
         }
     },
     methods: {
-        showDropdown () {
-            this.dropdownVisible = true
-        },
         hideDropdown () {
             this.dropdownVisible = false
         },
