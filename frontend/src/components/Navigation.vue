@@ -1,6 +1,6 @@
 <template>
-    <header class="flex flex-row py-4 mb-12">
-        <div>
+    <header class="flex flex-wrap flex-row py-4 mb-12 md:flex-nowrap">
+        <div class="w-full mb-4 md:mb-0">
             <h1 class="text-2xl font-medium tracking-wide">
                 <router-link to="/"
                              title="Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)">
@@ -9,8 +9,8 @@
             </h1>
         </div>
 
-        <nav class="flex-grow pt-2">
-            <ul class="flex flex-row justify-end">
+        <nav class="w-full flex-grow pt-2">
+            <ul class="flex flex-row justify-between md:justify-end">
                 <li>
                     <router-link to="/briefe">Briefe</router-link>
                 </li>
@@ -26,8 +26,7 @@
                        v-on:mouseover="showDropdown"
                        v-click-outside="hideDropdown"
                        v-on:click="toggleDropdown">
-                        <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon>
-                        Projekt
+                        <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon>&nbsp;Projekt
 
                         <ul>
                             <li>
