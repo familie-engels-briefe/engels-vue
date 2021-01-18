@@ -96,12 +96,12 @@ export const routes = [
         name: 'wordpress',
         props: function (route) {
             return {
-                slug: route.path.replace('/', '')
+                slug: decodeURI(route.path.replace('/', ''))
             }
         },
         meta: {
             title: function (to) {
-                return to.path.replace('/', '')
+                return decodeURI(to.path.replace('/', ''))
             }
         }
     }
