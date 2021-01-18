@@ -120,7 +120,7 @@ services:
       - api
       - matomo
     volumes:
-      -  ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
       - ./wordpress:/wordpress:ro
       - wordpress-uploads:/wordpress/wp-content/uploads:ro
       - ./api/public:/api/public
