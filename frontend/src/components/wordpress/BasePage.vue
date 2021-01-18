@@ -46,6 +46,10 @@ export default {
     @apply block w-full;
 }
 
+/deep/ figure figcaption {
+    @apply text-gray-dark px-4 py-2;
+}
+
 /deep/ a {
     @apply underline;
 }

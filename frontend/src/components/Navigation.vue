@@ -2,7 +2,8 @@
     <header class="flex flex-row py-4 mb-12">
         <div>
             <h1 class="text-2xl font-medium tracking-wide">
-                <router-link to="/" title="Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)">
+                <router-link to="/"
+                             title="Industriegeschichte Privat - Die Familie Engels in Briefen (1791 - 1851)">
                     Industriegeschichte Privat
                 </router-link>
             </h1>
@@ -20,10 +21,15 @@
                     <router-link to="/kontext">Kontext</router-link>
                 </li>
                 <li>
-                    <a class="cursor-pointer">
-                        <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon> Projekt
+                    <a class="cursor-pointer dropdown"
+                       :class="{ 'dropdown-visible': dropdownVisible }"
+                       v-on:mouseover="showDropdown"
+                       v-click-outside="hideDropdown"
+                       v-on:click="toggleDropdown">
+                        <font-awesome-icon :icon="['far', 'caret-down']"></font-awesome-icon>
+                        Projekt
 
-                        <ul class="absolute z-20">
+                        <ul>
                             <li>
                                 <router-link to="/mitwirkende">Mitwirkende</router-link>
                             </li>
@@ -47,8 +53,29 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
+
 export default {
-    name: 'Navigation'
+    name: 'Navigation',
+    data () {
+        return {
+            dropdownVisible: false
+        }
+    },
+    methods: {
+        showDropdown () {
+            this.dropdownVisible = true
+        },
+        hideDropdown () {
+            this.dropdownVisible = false
+        },
+        toggleDropdown () {
+            this.dropdownVisible = !this.dropdownVisible
+        },
+    },
+    directives: {
+        ClickOutside
+    },
 }
 </script>
 
@@ -61,21 +88,30 @@ li a {
     @apply px-2 text-brown border-transparent border-b-2;
 }
 
+li a.dropdown {
+    @apply border-b-0;
+}
+
 li a.router-link-active {
     @apply border-gold;
 }
 
 nav ul ul {
-    @apply hidden bg-white pt-2;
+    @apply hidden bg-white py-2 shadow absolute z-20;
 }
-nav a:hover ul,
-nav ul ul:hover {
+
+li a.dropdown-visible ul {
     @apply block;
+}
+
+nav ul ul li {
+    @apply px-0;
 }
 
 nav ul ul a {
     @apply block px-4 py-2 bg-white text-brown transition-colors duration-200 border-0;
 }
+
 nav ul ul a:hover {
     @apply bg-brown text-white transition-colors duration-200;
 }
