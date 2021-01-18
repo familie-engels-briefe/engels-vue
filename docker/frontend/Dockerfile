@@ -25,15 +25,16 @@ WORKDIR /frontend
 # Create .npmrc for fontawesome and install dependencies
 ARG NPM_AUTH_TOKEN
 
+# Install dependencies and build application
 RUN touch .npmrc && \
     echo "@fortawesome:registry=https://npm.fontawesome.com/" >> .npmrc && \
     echo "//npm.fontawesome.com/:_authToken=$NPM_AUTH_TOKEN" >> .npmrc && \
     cat .npmrc && \
     yarn install && \
-    rm .npmrc
-
-# Build for production
-RUN yarn run build
+    yarn run build && \
+    rm ./.npmrc && \
+    rm -fr ./node_modules && \
+    rm -fr ~/.cache
 
 RUN mkdir -p /dist
 

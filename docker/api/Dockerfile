@@ -9,13 +9,13 @@ WORKDIR /api
 
 ADD api/artisan api/package.json api/yarn.lock api/webpack.mix.js api/tailwind.config.js /api/
 
-RUN yarn install
-
 ADD api/resources/css/ /api/resources/css/
 ADD api/resources/js/ /api/resources/js/
 ADD api/resources/views/ /api/resources/views/
 
-RUN yarn production
+RUN yarn install && \
+    yarn production && \
+    rm -fr ./node_modules
 
 #
 # API
