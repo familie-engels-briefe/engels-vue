@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install \
     libmagickwand-dev \
     libcurl4-openssl-dev pkg-config libssl-dev -y
 RUN docker-php-ext-install -j$(nproc) mysqli zip curl gd exif
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions imagick
 
 # Create php user
 RUN groupadd -g 1000 engels
