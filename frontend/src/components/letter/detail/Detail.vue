@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-8">
         <Loading :loading="loading">
             <div class="flex flex-wrap lg:flex-nowrap justify-between">
                 <h2 v-if="details"><span class="font-normal">{{ numberPublic }}</span> {{ details.title }} ({{ doctypeName }})</h2>
