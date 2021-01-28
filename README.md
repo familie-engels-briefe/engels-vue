@@ -20,8 +20,26 @@ The [frontend](frontend) is a vue single-page-application (spa) which displays t
 * Create your local nginx config files in `docker/nginx/conf.d/` (reference: https://github.com/familie-engels-briefe/webapp/wiki/nginx-Config). 
 * Now you can start every container via `docker-compose up`.
 
+## Commands
+
+List of console commands for the api.
+
+### Create user
+
+`docker-compose exec api php artisan user:create EMAIL --admin --password 123456`
+
+The admin and passwort options are optional.
+
+### Sync exist
+
+Copy exist data from exist 4 to exist 5.
+
+`docker-compose exec api php artisan exist:sync --dry-run`
+
+The dry-run option is optional. When provided, no data is actually synced.
+
 ## Contact
 
 For technical questions: [Tim Helfensdörfer](https://github.com/thelfensdrfer)
 
-For questions about the content: [Fabian Etling](https://github.com/FabianEtling)
+For questions about the content: [Ulrich Rummel](https://github.com/urummel)
