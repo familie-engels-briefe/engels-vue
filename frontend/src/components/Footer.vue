@@ -1,6 +1,6 @@
 <template>
     <footer class="bg-gray-darker text-gray-lightest text-sm">
-        <div class="max-w-6xl mx-auto px-8 md:px-4 lg:px-0 py-4 leading-none flex justify-between">
+        <div class="max-w-6xl mx-auto px-8 md:px-4 py-4 leading-none flex justify-between">
             <div>
                 <router-link to="/datenschutzerklärung">Datenschutzerklärung</router-link> | <router-link to="/impressum">Impressum</router-link>
             </div>
