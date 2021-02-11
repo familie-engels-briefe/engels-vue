@@ -29,6 +29,7 @@
             </a>
 
             <a class="toolbar-item toolbar-item-small"
+               title="Zitierfähige Quelle in Zwischenablage kopieren"
                @click="copyQuote">
                 <font-awesome-icon :icon="['fas', 'quote-right']"
                                    size="lg"></font-awesome-icon>
@@ -151,13 +152,13 @@ export default {
 
 <style scoped>
 .toolbar {
-    transition: margin-bottom .2s ease;
+    transition: margin-bottom .1s ease;
 }
 
 .toolbar-bottom {
     margin-bottom: 46px;
 
-    transition: margin-bottom .2s ease;
+    transition: margin-bottom .1s ease;
 }
 
 .toolbar-item {
