@@ -141,8 +141,8 @@ export default {
                 that.htmlDiplomatic = response.data.html.dipl
                 that.facsimiles = response.data.facsimiles
 
-                that.references.previous = response.data.details.refs.prev.target
-                that.references.next = response.data.details.refs.next.target
+                that.references.previous = that.$store.getters.getLetterByRef(response.data.details.refs.prev.target)
+                that.references.next = that.$store.getters.getLetterByRef(response.data.details.refs.next.target)
             })
             .catch(function (err) {
                 that.displayAxiosError(err)
@@ -161,17 +161,7 @@ export default {
         updateHighlights (event) {
             this.highlights = event.selected
         },
-        goToLetter (ref) {
-            const letter = this.$store.getters.getLetterByRef(ref)
-            if (!letter) {
-                console.error('Letter with ID', ref, 'does not exist!')
-
-                this.$store.commit('setError', {
-                    message: 'Der Brief mit der ID "' + ref + '" konnte nicht gefunden werden!'
-                })
-                return
-            }
-
+        goToLetter (letter) {
             this.$router.push({
                 name: 'letter',
                 params: {
