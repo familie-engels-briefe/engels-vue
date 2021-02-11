@@ -17,7 +17,10 @@ import {
     faAngleRight,
     faCaretDown,
 } from '@fortawesome/pro-regular-svg-icons'
-import { faUser as faSolidUser } from '@fortawesome/free-solid-svg-icons'
+import {
+    faUser as faSolidUser,
+    faQuoteRight as faSolidQuote,
+} from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -39,6 +42,7 @@ library.add(faCaretDown)
 
 // Solid
 library.add(faSolidUser)
+library.add(faSolidQuote)
 
 // Brand
 library.add(faGithub)

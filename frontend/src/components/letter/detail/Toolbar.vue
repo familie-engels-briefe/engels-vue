@@ -27,11 +27,53 @@
 
                 <span class="toolbar-item-text">XML Datenansicht</span>
             </a>
+
+            <a class="toolbar-item toolbar-item-small"
+               @click="copyQuote">
+                <font-awesome-icon :icon="['fas', 'quote-right']"
+                                   size="lg"></font-awesome-icon>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
+function fallbackCopyTextToClipboard (text) {
+    let textArea = document.createElement("textarea")
+    textArea.value = text
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0"
+    textArea.style.left = "0"
+    textArea.style.position = "fixed"
+
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+
+    try {
+        let successful = document.execCommand('copy')
+        let msg = successful ? 'successful' : 'unsuccessful'
+        console.log('Fallback: Copying text command was ' + msg)
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err)
+    }
+
+    document.body.removeChild(textArea)
+}
+
+function copyTextToClipboard (text) {
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text)
+        return
+    }
+    navigator.clipboard.writeText(text).then(function () {
+        console.log('Async: Copying to clipboard was successful!')
+    }, function (err) {
+        console.error('Async: Could not copy text: ', err)
+    })
+}
+
 export default {
     name: 'LetterToolbar',
     props: {
@@ -79,7 +121,7 @@ export default {
         },
         checkOffset () {
             function getRectTop (el) {
-                var rect = el.getBoundingClientRect()
+                let rect = el.getBoundingClientRect()
                 return rect.top
             }
 
@@ -90,6 +132,18 @@ export default {
             if (document.body.scrollTop + window.innerHeight < (getRectTop(this.footer) + document.body.scrollTop)) {
                 this.toolbar.classList.remove('toolbar-bottom')
             }
+        },
+        copyQuote () {
+            const prefix = 'Familie Engels in Briefen'
+            const date = new Date()
+            const day = date.getDay()
+            const month = date.getMonth() + 1
+            const year = date.getFullYear()
+
+            const quote = prefix + ' ' + window.location.href + ' (' + day + '.' + month + '.' + year + ')'
+            copyTextToClipboard(quote)
+
+            alert('Die zitierfähige Quelle wurde in Ihre Zwischenablage kopiert.')
         },
     }
 }
@@ -108,6 +162,10 @@ export default {
 
 .toolbar-item {
     @apply block w-full bg-gray-dark2 px-4 py-2 text-sm cursor-pointer mb-2;
+}
+
+.toolbar-item-small {
+    @apply w-auto;
 }
 
 .toolbar-item:last-child {
