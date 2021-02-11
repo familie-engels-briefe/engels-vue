@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-24">
+    <div class="pb-48 lg:pb-24">
         <pre class="overflow-x-auto bg-gray-lighter p-4"><code v-text="xml" class="language-xml"></code></pre>
     </div>
 </template>

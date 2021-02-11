@@ -60,6 +60,10 @@ let $letters :=
                         <person ref="{extract:getPersonRef($doc, "received")}"></person>
                         <place ref="{extract:getPlaceRef($doc, "received")}"></place>
                     </received>
+                    <refs>
+                        <prev target="{if ($doc/tei:TEI//tei:correspContext/tei:ref[@type="prev"]/@target) then $doc/tei:TEI//tei:correspContext/tei:ref[@type="prev"]/@target else ""}" />
+                        <next target="{if ($doc/tei:TEI//tei:correspContext/tei:ref[@type="next"]/@target) then $doc/tei:TEI//tei:correspContext/tei:ref[@type="next"]/@target else ""}" />
+                    </refs>
                     <mentioned>
                         <persons>
                             {

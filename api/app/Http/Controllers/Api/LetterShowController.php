@@ -41,6 +41,7 @@ class LetterShowController
                 'sent' => $letter->data->sent,
                 'received' => $letter->data->received,
                 'mentioned' => $letter->data->mentioned,
+                'refs' => $letter->data->refs,
             ];
             $data['facsimiles'] = $letter->data->facs->graphic;
             $data['xml'] = $letter->data->xml->content;

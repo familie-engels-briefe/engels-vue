@@ -16,6 +16,8 @@ import {
     faExternalLink,
     faAngleRight,
     faCaretDown,
+    faArrowLeft,
+    faArrowRight,
 } from '@fortawesome/pro-regular-svg-icons'
 import {
     faUser as faSolidUser,
@@ -39,6 +41,8 @@ library.add(faBuilding)
 library.add(faExternalLink)
 library.add(faAngleRight)
 library.add(faCaretDown)
+library.add(faArrowLeft)
+library.add(faArrowRight)
 
 // Solid
 library.add(faSolidUser)

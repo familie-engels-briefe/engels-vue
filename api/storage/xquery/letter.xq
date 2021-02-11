@@ -31,6 +31,10 @@ return
                     $fac
             }
         </facs>
+        <refs>
+            <prev target="{if ($doc/tei:TEI//tei:correspContext/tei:ref[@type="prev"]/@target) then $doc/tei:TEI//tei:correspContext/tei:ref[@type="prev"]/@target else ""}" />
+            <next target="{if ($doc/tei:TEI//tei:correspContext/tei:ref[@type="next"]/@target) then $doc/tei:TEI//tei:correspContext/tei:ref[@type="next"]/@target else ""}" />
+        </refs>
         <xml content="{$xmlString}"></xml>
         <sent>
             <person ref="{extract:getPersonRef($doc, "sent")}"></person>

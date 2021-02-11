@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-wrap lg:-mx-6 pb-24">
+    <div class="flex flex-wrap lg:-mx-6 pb-48 lg:pb-24">
         <div class="w-full mb-6 lg:w-1/2 lg:px-6 lg:mb-0">
             <LetterFacsimile v-if="facsimiles"
                              :facsimiles="facsimiles"

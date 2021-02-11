@@ -4,16 +4,40 @@
             <div class="flex flex-wrap lg:flex-nowrap justify-between">
                 <h2 v-if="details"><span class="font-normal">{{ numberPublic }}</span> {{ title }}</h2>
 
-                <div class="mt-2 mb-8 lg:mb-0 lg:ml-6">
-                    <LetterHighlighter v-on:update-highlights="updateHighlights" :html="htmlDiplomatic"></LetterHighlighter>
+                <div class="mt-2 mb-8 flex flex-row justify-between w-full lg:w-auto lg:mb-0 lg:ml-6 lg:flex-col">
+                    <div class="mb-4 block lg:inline lg:h-8">
+                        <LetterHighlighter v-on:update-highlights="updateHighlights"
+                                           :html="htmlDiplomatic"></LetterHighlighter>
+                    </div>
+                    <div class="flex justify-end">
+                        <Button class="mr-2"
+                                title="Vorheriger Brief"
+                                v-if="references.previous"
+                                v-on:click.native="goToLetter(references.previous)">
+                            <font-awesome-icon :icon="['far', 'arrow-left']"></font-awesome-icon>
+                        </Button>
+                        <Button title="Nächster Brief"
+                                v-if="references.next"
+                                v-on:click.native="goToLetter(references.next)">
+                            <font-awesome-icon :icon="['far', 'arrow-right']"></font-awesome-icon>
+                        </Button>
+                    </div>
                 </div>
             </div>
 
-            <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'" :html="htmlNormalized" :highlights="highlights" :facsimiles="facsimiles"></LetterNormalized>
-            <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'" :html="htmlDiplomatic" :highlights="highlights" :facsimiles="facsimiles"></LetterDiplomatic>
-            <LetterXml v-if="xmlContent && activeView === 'xml'" :xml="xmlContent"></LetterXml>
+            <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'"
+                              :html="htmlNormalized"
+                              :highlights="highlights"
+                              :facsimiles="facsimiles"></LetterNormalized>
+            <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'"
+                              :html="htmlDiplomatic"
+                              :highlights="highlights"
+                              :facsimiles="facsimiles"></LetterDiplomatic>
+            <LetterXml v-if="xmlContent && activeView === 'xml'"
+                       :xml="xmlContent"></LetterXml>
 
-            <LetterToolbar :active="activeView" v-on:change-view="changeView"></LetterToolbar>
+            <LetterToolbar :active="activeView"
+                           v-on:change-view="changeView"></LetterToolbar>
         </Loading>
     </div>
 </template>
@@ -27,6 +51,7 @@ import LetterDiplomatic from './Diplomatic'
 import LetterXml from './Xml'
 import LetterToolbar from './Toolbar'
 import LetterHighlighter from './Highlighter'
+import Button from '../../Button'
 
 export default {
     name: 'LetterDetail',
@@ -36,7 +61,8 @@ export default {
         LetterDiplomatic,
         LetterXml,
         LetterToolbar,
-        LetterHighlighter
+        LetterHighlighter,
+        Button,
     },
     data () {
         return {
@@ -63,6 +89,10 @@ export default {
             activeView: 'normalized',
             // If data is loading
             loading: true,
+            references: {
+                previous: null,
+                next: null,
+            }
         }
     },
     props: {
@@ -110,6 +140,9 @@ export default {
                 that.htmlNormalized = response.data.html.norm
                 that.htmlDiplomatic = response.data.html.dipl
                 that.facsimiles = response.data.facsimiles
+
+                that.references.previous = response.data.details.refs.prev.target
+                that.references.next = response.data.details.refs.next.target
             })
             .catch(function (err) {
                 that.displayAxiosError(err)
@@ -127,6 +160,24 @@ export default {
         },
         updateHighlights (event) {
             this.highlights = event.selected
+        },
+        goToLetter (ref) {
+            const letter = this.$store.getters.getLetterByRef(ref)
+            if (!letter) {
+                console.error('Letter with ID', ref, 'does not exist!')
+
+                this.$store.commit('setError', {
+                    message: 'Der Brief mit der ID "' + ref + '" konnte nicht gefunden werden!'
+                })
+                return
+            }
+
+            this.$router.push({
+                name: 'letter',
+                params: {
+                    number: letter.number
+                }
+            })
         },
     },
     computed: {
@@ -177,60 +228,79 @@ export default {
 
     background-blend-mode: multiply;
 }
+
 /deep/ .engels_topic[data-type="W"] {
     @apply bg-blue-600;
 }
+
 /deep/ .engels_topic[data-type="R"] {
     @apply bg-purple-600;
 }
+
 /deep/ .engels_topic[data-type="P"] {
     @apply bg-red-600;
 }
+
 /deep/ .engels_topic[data-type="G"] {
     @apply bg-green-600;
 }
+
 /deep/ .engels_topic[data-type="E"] {
     @apply bg-yellow-600;
 }
+
 /deep/ .engels_topic[data-type="K"] {
     @apply bg-orange-600;
 }
+
 /deep/ .engels_topic[data-type="EB"] {
     @apply bg-amber-600;
 }
+
 /deep/ .engels_topic[data-type="H"] {
     @apply bg-lime-600;
 }
+
 /deep/ .engels_topic[data-type="M"] {
     @apply bg-teal-600;
 }
+
 /deep/ .engels_topic[data-type="F"] {
     @apply bg-cyan-600;
 }
+
 /deep/ .engels_topic[data-type="B"] {
     @apply bg-fuchsia-600;
 }
+
 /deep/ .engels_topic[data-type="L"] {
     @apply bg-rose-600;
 }
+
 /deep/ .engels_topic[data-type="KR"] {
     @apply bg-pink-600;
 }
+
 /deep/ .engels_topic[data-type="J"] {
     @apply bg-violet-600;
 }
+
 /deep/ .engels_topic[data-type="FEG"] {
     @apply bg-lightBlue-600;
 }
+
 /deep/ .engels_topic[data-type="FEK"] {
     @apply bg-lightBlue-700;
 }
+
 /deep/ .engels_topic[data-type="FEJ"] {
     @apply bg-lightBlue-800;
 }
+
 /deep/ .engels_topic[data-type="FEM"] {
     @apply bg-lightBlue-900;
 }
+
 /deep/ .engels_topic:not(.has-highlight) {
     @apply bg-transparent !important;
 }
