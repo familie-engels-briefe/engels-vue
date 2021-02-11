@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="place.name || 'Unbekannter Ort'" :url="url"><slot></slot></Tooltip>
+        <Tooltip :content="place.name || 'Unbekannter Ort'" :url="url" :classes="classes"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -17,6 +17,12 @@ export default {
             type: Object,
             required: true
         },
+        hasHighlight: {
+            required: false,
+            default() {
+                return false
+            },
+        },
     },
     computed: {
         url: function () {
@@ -31,6 +37,14 @@ export default {
                 }
             }
         },
+        classes() {
+            let classes = "place-tooltip cursor-help"
+            if (this.hasHighlight) {
+                classes += ' has-highlight'
+            }
+
+            return classes
+        }
     },
 }
 </script>

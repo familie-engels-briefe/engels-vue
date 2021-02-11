@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="org.name || 'Unbekannte Organisation'" :url="url"><slot></slot></Tooltip>
+        <Tooltip :content="org.name || 'Unbekannte Organisation'" :url="url" :classes="classes"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -16,7 +16,13 @@ export default {
         org: {
             type: Object,
             required: true
-        }
+        },
+        hasHighlight: {
+            required: false,
+            default() {
+                return false
+            },
+        },
     },
     computed: {
         url: function () {
@@ -31,6 +37,14 @@ export default {
                 }
             }
         },
+        classes() {
+            let classes = "organisation-tooltip cursor-help"
+            if (this.hasHighlight) {
+                classes += ' has-highlight'
+            }
+
+            return classes
+        }
     },
 }
 </script>

@@ -229,7 +229,7 @@ export default {
     @apply border-gray;
 }
 
-/deep/ .tooltip-button {
+/deep/ .has-highlight > .tooltip-button {
     @apply border-b border-dashed border-gray;
 }
 

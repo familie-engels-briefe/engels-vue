@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="person.name || 'Unbekannte Person'" :url="url"><slot></slot></Tooltip>
+        <Tooltip :content="person.name || 'Unbekannte Person'" :url="url" :classes="classes"><slot></slot></Tooltip>
     </span>
 </template>
 
@@ -16,7 +16,13 @@ export default {
         person: {
             type: Object,
             required: true
-        }
+        },
+        hasHighlight: {
+            required: false,
+            default() {
+                return false
+            },
+        },
     },
     computed: {
         url: function () {
@@ -31,6 +37,14 @@ export default {
                 }
             }
         },
+        classes() {
+            let classes = "person-tooltip cursor-help"
+            if (this.hasHighlight) {
+                classes += ' has-highlight'
+            }
+
+            return classes
+        }
     },
 }
 </script>

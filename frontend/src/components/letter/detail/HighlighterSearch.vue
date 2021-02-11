@@ -1,6 +1,7 @@
 <template>
     <div>
-        <label class="flex justify-between cursor-pointer hover:bg-gray-dark hover:text-white py-1 px-2 mb-2"
+        <label class="flex justify-between cursor-pointer py-1 px-2 mb-2"
+               :class="{ 'text-gray-dark': !enabled, 'hover:bg-gray-dark hover:text-white': enabled }"
                :for="name"
                v-on:click="active = !active">
             <span v-text="title"></span>
@@ -15,8 +16,9 @@
             @after-enter="afterEnter"
             @leave="leave">
             <div :class="classes" v-show="active">
-                <label v-for="item in items" :key="item.id" class="block mb-2 px-2 py-1 cursor-pointer engels_topic has-highlight hover:opacity-75" :data-type="item.id">
-                    <input :type="type" :name="inputName(item)" v-on:change="toggleItem(item)" class="align-middle"> {{ item.name }}
+                <label v-for="item in items" :key="item.id" class="block mb-2 px-2 py-1 cursor-pointer relative text-gray-darker" :class="{ 'engels_topic has-highlight hover:opacity-75': name === 'topics', 'hover:bg-gray-lighter': name !== 'topics', 'text-gray-dark': !enabled }" :data-type="item.id">
+                    <input :type="type" :name="inputName(item)" v-on:change="toggleItem(item)" class="align-middle" :disabled="!enabled">
+                    <span class="pl-6">{{ item.name }}</span>
                 </label>
 
                 <label v-if="type === 'radio'">
@@ -33,25 +35,32 @@ export default {
     props: {
         title: {
             type: String,
-            required: true
+            required: true,
         },
         name: {
             type: String,
-            required: true
+            required: true,
         },
         items: {
             type: Array,
-            required: true
+            required: true,
         },
         classes: {
-            required: true
+            required: true,
         },
         type: {
             required: false,
             default () {
                 return 'checkbox'
-            }
-        }
+            },
+        },
+        enabled: {
+            type: Boolean,
+            required: false,
+            default () {
+                return true
+            },
+        },
     },
     data () {
         return {
@@ -144,6 +153,13 @@ export default {
 </script>
 
 <style scoped>
+input[type="radio"],
+input[type="checkbox"] {
+    @apply absolute;
+
+    top: 8px;
+}
+
 .icon-input {
     @apply text-gray-light;
 

@@ -1,6 +1,6 @@
 <template>
     <span>
-        <Tooltip :content="letterTitle" v-on:click.native="goToLetter" :classes="'cursor-pointer'"><slot></slot></Tooltip>
+        <Tooltip :content="letterTitle" v-on:click.native="goToLetter" classes="letter-tooltip cursor-pointer"><slot></slot></Tooltip>
     </span>
 </template>
 

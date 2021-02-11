@@ -7,7 +7,8 @@
                 <div class="mt-2 mb-8 flex flex-row justify-between w-full lg:w-auto lg:mb-0 lg:ml-6 lg:flex-col">
                     <div class="mb-4 block lg:inline lg:h-8">
                         <LetterHighlighter v-on:update-highlights="updateHighlights"
-                                           :html="htmlDiplomatic"></LetterHighlighter>
+                                           :html="htmlDiplomatic"
+                                           :activeView="activeView"></LetterHighlighter>
                     </div>
                     <div class="flex justify-end">
                         <Button class="mr-2"
@@ -293,5 +294,17 @@ export default {
 
 /deep/ .engels_topic:not(.has-highlight) {
     @apply bg-transparent !important;
+}
+
+/deep/ .TMP.IGNORE {
+    @apply text-lg font-bold not-italic mt-6 !important;
+}
+
+/deep/ .TMP.IGNORE hr {
+    @apply mb-6;
+}
+
+/deep/ .TMP.IGNORE br {
+    @apply hidden;
 }
 </style>
