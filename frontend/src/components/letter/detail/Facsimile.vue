@@ -40,15 +40,15 @@ export default {
         }
 
         document.addEventListener('scroll', this.scrollHandler)
-        this.scrollHandler()
-
         window.addEventListener('resize', this.resizeHandler)
-        this.resizeHandler()
 
         this.scrollCheckInterval = window.setInterval(this.scrollHandler, 1000)
+
+        setTimeout(this.resizeHandler, 0)
     },
     beforeDestroy () {
         document.removeEventListener('scroll', this.scrollHandler)
+        window.removeEventListener('resize', this.scrollHandler)
 
         window.clearInterval(this.scrollCheckInterval)
     },
@@ -74,7 +74,7 @@ export default {
             )
 
             if (this.offsetTop === 0) {
-                this.offsetTop = pdfViewer.getBoundingClientRect().top
+                this.offsetTop = pdfViewer.offsetTop || 0
             }
 
             // Add/remove fixed position of facsimile based on scrolling position
