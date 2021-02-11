@@ -27,7 +27,7 @@ let $letters :=
             let $uri := concat($data-collection, "/", $resource-name)
             let $doc := doc($uri)
             let $number := replace($doc/tei:TEI/@xml:id, "[fe.^]*", "")
-            let $doctype := if ($doc/tei:TEI/@*[name()='engels:doctype']) then $doc/tei:TEI/@*[name()='engels:doctype'] else ""
+            let $doctype := if ($doc/tei:TEI//tei:sourceDesc/@n) then $doc/tei:TEI//tei:sourceDesc/@n else ""
             (: Filter xml documents in collection :)
             where fn:substring-after($resource-name, ".") = 'xml'
             (: Filter by person send/receive :)

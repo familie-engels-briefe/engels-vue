@@ -90,7 +90,11 @@ const store = new Vuex.Store({
         placeDictionary: {},
         letterDictionary: {},
         doctypesDictionary: {
-            'letter': 'Brief'
+            'brief.original': 'Brief',
+            'brief.abschrift': 'Abschrift',
+            'brief.kopie': 'Briefkopie',
+            'entwurf.original': 'Entwurf',
+            'memorandum.original': 'Memorandum',
         }
     },
     getters: {

@@ -22,7 +22,7 @@ return
         number="{$number}"
         version="{if ($doc/tei:TEI/@n) then $doc/tei:TEI/@n else ""}"
         date="{extract:getSenderDate($doc)}"
-        doctype="{if ($doc/tei:TEI/@*[name()='engels:doctype']) then $doc/tei:TEI/@*[name()='engels:doctype'] else ""}">
+        doctype="{if ($doc/tei:TEI//tei:sourceDesc/@n) then $doc/tei:TEI//tei:sourceDesc/@n else ""}">
         <title>{$doc/tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:title/text()}</title>
         <facs>
             {
