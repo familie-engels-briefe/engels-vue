@@ -52,10 +52,6 @@
                     <td>{{ $numberOfDocuments }}</td>
                 </tr>
                 <tr>
-                    <td class="font-bold">Number of html files</td>
-                    <td>{{ $numberOfHtmlFiles }} (Should be: {{ $numberOfDocuments * 2 }})</td>
-                </tr>
-                <tr>
                     <td class="font-bold">Cache size</td>
                     <td>{{ $cacheSize }}</td>
                 </tr>

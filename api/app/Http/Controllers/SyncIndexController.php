@@ -51,11 +51,6 @@ class SyncIndexController extends Controller
             })
             ->sum();
 
-        $numberOfHtmlFiles = $cacheKeys->filter(function ($key) {
-            return str_contains($key, 'html');
-        })
-            ->count();
-
         $units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
         $power = $cacheSize > 0 ? floor(log($cacheSize, 1024)) : 0;
         $cacheSize = number_format( $cacheSize / (1024 ** $power), 2, '.', ',') . ' ' . $units[ $power];
@@ -64,7 +59,6 @@ class SyncIndexController extends Controller
             'lastSync' => DB::table('sync_logs')->orderBy('id', 'desc')->first(),
             'lastSyncErrors' => DB::table('failed_jobs')->orderBy('failed_at', 'desc')->where('failed_at', '>', now()->subHours(24))->get(),
             'numberOfDocuments' => $numberOfDocuments,
-            'numberOfHtmlFiles' => $numberOfHtmlFiles,
             'cacheSize' => $cacheSize,
             'error' => $error,
         ]);
