@@ -201,10 +201,16 @@ export default {
             const sentPlace = letter.sent.place.name
             const receivedName = letter.received.person.name
             const receivedPlace = letter.received.place.name
+            let formatedDate = null
+            if (letter.date.length > 4) {
+                formatedDate = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
+            } else {
+                formatedDate = date.getFullYear()
+            }
 
             return sentName + ', ' + sentPlace + ', an ' +
                 receivedName + ', ' + receivedPlace + ', ' +
-                date.getFullYear() + ' (' + letter.doctypeName + ')'
+                formatedDate + ' (' + letter.doctypeName + ')'
         }
     }
 }
