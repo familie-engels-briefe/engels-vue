@@ -13,13 +13,13 @@
                     <div class="flex justify-end">
                         <Button class="mr-2"
                                 title="Vorheriger Brief"
-                                v-if="references.previous"
-                                v-on:click.native="goToLetter(references.previous)">
+                                v-if="referencesPrevious"
+                                v-on:click.native="goToLetter(referencesPrevious)">
                             <font-awesome-icon :icon="['far', 'arrow-left']"></font-awesome-icon>
                         </Button>
                         <Button title="Nächster Brief"
-                                v-if="references.next"
-                                v-on:click.native="goToLetter(references.next)">
+                                v-if="referencesNext"
+                                v-on:click.native="goToLetter(referencesNext)">
                             <font-awesome-icon :icon="['far', 'arrow-right']"></font-awesome-icon>
                         </Button>
                     </div>
@@ -90,10 +90,6 @@ export default {
             activeView: 'normalized',
             // If data is loading
             loading: true,
-            references: {
-                previous: null,
-                next: null,
-            }
         }
     },
     props: {
@@ -113,44 +109,7 @@ export default {
         }
     },
     created () {
-        // Check if the given letter should be used
-        if (this.letterLocal !== null) {
-            console.debug('Loaded letter details locally')
-
-            this.details = this.letterLocal.details
-            this.xmlContent = this.letterLocal.xml
-            this.htmlNormalized = this.letterLocal.html.norm
-            this.htmlDiplomatic = this.letterLocal.html.dipl
-            this.facsimiles = this.letterLocal.facsimiles
-            this.loading = false
-            return
-        }
-
-        if (this.number === null) {
-            console.error('Either a letter number or a letter object is required!')
-            return
-        }
-
-        // Otherwise fetch letters from the api
-        let that = this
-
-        axios.get(this.createApiUrl('letters/' + this.number))
-            .then(function (response) {
-                that.details = response.data.details
-                that.xmlContent = response.data.xml
-                that.htmlNormalized = response.data.html.norm
-                that.htmlDiplomatic = response.data.html.dipl
-                that.facsimiles = response.data.facsimiles
-
-                that.references.previous = that.$store.getters.getLetterByRef(response.data.details.refs.prev.target)
-                that.references.next = that.$store.getters.getLetterByRef(response.data.details.refs.next.target)
-            })
-            .catch(function (err) {
-                that.displayAxiosError(err)
-            })
-            .then(function () {
-                that.loading = false
-            })
+        this.loadLetter()
     },
     mounted () {
         console.debug('Mounted Letter/Detail')
@@ -164,12 +123,48 @@ export default {
         },
         goToLetter (letter) {
             this.$router.push({
-                name: 'letter',
                 params: {
                     number: letter.number
                 }
             })
         },
+        loadLetter () {
+            // Check if the given letter should be used
+            if (this.letterLocal !== null) {
+                console.debug('Loaded letter details locally')
+
+                this.details = this.letterLocal.details
+                this.xmlContent = this.letterLocal.xml
+                this.htmlNormalized = this.letterLocal.html.norm
+                this.htmlDiplomatic = this.letterLocal.html.dipl
+                this.facsimiles = this.letterLocal.facsimiles
+                this.loading = false
+                return
+            }
+
+            if (this.number === null) {
+                console.error('Either a letter number or a letter object is required!')
+                return
+            }
+
+            // Otherwise fetch letters from the api
+            let that = this
+
+            axios.get(this.createApiUrl('letters/' + this.number))
+                .then(function (response) {
+                    that.details = response.data.details
+                    that.xmlContent = response.data.xml
+                    that.htmlNormalized = response.data.html.norm
+                    that.htmlDiplomatic = response.data.html.dipl
+                    that.facsimiles = response.data.facsimiles
+                })
+                .catch(function (err) {
+                    that.displayAxiosError(err)
+                })
+                .then(function () {
+                    that.loading = false
+                })
+        }
     },
     computed: {
         numberPublic () {
@@ -211,8 +206,19 @@ export default {
             return sentName + ', ' + sentPlace + ', an ' +
                 receivedName + ', ' + receivedPlace + ', ' +
                 formatedDate + ' (' + letter.doctypeName + ')'
-        }
-    }
+        },
+        referencesPrevious () {
+            return this.$store.getters.getLetterByRef(this.details.refs.prev.target)
+        },
+        referencesNext () {
+            return this.$store.getters.getLetterByRef(this.details.refs.next.target)
+        },
+    },
+    watch: {
+        '$route' () {
+            this.loadLetter()
+        },
+    },
 }
 </script>
 
