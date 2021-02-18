@@ -48,3 +48,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+/deep/ .org-tooltip.has-highlight > .tooltip-button {
+    @apply bg-blueGray-100;
+}
+</style>

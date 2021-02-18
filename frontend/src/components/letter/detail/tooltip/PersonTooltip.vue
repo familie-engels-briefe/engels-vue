@@ -48,3 +48,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+/deep/ .person-tooltip.has-highlight > .tooltip-button {
+    @apply bg-indigo-100;
+}
+</style>

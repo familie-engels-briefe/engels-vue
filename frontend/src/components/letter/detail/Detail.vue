@@ -220,7 +220,6 @@ export default {
             }
 
             return null
-
         },
     },
     watch: {
@@ -236,85 +235,93 @@ export default {
  * Topics
  */
 /deep/ .engels_topic.has-highlight {
-    @apply text-white;
-
     background-blend-mode: multiply;
 }
 
 /deep/ .engels_topic[data-type="W"] {
-    @apply bg-blue-600;
+    @apply bg-blue-100;
 }
 
 /deep/ .engels_topic[data-type="R"] {
-    @apply bg-purple-600;
+    @apply bg-purple-100;
 }
 
 /deep/ .engels_topic[data-type="P"] {
-    @apply bg-red-600;
+    @apply bg-red-100;
 }
 
 /deep/ .engels_topic[data-type="G"] {
-    @apply bg-green-600;
+    @apply bg-green-100;
 }
 
 /deep/ .engels_topic[data-type="E"] {
-    @apply bg-yellow-600;
+    @apply bg-yellow-100;
 }
 
 /deep/ .engels_topic[data-type="K"] {
-    @apply bg-orange-600;
+    @apply bg-orange-100;
 }
 
 /deep/ .engels_topic[data-type="EB"] {
-    @apply bg-amber-600;
+    @apply bg-amber-100;
 }
 
 /deep/ .engels_topic[data-type="H"] {
-    @apply bg-lime-600;
+    @apply bg-lime-100;
 }
 
 /deep/ .engels_topic[data-type="M"] {
-    @apply bg-teal-600;
+    @apply bg-teal-100;
 }
 
 /deep/ .engels_topic[data-type="F"] {
-    @apply bg-cyan-600;
+    @apply bg-cyan-100;
 }
 
 /deep/ .engels_topic[data-type="B"] {
-    @apply bg-fuchsia-600;
+    @apply bg-fuchsia-100;
 }
 
 /deep/ .engels_topic[data-type="L"] {
-    @apply bg-rose-600;
+    @apply bg-rose-100;
 }
 
 /deep/ .engels_topic[data-type="KR"] {
-    @apply bg-pink-600;
+    @apply bg-pink-100;
 }
 
 /deep/ .engels_topic[data-type="J"] {
-    @apply bg-violet-600;
+    @apply bg-violet-100;
 }
 
 /deep/ .engels_topic[data-type="FEG"] {
-    @apply bg-lightBlue-600;
+    @apply bg-lightBlue-100;
 }
 
 /deep/ .engels_topic[data-type="FEK"] {
-    @apply bg-lightBlue-700;
+    @apply bg-lightBlue-200;
 }
 
 /deep/ .engels_topic[data-type="FEJ"] {
-    @apply bg-lightBlue-800;
+    @apply bg-lightBlue-300;
 }
 
 /deep/ .engels_topic[data-type="FEM"] {
-    @apply bg-lightBlue-900;
+    @apply bg-lightBlue-400;
 }
 
 /deep/ .engels_topic:not(.has-highlight) {
     @apply bg-transparent !important;
+}
+
+/* Textkritisch */
+/deep/ .highlight-text.has-highlight{
+    @apply bg-warmGray-100;
+}
+
+/* Sachkommentar */
+/deep/ .highlight-comment.has-highlight{
+    @apply bg-coolGray-100;
 }
 
 /deep/ .TMP.IGNORE {

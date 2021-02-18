@@ -48,3 +48,9 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+/deep/ .place-tooltip.has-highlight > .tooltip-button {
+    @apply bg-emerald-100;
+}
+</style>

@@ -1,31 +1,57 @@
 <template>
     <div>
-        <label class="flex justify-between cursor-pointer py-1 px-2 mb-2"
-               :class="{ 'text-gray-dark': !enabled, 'hover:bg-gray-dark hover:text-white': enabled }"
-               :for="name"
-               v-on:click="active = !active">
-            <span v-text="title"></span>
-            <span>
-                <font-awesome-icon :icon="icon" size="lg"></font-awesome-icon>
-            </span>
-        </label>
+        <template v-if="type === 'checkbox' && items.length === 1">
+            <label v-for="item in items"
+                   :key="item.id"
+                   class="block mb-2 px-2 py-1 cursor-pointer relative text-gray-darker"
+                   :class="{ 'engels_topic has-highlight hover:opacity-75': name === 'topics', 'hover:bg-gray-lighter': name !== 'topics', 'text-gray-dark': !enabled }"
+                   :data-type="item.id">
+                <input :type="type"
+                       :name="inputName(item)"
+                       v-on:change="toggleItem(item)"
+                       class="align-middle"
+                       :disabled="!enabled">
+                <span class="pl-6">{{ title }}</span>
+            </label>
+        </template>
+        <template v-else>
+            <label class="flex justify-between cursor-pointer py-1 px-2 mb-2"
+                   :class="{ 'text-gray-dark': !enabled, 'hover:bg-gray-dark hover:text-white': enabled }"
+                   :for="name"
+                   v-on:click="active = !active">
+                <span v-text="title"></span>
+                <span>
+                    <font-awesome-icon :icon="icon"
+                                       size="lg"></font-awesome-icon>
+                </span>
+            </label>
 
-        <transition
-            name="expand"
-            @enter="enter"
-            @after-enter="afterEnter"
-            @leave="leave">
-            <div :class="classes" v-show="active">
-                <label v-for="item in items" :key="item.id" class="block mb-2 px-2 py-1 cursor-pointer relative text-gray-darker" :class="{ 'engels_topic has-highlight hover:opacity-75': name === 'topics', 'hover:bg-gray-lighter': name !== 'topics', 'text-gray-dark': !enabled }" :data-type="item.id">
-                    <input :type="type" :name="inputName(item)" v-on:change="toggleItem(item)" class="align-middle" :disabled="!enabled">
-                    <span class="pl-6">{{ item.name }}</span>
-                </label>
+            <transition name="expand"
+                        @enter="enter"
+                        @after-enter="afterEnter"
+                        @leave="leave">
+                <div :class="classes"
+                     v-show="active">
+                    <label v-for="item in items"
+                           :key="item.id"
+                           class="block mb-2 px-2 py-1 cursor-pointer relative text-gray-darker"
+                           :class="{ 'engels_topic has-highlight hover:opacity-75': name === 'topics', 'hover:bg-gray-lighter': name !== 'topics', 'text-gray-dark': !enabled }"
+                           :data-type="item.id">
+                        <input :type="type"
+                               :name="inputName(item)"
+                               v-on:change="toggleItem(item)"
+                               class="align-middle"
+                               :disabled="!enabled">
+                        <span class="pl-6">{{ item.name }}</span>
+                    </label>
 
-                <label v-if="type === 'radio'">
-                    <a class="inline-block mt-4 cursor-pointer float-right border border-gray-dark px-2 py-1 hover:bg-gray-lighter" v-on:click="clearSelectedItems()">Filter zurücksetzen</a>
-                </label>
-            </div>
-        </transition>
+                    <label v-if="type === 'radio'">
+                        <a class="inline-block mt-4 cursor-pointer float-right border border-gray-dark px-2 py-1 hover:bg-gray-lighter"
+                           v-on:click="clearSelectedItems()">Filter zurücksetzen</a>
+                    </label>
+                </div>
+            </transition>
+        </template>
     </div>
 </template>
 

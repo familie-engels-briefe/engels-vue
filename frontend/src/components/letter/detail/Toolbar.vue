@@ -146,7 +146,7 @@ export default {
             const quote = prefix + ' ' + window.location.href + ' (' + day + '.' + month + '.' + year + ')'
             copyTextToClipboard(quote)
 
-            alert('Die zitierfähige Quelle wurde in Ihre Zwischenablage kopiert.')
+            alert(`Die zitierfähige Quelle:\n\n${quote}\n\nwurde in Ihre Zwischenablage kopiert.`)
         },
     }
 }

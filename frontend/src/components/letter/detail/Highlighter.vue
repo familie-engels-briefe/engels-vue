@@ -4,7 +4,7 @@
             <Button v-show="!showHighlighter"
                     v-on:click.native="showHighlighter = !showHighlighter"
                     :classes="['absolute', 'right-0']">
-                Hervorhebungen&nbsp;<font-awesome-icon :icon="['far', 'highlighter']"></font-awesome-icon>
+                Annotationen&nbsp;<font-awesome-icon :icon="['far', 'highlighter']"></font-awesome-icon>
             </Button>
         </transition>
 
@@ -14,7 +14,7 @@
                 <div class="flex justify-between border-b border-gray pb-2 px-2 mb-2">
                     <div>
                         <font-awesome-icon :icon="['far', 'highlighter']"></font-awesome-icon>
-                        <span class="uppercase text-lg pl-2">Hervorhebungen</span>
+                        <span class="uppercase text-lg pl-2">Annotationen</span>
                     </div>
                     <div v-on:click="showHighlighter = false"
                          class="cursor-pointer hover:text-gray-darker"
@@ -38,7 +38,7 @@
                                    type="checkbox"
                                    :items="textcomments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'diplomatic'"></HighlighterSearch>
+                                   :enabled="activeView === 'diplomatisch'"></HighlighterSearch>
 
                 <HighlighterSearch name="comments"
                                    title="Sachkommentare"
