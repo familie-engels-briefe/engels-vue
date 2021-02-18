@@ -2,8 +2,8 @@
     <div class="fixed left-0 right-0 bottom-0 bg-black toolbar">
         <div class="max-w-6xl w-full mx-auto px-4 md:px-8 lg:px-0 py-8 text-gray-lighter flex flex-col lg:justify-center lg:flex-row">
             <a class="toolbar-item"
-               :class="{ 'toolbar-item-active': active === 'normalized' }"
-               @click="changeLetterView('normalized')">
+               :class="{ 'toolbar-item-active': active === 'normalisiert' }"
+               @click="changeLetterView('normalisiert')">
                 <font-awesome-icon :icon="['far', 'align-justify']"
                                    size="lg"></font-awesome-icon>
 
@@ -11,8 +11,8 @@
             </a>
 
             <a class="toolbar-item"
-               :class="{ 'toolbar-item-active': active === 'diplomatic' }"
-               @click="changeLetterView('diplomatic')">
+               :class="{ 'toolbar-item-active': active === 'diplomatisch' }"
+               @click="changeLetterView('diplomatisch')">
                 <font-awesome-icon :icon="['far', 'align-left']"
                                    size="lg"></font-awesome-icon>
 
@@ -93,8 +93,10 @@ export default {
         console.debug('Mounted Letter/Toolbar')
 
         const hash = window.location.hash.replace('#', '')
-        if (hash === 'normalized' || hash === 'diplomatic' || hash === 'xml') {
+        if (hash === 'normalisiert' || hash === 'diplomatisch' || hash === 'xml') {
             this.changeLetterView(hash)
+        } else {
+            this.changeLetterView('normalisiert')
         }
 
         this.toolbar = this.$el

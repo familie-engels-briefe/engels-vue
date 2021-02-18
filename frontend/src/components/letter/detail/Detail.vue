@@ -26,11 +26,11 @@
                 </div>
             </div>
 
-            <LetterNormalized v-if="htmlNormalized && activeView === 'normalized'"
+            <LetterNormalized v-if="htmlNormalized && activeView === 'normalisiert'"
                               :html="htmlNormalized"
                               :highlights="highlights"
                               :facsimiles="facsimiles"></LetterNormalized>
-            <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatic'"
+            <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatisch'"
                               :html="htmlDiplomatic"
                               :highlights="highlights"
                               :facsimiles="facsimiles"></LetterDiplomatic>

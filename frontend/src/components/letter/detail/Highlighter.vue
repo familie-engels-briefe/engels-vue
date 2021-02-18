@@ -30,7 +30,7 @@
                                    type="checkbox"
                                    :items="normalizations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
 
                 <HighlighterSearch name="textcomments"
                                    title="Textkritische Kommentare"
@@ -46,7 +46,7 @@
                                    type="checkbox"
                                    :items="comments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
 
                 <HighlighterSearch name="persons"
                                    title="Personen"
@@ -54,7 +54,7 @@
                                    type="checkbox"
                                    :items="persons"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
 
                 <HighlighterSearch name="organisations"
                                    title="Unternehmen"
@@ -62,7 +62,7 @@
                                    type="checkbox"
                                    :items="organisations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
 
                 <HighlighterSearch name="places"
                                    title="Orte"
@@ -70,7 +70,7 @@
                                    type="checkbox"
                                    :items="places"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
 
                 <HighlighterSearch name="topics"
                                    title="Thema"
@@ -78,7 +78,7 @@
                                    type="radio"
                                    :items="topicsWithNames"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalized'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
             </div>
         </transition>
     </div>
