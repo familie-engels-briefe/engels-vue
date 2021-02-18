@@ -120,7 +120,9 @@ export default {
         changeView (view) {
             this.activeView = view
 
-            this.$refs.letterHighlighter.resetHighlights()
+            if (this.$refs.letterHighlighter) {
+                this.$refs.letterHighlighter.resetHighlights()
+            }
         },
         updateHighlights (event) {
             this.highlights = event.selected
@@ -328,5 +330,13 @@ export default {
 
 /deep/ .TMP.IGNORE br {
     @apply hidden;
+}
+
+/deep/ .line-number {
+    @apply text-gray absolute right-0 pr-16;
+}
+
+/deep/ .line-number {
+    @apply text-gray absolute right-0 pr-16 mt-6;
 }
 </style>
