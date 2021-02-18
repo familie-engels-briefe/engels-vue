@@ -38,7 +38,7 @@ export default {
             }
         },
         classes() {
-            let classes = "person-tooltip cursor-help"
+            let classes = 'person-tooltip cursor-help'
             if (this.hasHighlight) {
                 classes += ' has-highlight'
             }

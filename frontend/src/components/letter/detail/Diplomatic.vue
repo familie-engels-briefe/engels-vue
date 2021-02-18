@@ -15,11 +15,12 @@ import PersonTooltip from './tooltip/PersonTooltip'
 import PlaceTooltip from './tooltip/PlaceTooltip'
 import OrganisationTooltip from './tooltip/OrganisationTooltip'
 import LetterTooltip from './tooltip/LetterTooltip'
+import TextkommentarTooltip from './tooltip/TextkommentarTooltip'
 import FacsimileLink from './FacsimileLink'
 import LetterFacsimile from './Facsimile'
 
-import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
-import { highlightTopics } from './helper_highlights'
+import { replaceTextkommentare, replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
+import { highlightTopics, highlightTextkommentare } from './helper_highlights'
 import { replaceFacsimiles } from './helper_facsimiles'
 
 export default {
@@ -57,13 +58,15 @@ export default {
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
+            highlightTextkommentare(wrapper, (this.highlights && this.highlights.textcomments) ? this.highlights.textcomments.length > 0 : false)
+            highlightTopics(wrapper, (this.highlights && this.highlights.topics) ? this.highlights.topics : [])
+
+            replaceTextkommentare(wrapper)
             replacePersons(wrapper, this.$store)
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
             replaceFacsimiles(wrapper)
-
-            highlightTopics(wrapper, this.highlights && this.highlights.topics ? this.highlights.topics : [])
 
             // Replace uncertain text with element with highest certainty
             Array.from(wrapper.querySelectorAll('.tei_choice')).forEach(function (choice) {
@@ -143,6 +146,7 @@ export default {
             return {
                 template: wrapper.outerHTML,
                 components: {
+                    TextkommentarTooltip,
                     PersonTooltip,
                     PlaceTooltip,
                     OrganisationTooltip,
@@ -151,6 +155,7 @@ export default {
                 },
                 data () {
                     return {
+                        TextkommentarTooltip,
                         PersonTooltip,
                         PlaceTooltip,
                         OrganisationTooltip,

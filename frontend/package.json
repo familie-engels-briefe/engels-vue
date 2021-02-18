@@ -41,6 +41,7 @@
         "lodash": "^4.17",
         "moment": "^2.29",
         "pdfobject": "^2.2",
+        "popper-max-size-modifier": "^0.2.0",
         "postcss": "^7.0",
         "prismjs": "^1.22",
         "react-is": "^17.0",
@@ -50,6 +51,7 @@
         "vue": "^2.6",
         "vue-click-outside": "^1.1",
         "vue-matomo": "^3.14.0-0",
+        "vue-multi-ref": "^2.0.1",
         "vue-router": "^3.4",
         "vue-template-compiler": "^2.6",
         "vuex": "^3.5"

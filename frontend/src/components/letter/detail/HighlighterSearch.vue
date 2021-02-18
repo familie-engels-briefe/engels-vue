@@ -167,11 +167,9 @@ export default {
             return 'highlight-radio-' + this.name
         },
         clearSelectedItems () {
-            console.debug('Reset items')
-
             this.selectedItems.splice(0)
-            this.$el.querySelectorAll('input[type="radio"]').forEach(function (radio) {
-                radio.checked = false
+            this.$el.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(function (input) {
+                input.checked = false
             })
         },
     }

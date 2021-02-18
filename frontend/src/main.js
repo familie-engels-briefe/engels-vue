@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
+import VueMultiRef from 'vue-multi-ref'
 
 import './sentry'
 
@@ -14,6 +15,8 @@ import store from './store/index'
 import './matomo'
 
 Vue.config.productionTip = false
+
+Vue.use(VueMultiRef)
 
 new Vue({
     render: h => h(App),

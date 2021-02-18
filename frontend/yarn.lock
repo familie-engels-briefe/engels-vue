@@ -10056,6 +10056,11 @@ polished@^3.4.4:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+popper-max-size-modifier@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/popper-max-size-modifier/-/popper-max-size-modifier-0.2.0.tgz#1574744401296a488b4974909d130a85db94256f"
+  integrity sha512-UerPt9pZfTFnpSpIBVJrR3ibHMuU1k5K01AyNLfMUWCr4z1MFH+dsayPlAF9ZeYExa02HPiQn5OIMqUSVtJEbg==
+
 portfinder@^1.0.26:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -13296,6 +13301,11 @@ vue-matomo@^3.14.0-0:
   version "3.14.0-0"
   resolved "https://registry.yarnpkg.com/vue-matomo/-/vue-matomo-3.14.0-0.tgz#f8e668c26ec1f2f7b4498f758edfb7c387259735"
   integrity sha512-i1IkZGSXNY84zg1gVU8TOuaqajYDWQYl4Vs7M1mEb21cNhlMZKUxxgElvj+xmv7ytYUc/6ekZbxIS+y6W4qTMQ==
+
+vue-multi-ref@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-multi-ref/-/vue-multi-ref-2.0.1.tgz#17a2096766ccfb22cb7f553a8b11f2b4d8c440a8"
+  integrity sha512-4wkM36tp/0lsAs/B5T+FwBK+VHwL7tagaG1zDTqOG2p6am3l3RXQn2rYfcT84QsDgQJ5xw7BYnMkMY1+5fhMWA==
 
 vue-router@^3.4:
   version "3.5.1"

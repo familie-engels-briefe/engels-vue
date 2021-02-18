@@ -1,11 +1,31 @@
 <template>
-    <div class="inline" :class="classes" @mouseenter="showTooltip()" @mouseleave="hideTooltip()" @focus="showTooltip()" @blur="hideTooltip()" aria-describedby="tooltip">
-        <span class="tooltip-button"><slot></slot></span><Transition name="fade"><div class="tooltip-content" role="tooltip" v-show="visibleTooltip"><div v-html="content"></div><div v-if="url !== null" class="mt-4"><router-link :to="url" class="underline text-sm uppercase">Mehr Informationen</router-link></div></div></Transition>
+    <div class="inline"
+         :class="classes"
+         @mouseenter="showTooltip()"
+         @mouseleave="hideTooltip()"
+         @focus="showTooltip()"
+         @blur="hideTooltip()"
+         aria-describedby="tooltip">
+        <span class="tooltip-button"><slot></slot></span>
+        <Transition name="fade">
+            <div class="tooltip-content"
+                 role="tooltip"
+                 v-show="visibleTooltip">
+                <div v-html="content"></div>
+                <div v-if="url !== null"
+                     class="mt-4">
+                    <router-link :to="url"
+                                 class="underline text-sm uppercase">Mehr Informationen
+                    </router-link>
+                </div>
+            </div>
+        </Transition>
     </div>
 </template>
 
 <script>
 import { createPopper } from '@popperjs/core'
+import maxSize from 'popper-max-size-modifier'
 
 export default {
     name: 'Tooltip',
@@ -39,6 +59,17 @@ export default {
         }
     },
     mounted () {
+        const applyMaxSize = {
+            name: 'applyMaxSize',
+            enabled: true,
+            phase: 'beforeWrite',
+            requires: ['maxSize'],
+            fn ({ state }) {
+                const { height } = state.modifiersData.maxSize
+                state.styles.popper.maxHeight = `${ height }px`
+            }
+        }
+
         this.tooltip = createPopper(
             this.$el.querySelector('.tooltip-button'),
             this.$el.querySelector('.tooltip-content'),
@@ -59,6 +90,8 @@ export default {
                             fallbackPlacements: ['top'],
                         },
                     },
+                    maxSize,
+                    applyMaxSize
                 ],
             }
         )
@@ -82,7 +115,7 @@ export default {
 
 <style scoped>
 .tooltip-content {
-    @apply px-8 py-4 bg-white shadow transition-opacity max-w-full;
+    @apply px-8 py-4 bg-white shadow transition-opacity max-w-xs;
 }
 
 .fade-enter-active, .fade-leave-active {

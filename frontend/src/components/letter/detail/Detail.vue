@@ -8,7 +8,8 @@
                     <div class="mb-4 block lg:inline lg:h-8">
                         <LetterHighlighter v-on:update-highlights="updateHighlights"
                                            :html="htmlDiplomatic"
-                                           :activeView="activeView"></LetterHighlighter>
+                                           :activeView="activeView"
+                                           ref="letterHighlighter"></LetterHighlighter>
                     </div>
                     <div class="flex justify-end">
                         <Button class="mr-2"
@@ -83,8 +84,9 @@ export default {
                 places: [],
                 organisations: [],
                 letters: [],
-                dates: [],
-                comments: []
+                comments: [],
+                textcomments: [],
+                normalizations: [],
             },
             // Which views are active
             activeView: 'normalized',
@@ -117,6 +119,8 @@ export default {
     methods: {
         changeView (view) {
             this.activeView = view
+
+            this.$refs.letterHighlighter.resetHighlights()
         },
         updateHighlights (event) {
             this.highlights = event.selected
@@ -312,16 +316,6 @@ export default {
 
 /deep/ .engels_topic:not(.has-highlight) {
     @apply bg-transparent !important;
-}
-
-/* Textkritisch */
-/deep/ .highlight-text.has-highlight{
-    @apply bg-warmGray-100;
-}
-
-/* Sachkommentar */
-/deep/ .highlight-comment.has-highlight{
-    @apply bg-coolGray-100;
 }
 
 /deep/ .TMP.IGNORE {

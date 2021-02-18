@@ -18,11 +18,12 @@ import PersonTooltip from './tooltip/PersonTooltip'
 import PlaceTooltip from './tooltip/PlaceTooltip'
 import OrganisationTooltip from './tooltip/OrganisationTooltip'
 import LetterTooltip from './tooltip/LetterTooltip'
+import SachkommentarTooltip from './tooltip/SachkommentarTooltip'
 import FacsimileLink from './FacsimileLink'
 import LetterFacsimile from './Facsimile'
 
-import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
-import { highlightTopics, highlightPersons, highlightOrgs, highlightPlaces } from './helper_highlights'
+import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters, replaceSachkommentare, replaceNormalizations } from './helper_tooltips'
+import { highlightTopics, highlightPersons, highlightOrgs, highlightPlaces, highlightNormalizations, highlightSachkommentare } from './helper_highlights'
 import { replaceFacsimiles } from './helper_facsimiles'
 
 export default {
@@ -60,11 +61,15 @@ export default {
             const wrapper = document.createElement('div')
             wrapper.innerHTML = this.html
 
+            highlightNormalizations(wrapper, (this.highlights && this.highlights.normalizations) ? this.highlights.normalizations.length > 0 : false)
+            highlightSachkommentare(wrapper, (this.highlights && this.highlights.comments) ? this.highlights.comments.length > 0 : false)
             highlightPersons(wrapper, (this.highlights && this.highlights.persons) ? this.highlights.persons.length > 0 : false)
             highlightOrgs(wrapper, (this.highlights && this.highlights.organisations) ? this.highlights.organisations.length > 0 : false)
             highlightPlaces(wrapper, (this.highlights && this.highlights.places) ? this.highlights.places.length > 0 : false)
             highlightTopics(wrapper, (this.highlights && this.highlights.topics) ? this.highlights.topics : [])
 
+            replaceNormalizations(wrapper)
+            replaceSachkommentare(wrapper)
             replacePersons(wrapper, this.$store)
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
@@ -86,6 +91,7 @@ export default {
                     PlaceTooltip,
                     OrganisationTooltip,
                     LetterTooltip,
+                    SachkommentarTooltip,
                     FacsimileLink,
                 },
                 data () {
@@ -94,6 +100,7 @@ export default {
                         PlaceTooltip,
                         OrganisationTooltip,
                         LetterTooltip,
+                        SachkommentarTooltip,
                         FacsimileLink,
                     }
                 },

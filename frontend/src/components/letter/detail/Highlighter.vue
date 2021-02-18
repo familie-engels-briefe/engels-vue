@@ -30,7 +30,8 @@
                                    type="checkbox"
                                    :items="normalizations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="textcomments"
                                    title="Textkritische Kommentare"
@@ -38,7 +39,8 @@
                                    type="checkbox"
                                    :items="textcomments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'diplomatisch'"></HighlighterSearch>
+                                   :enabled="activeView === 'diplomatisch'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="comments"
                                    title="Sachkommentare"
@@ -46,7 +48,8 @@
                                    type="checkbox"
                                    :items="comments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="persons"
                                    title="Personen"
@@ -54,7 +57,8 @@
                                    type="checkbox"
                                    :items="persons"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="organisations"
                                    title="Unternehmen"
@@ -62,7 +66,8 @@
                                    type="checkbox"
                                    :items="organisations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="places"
                                    title="Orte"
@@ -70,7 +75,8 @@
                                    type="checkbox"
                                    :items="places"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="topics"
                                    title="Thema"
@@ -78,7 +84,8 @@
                                    type="radio"
                                    :items="topicsWithNames"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"></HighlighterSearch>
+                                   :enabled="activeView === 'normalisiert'"
+                                   v-multi-ref:highlighter></HighlighterSearch>
             </div>
         </transition>
     </div>
@@ -199,6 +206,11 @@ export default {
             this.$emit('update-highlights', {
                 selected: this.selected
             })
+        },
+        resetHighlights () {
+            for (let i = 0; i < this.$refs.highlighter.length; i++) {
+                this.$refs.highlighter[i].clearSelectedItems()
+            }
         }
     },
 }

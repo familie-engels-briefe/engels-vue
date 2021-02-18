@@ -86,3 +86,64 @@ export function replaceLetters(wrapper, store) {
         letter.replaceWith(letterNode)
     })
 }
+
+export function replaceSachkommentare(wrapper) {
+    Array.from(wrapper.querySelectorAll('.tei_back .tei_div[data-type="com"] .tei_note')).forEach(function (note) {
+        try {
+            const id = note.querySelector('[data-from]')
+                .getAttribute('data-from')
+                .replace('#', '')
+                .replace('.s', '')
+
+            const contents = note.innerHTML
+            const target = wrapper.querySelector('[data-annotId^="' + id + '"]')
+
+            const sachkommentarNode = document.createElement('component')
+            sachkommentarNode.setAttribute('is', 'SachkommentarTooltip')
+            sachkommentarNode.setAttribute(':html', JSON.stringify(contents))
+            if (target.classList.contains('has-highlight')) {
+                sachkommentarNode.setAttribute(':has-highlight', '1')
+            } else {
+                sachkommentarNode.removeAttribute(':has-highlight')
+            }
+
+            sachkommentarNode.innerHTML = target.innerHTML
+
+            target.replaceWith(sachkommentarNode)
+        } catch (e) {
+            console.error('Could not replace Sachkommentar:', e)
+        }
+    })
+}
+
+export function replaceTextkommentare(wrapper) {
+    Array.from(wrapper.querySelectorAll('.tei_back .tei_div[data-type="txt"] .tei_note')).forEach(function (note) {
+        try {
+            const id = note.querySelector('[data-corresp]')
+                .getAttribute('data-corresp')
+                .replace('#', '')
+
+            const contents = note.innerHTML
+            const target = wrapper.querySelector('[data-annotid^="' + id + '"]')
+
+            const textkommentarNode = document.createElement('component')
+            textkommentarNode.setAttribute('is', 'TextkommentarTooltip')
+            textkommentarNode.setAttribute(':html', JSON.stringify(contents))
+            if (target.classList.contains('has-highlight')) {
+                textkommentarNode.setAttribute(':has-highlight', '1')
+            } else {
+                textkommentarNode.removeAttribute(':has-highlight')
+            }
+
+            textkommentarNode.innerHTML = target.innerHTML
+
+            target.replaceWith(textkommentarNode)
+        } catch (e) {
+            console.error('Could not replace Textkommentar:', e)
+        }
+    })
+}
+
+export function replaceNormalizations() {
+    // TODO: Implement
+}

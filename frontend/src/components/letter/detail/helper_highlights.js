@@ -63,3 +63,52 @@ export function highlightPlaces(wrapper, highlight) {
         })
     }
 }
+
+/**
+ * @param {HTMLDivElement} wrapper
+ * @param {Boolean} highlight
+ */
+export function highlightNormalizations(wrapper, highlight) {
+    // TODO: Highlight
+    if (highlight) {
+        /*wrapper.querySelectorAll('.tei_placeName').forEach(function (tooltip) {
+            tooltip.classList.add('has-highlight')
+        })*/
+    } else {
+        /*wrapper.querySelectorAll('.tei_placeName.has-highlight').forEach(function (tooltip) {
+            tooltip.classList.remove('has-highlight')
+        })*/
+    }
+}
+
+/**
+ * @param {HTMLDivElement} wrapper
+ * @param {Boolean} highlight
+ */
+export function highlightTextkommentare(wrapper, highlight) {
+    if (highlight) {
+        wrapper.querySelectorAll('[data-annotId][data-type="txt"]').forEach(function (tooltip) {
+            tooltip.classList.add('has-highlight')
+        })
+    } else {
+        wrapper.querySelectorAll('[data-annotId][data-type="txt"].has-highlight').forEach(function (tooltip) {
+            tooltip.classList.remove('has-highlight')
+        })
+    }
+}
+
+/**
+ * @param {HTMLDivElement} wrapper
+ * @param {Boolean} highlight
+ */
+export function highlightSachkommentare(wrapper, highlight) {
+    if (highlight) {
+        wrapper.querySelectorAll('[data-annotId][data-type="com"]').forEach(function (tooltip) {
+            tooltip.classList.add('has-highlight')
+        })
+    } else {
+        wrapper.querySelectorAll('[data-annotId][data-type="com"].has-highlight').forEach(function (tooltip) {
+            tooltip.classList.remove('has-highlight')
+        })
+    }
+}
