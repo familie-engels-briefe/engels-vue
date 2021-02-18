@@ -208,10 +208,19 @@ export default {
                 formatedDate + ' (' + letter.doctypeName + ')'
         },
         referencesPrevious () {
-            return this.$store.getters.getLetterByRef(this.details.refs.prev.target)
+            if (this.details && this.details.refs && this.details.refs.prev) {
+                return this.$store.getters.getLetterByRef(this.details.refs.prev.target)
+            }
+
+            return null
         },
         referencesNext () {
-            return this.$store.getters.getLetterByRef(this.details.refs.next.target)
+            if (this.details && this.details.refs && this.details.refs.next) {
+                return this.$store.getters.getLetterByRef(this.details.refs.next.target)
+            }
+
+            return null
+
         },
     },
     watch: {
