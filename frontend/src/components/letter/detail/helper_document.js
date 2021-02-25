@@ -1,7 +1,7 @@
 export function addLineNumbers(wrapper) {
     let i = 1
 
-    wrapper.querySelectorAll('.tei_lb, .tei_opener, .tei_opener_inline').forEach(function (line) {
+    wrapper.querySelectorAll('.tei_lb').forEach(function (line) {
         let span = document.createElement('span')
         span.classList.add('line-number')
         span.classList.add('line-number-' + line.classList.toString())
@@ -11,6 +11,8 @@ export function addLineNumbers(wrapper) {
 
         span.innerText = i++
 
-        line.appendChild(span)
+        // Insert after
+        line.parentNode.insertBefore(span, line.nextSibling)
+        console.log(span)
     })
 }

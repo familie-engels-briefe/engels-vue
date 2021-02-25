@@ -333,11 +333,7 @@ export default {
 }
 
 /deep/ .line-number {
-    @apply text-gray absolute right-0 pr-16;
-}
-
-/deep/ .line-number {
-    @apply text-gray absolute right-0 pr-16 mt-6;
+    @apply text-gray absolute right-0 pr-16 -mt-6;
 }
 
 /* Hide annotations below letters */

@@ -22,7 +22,6 @@ import SachkommentarTooltip from './tooltip/SachkommentarTooltip'
 import FacsimileLink from './FacsimileLink'
 import LetterFacsimile from './Facsimile'
 
-import { addLineNumbers } from './helper_document'
 import { replacePersons, replacePlaces, replaceOrganisations, replaceLetters, replaceSachkommentare, replaceNormalizations } from './helper_tooltips'
 import { highlightTopics, highlightPersons, highlightOrgs, highlightPlaces, highlightNormalizations, highlightSachkommentare } from './helper_highlights'
 import { replaceFacsimiles } from './helper_facsimiles'
@@ -76,8 +75,6 @@ export default {
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
             replaceFacsimiles(wrapper)
-
-            addLineNumbers(wrapper)
 
             // Show abbreviations when the expen part is "no" or "com"
             Array.from(wrapper.querySelectorAll('.tei_choice .tei_expan[data-n="no"],.tei_choice .tei_expan[data-n="com"]')).forEach(function (expan) {

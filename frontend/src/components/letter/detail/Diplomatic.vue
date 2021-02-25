@@ -19,6 +19,7 @@ import TextkommentarTooltip from './tooltip/TextkommentarTooltip'
 import FacsimileLink from './FacsimileLink'
 import LetterFacsimile from './Facsimile'
 
+import { addLineNumbers } from './helper_document'
 import { replaceTextkommentare, replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
 import { highlightTopics, highlightTextkommentare } from './helper_highlights'
 import { replaceFacsimiles } from './helper_facsimiles'
@@ -67,6 +68,8 @@ export default {
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
             replaceFacsimiles(wrapper)
+
+            addLineNumbers(wrapper)
 
             // Replace uncertain text with element with highest certainty
             Array.from(wrapper.querySelectorAll('.tei_choice')).forEach(function (choice) {
