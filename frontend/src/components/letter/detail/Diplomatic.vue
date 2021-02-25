@@ -234,10 +234,6 @@ export default {
     @apply border-gray;
 }
 
-/deep/ .has-highlight > .tooltip-button {
-    @apply border-b border-dashed border-gray;
-}
-
 /**
  * Choice
  */

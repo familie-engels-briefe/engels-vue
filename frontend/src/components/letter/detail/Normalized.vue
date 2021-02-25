@@ -147,10 +147,6 @@ export default {
     vertical-align: sub;
 }
 
-/deep/ .has-highlight > .tooltip-button {
-    @apply border-b border-dashed border-gray;
-}
-
 /**
  * <choice></choice>
  */
