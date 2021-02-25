@@ -210,6 +210,10 @@ export default {
             this.showHighlighter = false
         },
         resetHighlights () {
+            if (!this.$refs.highlighter) {
+                return
+            }
+
             for (let i = 0; i < this.$refs.highlighter.length; i++) {
                 this.$refs.highlighter[i].clearSelectedItems()
             }
