@@ -43,7 +43,11 @@ export default {
 }
 
 /deep/ img {
-    @apply block w-full;
+    @apply block;
+}
+
+/deep/ .size-medium {
+    @apply max-w-xs;
 }
 
 /deep/ figure figcaption {
@@ -66,5 +70,17 @@ export default {
     /deep/ .wp-block-columns .wp-block-column {
         @apply w-auto flex-1 mb-0;
     }
+}
+
+/deep/ .alignleft {
+    @apply float-left;
+}
+
+/deep/ .aligncenter > * {
+    @apply text-center;
+}
+
+/deep/ .alignright {
+    @apply float-right;
 }
 </style>
