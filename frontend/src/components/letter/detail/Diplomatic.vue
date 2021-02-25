@@ -204,7 +204,12 @@ export default {
 
 /deep/ .tei_hi[data-rend*="underline"],
 /deep/ .engels_hiSic .engels_hiIntended[data-rend*="underline"] {
-    @apply underline;
+    @apply underline text-sm;
+}
+
+/deep/ .tei_hi[data-rend*="underline"][data-n="2"],
+/deep/ .engels_hiSic .engels_hiIntended[data-rend*="underline"][data-n="2"] {
+    @apply border-b border-gray-darker;
 }
 
 /deep/ .tei_hi[data-rend="spacing"] {
@@ -227,6 +232,14 @@ export default {
 }
 /deep/ [data-rendition="#g.enc.tagsdecl.indent-large"] {
     text-indent: 3rem;
+}
+
+/deep/ [data-rendition="#g.enc.tagsdecl.wd.vertical-right"] {
+    @apply block transform rotate-90 origin-bottom-left absolute;
+}
+
+/deep/ [data-page^="envelope"] [data-rendition="#g.enc.tagsdecl.wd.vertical-right"] {
+    @apply origin-center relative;
 }
 
 /deep/ .tei_pb {
@@ -332,6 +345,25 @@ export default {
 
 /deep/ .tei_signed {
     @apply float-right text-left;
+}
+
+/**
+ * Margin
+ */
+/deep/ [data-page="wrapper"] [data-page="middle"] {
+    @apply flex flex-row -mx-2;
+}
+
+/deep/ [data-page="wrapper"] [data-page="middle"] > div {
+    @apply flex flex-row px-2;
+}
+
+/deep/ [data-page="wrapper"] [data-page="middle"] [data-page^="margin"] {
+    @apply w-1/12 overflow-hidden overflow-ellipsis;
+}
+
+/deep/ [data-page="wrapper"] [data-page="middle"] [data-page="content"] {
+    @apply w-5/6;
 }
 
 /**
