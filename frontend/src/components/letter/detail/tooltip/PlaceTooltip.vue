@@ -51,6 +51,6 @@ export default {
 
 <style scoped>
 /deep/ .place-tooltip.has-highlight > .tooltip-button {
-    @apply bg-emerald-100;
+    @apply bg-emerald-50;
 }
 </style>

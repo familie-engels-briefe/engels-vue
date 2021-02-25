@@ -51,6 +51,6 @@ export default {
 
 <style scoped>
 /deep/ .org-tooltip.has-highlight > .tooltip-button {
-    @apply bg-blueGray-100;
+    @apply bg-blueGray-50;
 }
 </style>

@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     purge: [
         './public/**/*.html',
@@ -21,25 +23,25 @@ module.exports = {
             transparent: 'transparent',
 
             rose: {
-                100: '#ffe4e6',
+                50: colors.rose['50'],
             },
             pink: {
-                100: '#fce7f3',
+                50: colors.pink['50'],
             },
             fuchsia: {
-                100: '#fae8ff',
+                50: colors.fuchsia['50'],
             },
             purple: {
-                100: '#f3e8ff',
+                50: colors.purple['50'],
             },
             violet: {
-                100: '#ede9fe',
+                50: colors.violet['50'],
             },
             indigo: {
-                100: '#e0e7ff',
+                50: colors.indigo['50'],
             },
             blue: {
-                100: '#dbeafe',
+                50: colors.blue['50'],
             },
             lightBlue: {
                 50: '#f0f9ff',
@@ -54,41 +56,42 @@ module.exports = {
                 900: '#0c4a6e',
             },
             cyan: {
-                100: '#cffafe',
+                50: colors.cyan['50'],
             },
             teal: {
-                100: '#ccfbf1',
+                50: colors.teal['50'],
             },
             emerald: {
-                100: '#d1fae5',
+                50: colors.emerald['50'],
             },
             green: {
-                100: '#dcfce7',
+                50: colors.green['50'],
             },
             lime: {
-                100: '#ecfccb',
+                50: colors.lime['50'],
             },
             yellow: {
-                100: '#fef9c3',
+                50: colors.yellow['50'],
             },
             amber: {
-                100: '#fef3c7',
+                50: colors.amber['50'],
             },
             orange: {
-                100: '#ffedd5',
+                50: colors.orange['50'],
             },
             red: {
+                50: colors.red['50'],
                 100: '#fee2e2',
                 900: '#7f1d1d',
             },
             warmGray: {
-                100: '#f5f5f4',
+                50: colors.warmGray['50'],
             },
             blueGray: {
-                100: '#f1f5f9',
+                50: colors.blueGray['50'],
             },
             coolGray: {
-                100: '#f3f4f6',
+                50: colors.coolGray['50'],
             },
         },
         extend: {

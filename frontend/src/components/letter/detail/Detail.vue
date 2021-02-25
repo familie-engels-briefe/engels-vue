@@ -245,75 +245,75 @@ export default {
 }
 
 /deep/ .engels_topic[data-type="W"] {
-    @apply bg-blue-100;
+    @apply bg-blue-50;
 }
 
 /deep/ .engels_topic[data-type="R"] {
-    @apply bg-purple-100;
+    @apply bg-purple-50;
 }
 
 /deep/ .engels_topic[data-type="P"] {
-    @apply bg-red-100;
+    @apply bg-red-50;
 }
 
 /deep/ .engels_topic[data-type="G"] {
-    @apply bg-green-100;
+    @apply bg-green-50;
 }
 
 /deep/ .engels_topic[data-type="E"] {
-    @apply bg-yellow-100;
+    @apply bg-yellow-50;
 }
 
 /deep/ .engels_topic[data-type="K"] {
-    @apply bg-orange-100;
+    @apply bg-orange-50;
 }
 
 /deep/ .engels_topic[data-type="EB"] {
-    @apply bg-amber-100;
+    @apply bg-amber-50;
 }
 
 /deep/ .engels_topic[data-type="H"] {
-    @apply bg-lime-100;
+    @apply bg-lime-50;
 }
 
 /deep/ .engels_topic[data-type="M"] {
-    @apply bg-teal-100;
+    @apply bg-teal-50;
 }
 
 /deep/ .engels_topic[data-type="F"] {
-    @apply bg-cyan-100;
+    @apply bg-cyan-50;
 }
 
 /deep/ .engels_topic[data-type="B"] {
-    @apply bg-fuchsia-100;
+    @apply bg-fuchsia-50;
 }
 
 /deep/ .engels_topic[data-type="L"] {
-    @apply bg-rose-100;
+    @apply bg-rose-50;
 }
 
 /deep/ .engels_topic[data-type="KR"] {
-    @apply bg-pink-100;
+    @apply bg-pink-50;
 }
 
 /deep/ .engels_topic[data-type="J"] {
-    @apply bg-violet-100;
+    @apply bg-violet-50;
 }
 
 /deep/ .engels_topic[data-type="FEG"] {
-    @apply bg-lightBlue-100;
+    @apply bg-lightBlue-50;
 }
 
 /deep/ .engels_topic[data-type="FEK"] {
-    @apply bg-lightBlue-200;
+    @apply bg-lightBlue-100;
 }
 
 /deep/ .engels_topic[data-type="FEJ"] {
-    @apply bg-lightBlue-300;
+    @apply bg-lightBlue-200;
 }
 
 /deep/ .engels_topic[data-type="FEM"] {
-    @apply bg-lightBlue-400;
+    @apply bg-lightBlue-300;
 }
 
 /deep/ .engels_topic:not(.has-highlight) {

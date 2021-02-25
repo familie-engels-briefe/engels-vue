@@ -39,6 +39,6 @@ export default {
 
 <style scoped>
 /deep/ .textkommentar-tooltip.has-highlight > .tooltip-button {
-    @apply bg-warmGray-100;
+    @apply bg-warmGray-50;
 }
 </style>
