@@ -206,6 +206,8 @@ export default {
             this.$emit('update-highlights', {
                 selected: this.selected
             })
+
+            this.showHighlighter = false
         },
         resetHighlights () {
             for (let i = 0; i < this.$refs.highlighter.length; i++) {
