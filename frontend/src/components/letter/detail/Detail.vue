@@ -339,4 +339,10 @@ export default {
 /deep/ .line-number {
     @apply text-gray absolute right-0 pr-16 mt-6;
 }
+
+/* Hide annotations below letters */
+/deep/ .TMP.IGNORE,
+/deep/ .tei_back {
+    @apply hidden;
+}
 </style>
