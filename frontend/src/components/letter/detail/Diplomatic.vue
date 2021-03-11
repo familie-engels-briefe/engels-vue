@@ -238,8 +238,8 @@ export default {
     @apply block transform rotate-90 origin-bottom-left absolute;
 }
 
-/deep/ [data-page^="envelope"] [data-rendition="#g.enc.tagsdecl.wd.vertical-right"] {
-    @apply origin-center relative;
+/deep/ [data-page*="envelope"] [data-rendition="#g.enc.tagsdecl.wd.vertical-right"] {
+    @apply rotate-0 static;
 }
 
 /deep/ .tei_pb {
