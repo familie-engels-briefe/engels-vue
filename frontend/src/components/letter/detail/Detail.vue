@@ -30,7 +30,8 @@
             <LetterNormalized v-if="htmlNormalized && activeView === 'normalisiert'"
                               :html="htmlNormalized"
                               :highlights="highlights"
-                              :facsimiles="facsimiles"></LetterNormalized>
+                              :facsimiles="facsimiles"
+                              :source="details.source"></LetterNormalized>
             <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatisch'"
                               :html="htmlDiplomatic"
                               :highlights="highlights"

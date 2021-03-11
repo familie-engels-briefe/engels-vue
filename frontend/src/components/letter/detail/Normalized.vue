@@ -7,8 +7,92 @@
         </div>
 
         <div class="w-full lg:w-1/2 lg:px-6">
-            <component :is="processedHtml"
-                       class="letter letter-normalized"></component>
+            <div>
+                <component :is="processedHtml" class="letter letter-normalized"></component>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="font-light">Textträgerbeschreibung</h3>
+
+                <table class="w-full table-source">
+                    <tbody>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Identifizierung
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ort</td>
+                            <td v-text="identifierSettlement"></td>
+                        </tr>
+                        <tr>
+                            <td>Sammlung</td>
+                            <td v-text="identifierRepository"></td>
+                        </tr>
+                        <tr>
+                            <td>IDNO</td>
+                            <td v-text="identifierIdno"></td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Handschriftlich
+                            </td>
+                        </tr>
+                        <tr v-for="physHandNote in physHandNotes" :key="physHandNote.id">
+                            <td v-text="physHandNote.author"></td>
+                            <td v-text="physHandNote.text"></td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Type
+                            </td>
+                        </tr>
+                        <tr v-for="physTypeNote in physTypeNotes" :key="physTypeNote.id">
+                            <td v-text="physTypeNote.author"></td>
+                            <td v-text="physTypeNote.text"></td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Script
+                            </td>
+                        </tr>
+                        <tr v-for="physScriptNote in physScriptNotes" :key="physScriptNote.id">
+                            <td v-text="physScriptNote.author"></td>
+                            <td v-text="physScriptNote.text"></td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Materialität Substrat
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Material</td>
+                            <td v-text="physObjectMaterial"></td>
+                        </tr>
+                        <tr>
+                            <td>Farbe</td>
+                            <td v-text="physObjectFarbe"></td>
+                        </tr>
+                        <tr>
+                            <td>Breite</td>
+                            <td v-text="physObjectWidth"></td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td v-text="physObjectHeight"></td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td colspan="2">
+                                Materialität Schreibmaterial
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Material</td>
+                            <td v-text="physHandMaterial"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -46,6 +130,13 @@ export default {
                 return {}
             },
         },
+        source: {
+            type: Object,
+            required: false,
+            default () {
+                return {}
+            },
+        }
     },
     data () {
         return {
@@ -54,6 +145,37 @@ export default {
     },
     mounted () {
         console.debug('Mounted Letter/Detail/Normalized')
+    },
+    methods: {
+        /***
+         * @param {Object|Array} notes
+         * @param {string} key
+         * @returns {{author: *, text: *}[]}
+         */
+        physDescToArray (notes, key) {
+            if (!Array.isArray(notes)) {
+                notes = [notes]
+            }
+
+            let id = 1
+
+            return notes.map((note) => {
+                let author = note.scribeRef ? this.$store.getters.getPersonByRef(note.scribeRef) : null
+                if (!author) {
+                    if (note.n) {
+                        author = note.n
+                    } else if (note['xml:id']) {
+                        author = note['xml:id']
+                    }
+                }
+
+                return {
+                    id: key + '-' + id++,
+                    author: author.name ? author.name : author,
+                    text: note['#text'],
+                }
+            })
+        },
     },
     computed: {
         processedHtml () {
@@ -115,7 +237,44 @@ export default {
                     }
                 }
             }
-        }
+        },
+        identifierSettlement () {
+            return this.source?.msDesc?.msIdentifier?.settlement || null
+        },
+        identifierRepository () {
+            return this.source?.msDesc?.msIdentifier?.repository || null
+        },
+        identifierIdno () {
+            return this.source?.msDesc?.msIdentifier?.idno || null
+        },
+        physHandNotes () {
+            return this.physDescToArray(this.source?.msDesc?.physDesc?.handDesc?.handNote || [], 'hand')
+        },
+        physTypeNotes () {
+            return this.physDescToArray(this.source?.msDesc?.physDesc?.typeDesc?.typeNote || [], 'type')
+        },
+        physScriptNotes () {
+            return this.physDescToArray(this.source?.msDesc?.physDesc?.scriptDesc?.scriptNote || [], 'script')
+        },
+        physObjectMaterial () {
+            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.material || null
+        },
+        physObjectFarbe () {
+            const color = (this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.note || []).filter((note) => {
+                return note.type === 'color'
+            })
+
+            return color[0]?.['#text'] || ''
+        },
+        physObjectWidth () {
+            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.width + this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.unit || null
+        },
+        physObjectHeight () {
+            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.height + this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.unit || null
+        },
+        physHandMaterial () {
+            return this.source?.msDesc?.msPart?.physDesc?.handDesc?.handNote || null
+        },
     }
 }
 </script>
@@ -234,8 +393,12 @@ export default {
     @apply bg-transparent;
 }
 
-/deep/ table tr td {
+/deep/ table:not(.table-source) tr td {
     @apply border border-dashed border-black;
+}
+
+/deep/ table.table-source tr td {
+    @apply border border-gray-light;
 }
 
 /**
