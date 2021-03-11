@@ -3,13 +3,13 @@
         <h2>Suche nach "{{ term }}"</h2>
 
         <Loading :loading="finished === false">
-            <template v-if="resultsFiltered.length > 0">
-                <div v-for="result in resultsFiltered"
+            <template v-if="results.length > 0">
+                <div v-for="result in results"
                      class="mb-8"
                      :key="result.number">
                     <h3>
                         <router-link :to="{ name: 'letter', params: { number: result.number }}">
-                            <strong v-text="result.letter.numberPublic"></strong> {{ result.title }}
+                            <strong v-text="result.letter ? result.letter.numberPublic : null"></strong> {{ result.title }}
                         </router-link>
                     </h3>
                     <div v-html="result.found"></div>
@@ -52,12 +52,10 @@ export default {
     },
     methods: {
         search () {
-            console.log('SEARCH')
             this.finished = false
 
             axios.get(this.createApiUrl('search/' + encodeURIComponent(this.term)))
                 .then((response) => {
-                    console.log(response)
                     this.results.splice(0)
 
                     for (let i = 0; i < response.data.results.length; i++) {
@@ -80,13 +78,6 @@ export default {
             this.search()
         },
     },
-    computed: {
-        resultsFiltered () {
-            return this.results.filter((result) => {
-                return result && result.letter
-            })
-        },
-    }
 }
 </script>
 
