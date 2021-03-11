@@ -1,13 +1,15 @@
 name: 'Publish storybook to chromatic'
 
-on: push
+on: [push]
 
 jobs:
   chromatic:
     runs-on: ubuntu-20.04
+
     defaults:
       run:
         working-directory: ./frontend
+
     steps:
       - uses: actions/checkout@v1
       - run: 'echo "$FONTAWESOME_AUTH_TOKEN" > .npmrc'
