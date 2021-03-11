@@ -30,7 +30,7 @@
                                    type="checkbox"
                                    :items="normalizations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasNormalizations"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="textcomments"
@@ -39,7 +39,7 @@
                                    type="checkbox"
                                    :items="textcomments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'diplomatisch'"
+                                   :enabled="activeView === 'diplomatisch' && hasTextcomments"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="comments"
@@ -48,7 +48,7 @@
                                    type="checkbox"
                                    :items="comments"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasSachkommentare"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="persons"
@@ -57,7 +57,7 @@
                                    type="checkbox"
                                    :items="persons"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasPersons"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="organisations"
@@ -66,7 +66,7 @@
                                    type="checkbox"
                                    :items="organisations"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasOrgs"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="places"
@@ -75,7 +75,7 @@
                                    type="checkbox"
                                    :items="places"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasPlaces"
                                    v-multi-ref:highlighter></HighlighterSearch>
 
                 <HighlighterSearch name="topics"
@@ -84,7 +84,7 @@
                                    type="radio"
                                    :items="topicsWithNames"
                                    v-on:update-items="updateHighlighter"
-                                   :enabled="activeView === 'normalisiert'"
+                                   :enabled="activeView === 'normalisiert' && hasTopics"
                                    v-multi-ref:highlighter></HighlighterSearch>
             </div>
         </transition>
@@ -112,6 +112,34 @@ export default {
         activeView: {
             required: true,
             type: String,
+        },
+        hasNormalizations: {
+            required: true,
+            type: Boolean,
+        },
+        hasTextcomments: {
+            required: true,
+            type: Boolean,
+        },
+        hasSachkommentare: {
+            required: true,
+            type: Boolean,
+        },
+        hasPersons: {
+            required: true,
+            type: Boolean,
+        },
+        hasOrgs: {
+            required: true,
+            type: Boolean,
+        },
+        hasPlaces: {
+            required: true,
+            type: Boolean,
+        },
+        hasTopics: {
+            required: true,
+            type: Boolean,
         },
     },
     data () {

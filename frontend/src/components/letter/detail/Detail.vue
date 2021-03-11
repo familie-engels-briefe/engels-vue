@@ -7,6 +7,13 @@
                 <div class="mt-2 mb-8 flex flex-row justify-between w-full lg:w-auto lg:mb-0 lg:ml-6 lg:flex-col">
                     <div class="mb-4 block lg:inline lg:h-8">
                         <LetterHighlighter v-on:update-highlights="updateHighlights"
+                                           :has-normalizations="hasNormalizations"
+                                           :has-textcomments="hasTextcomments"
+                                           :has-sachkommentare="hasSachkommentare"
+                                           :has-persons="hasPersons"
+                                           :has-orgs="hasOrgs"
+                                           :has-places="hasPlaces"
+                                           :has-topics="hasTopics"
                                            :html="htmlDiplomatic"
                                            :activeView="activeView"
                                            ref="letterHighlighter"></LetterHighlighter>
@@ -227,6 +234,70 @@ export default {
             }
 
             return null
+        },
+        hasNormalizations () {
+            // TODO: Implement
+            return true
+        },
+        hasTextcomments () {
+            if (this.htmlDiplomatic) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlDiplomatic
+
+                return wrapper.querySelectorAll('[data-annotId][data-type="txt"]').length > 0
+            } else {
+                return false
+            }
+        },
+        hasSachkommentare () {
+            if (this.htmlNormalized) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlNormalized
+
+                return wrapper.querySelectorAll('[data-annotId][data-type="com"]').length > 0
+            } else {
+                return false
+            }
+        },
+        hasPersons () {
+            if (this.htmlNormalized) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlNormalized
+
+                return wrapper.querySelectorAll('.tei_persName').length > 0
+            } else {
+                return false
+            }
+        },
+        hasOrgs () {
+            if (this.htmlNormalized) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlNormalized
+
+                return wrapper.querySelectorAll('.tei_orgName').length > 0
+            } else {
+                return false
+            }
+        },
+        hasPlaces () {
+            if (this.htmlNormalized) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlNormalized
+
+                return wrapper.querySelectorAll('.tei_placeName').length > 0
+            } else {
+                return false
+            }
+        },
+        hasTopics () {
+            if (this.htmlNormalized) {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = this.htmlNormalized
+
+                return wrapper.querySelectorAll('.tei_topic').length > 0
+            } else {
+                return false
+            }
         },
     },
     watch: {
