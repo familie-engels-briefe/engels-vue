@@ -188,7 +188,6 @@ const store = new Vuex.Store({
             letters = _.uniqBy(filteredLetters, 'number')
 
             filteredLetters = []
-            console.log(placeSenders)
             if (placeSenders.length) {
                 for (let i = 0; i < placeSenders.length; i++) {
                     filteredLetters.push(...letters.filter(function (letter) {
