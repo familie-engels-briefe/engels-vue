@@ -22,6 +22,7 @@ import LetterFacsimile from './Facsimile'
 import { addLineNumbers } from './helper_document'
 import { replaceTextkommentare, replacePersons, replacePlaces, replaceOrganisations, replaceLetters } from './helper_tooltips'
 import { highlightTopics, highlightTextkommentare } from './helper_highlights'
+import { replaceSymbols } from './helper_fixes.js'
 import { replaceFacsimiles } from './helper_facsimiles'
 
 export default {
@@ -67,6 +68,7 @@ export default {
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
+            replaceSymbols(wrapper)
             replaceFacsimiles(wrapper)
 
             addLineNumbers(wrapper)
