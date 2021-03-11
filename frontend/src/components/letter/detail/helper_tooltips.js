@@ -1,9 +1,10 @@
-export function replacePersons(wrapper, store) {
+export function replacePersons(wrapper, store, sent, received) {
     Array.from(wrapper.querySelectorAll('.tei_persName')).forEach(function (person) {
         const personNode = document.createElement('component')
         personNode.setAttribute('is', 'PersonTooltip')
         personNode.setAttribute(':person', JSON.stringify(store.getters.getPersonByRef(person.getAttribute('data-ref')) || {}))
-        if (person.classList.contains('has-highlight')) {
+
+        if (person.classList.contains('has-highlight') && person.getAttribute('data-ref') !== sent && person.getAttribute('data-ref') !== received) {
             personNode.setAttribute(':has-highlight', '1')
         } else {
             personNode.removeAttribute(':has-highlight')

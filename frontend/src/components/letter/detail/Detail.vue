@@ -31,7 +31,7 @@
                               :html="htmlNormalized"
                               :highlights="highlights"
                               :facsimiles="facsimiles"
-                              :source="details.source"></LetterNormalized>
+                              :details="details"></LetterNormalized>
             <LetterDiplomatic v-if="htmlDiplomatic && activeView === 'diplomatisch'"
                               :html="htmlDiplomatic"
                               :highlights="highlights"

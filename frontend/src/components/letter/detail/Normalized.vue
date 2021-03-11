@@ -130,7 +130,7 @@ export default {
                 return {}
             },
         },
-        source: {
+        details: {
             type: Object,
             required: false,
             default () {
@@ -192,7 +192,7 @@ export default {
 
             replaceNormalizations(wrapper)
             replaceSachkommentare(wrapper)
-            replacePersons(wrapper, this.$store)
+            replacePersons(wrapper, this.$store, this.details.sent?.person?.ref, this.details.received?.person?.ref, this.details.sent?.person?.ref, this.details.received?.person?.ref)
             replacePlaces(wrapper, this.$store)
             replaceOrganisations(wrapper, this.$store)
             replaceLetters(wrapper, this.$store)
@@ -239,41 +239,41 @@ export default {
             }
         },
         identifierSettlement () {
-            return this.source?.msDesc?.msIdentifier?.settlement || null
+            return this.details.source?.msDesc?.msIdentifier?.settlement || null
         },
         identifierRepository () {
-            return this.source?.msDesc?.msIdentifier?.repository || null
+            return this.details.source?.msDesc?.msIdentifier?.repository || null
         },
         identifierIdno () {
-            return this.source?.msDesc?.msIdentifier?.idno || null
+            return this.details.source?.msDesc?.msIdentifier?.idno || null
         },
         physHandNotes () {
-            return this.physDescToArray(this.source?.msDesc?.physDesc?.handDesc?.handNote || [], 'hand')
+            return this.physDescToArray(this.details.source?.msDesc?.physDesc?.handDesc?.handNote || [], 'hand')
         },
         physTypeNotes () {
-            return this.physDescToArray(this.source?.msDesc?.physDesc?.typeDesc?.typeNote || [], 'type')
+            return this.physDescToArray(this.details.source?.msDesc?.physDesc?.typeDesc?.typeNote || [], 'type')
         },
         physScriptNotes () {
-            return this.physDescToArray(this.source?.msDesc?.physDesc?.scriptDesc?.scriptNote || [], 'script')
+            return this.physDescToArray(this.details.source?.msDesc?.physDesc?.scriptDesc?.scriptNote || [], 'script')
         },
         physObjectMaterial () {
-            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.material || null
+            return this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.material || null
         },
         physObjectFarbe () {
-            const color = (this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.note || []).filter((note) => {
+            const color = (this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.support?.note || []).filter((note) => {
                 return note.type === 'color'
             })
 
             return color[0]?.['#text'] || ''
         },
         physObjectWidth () {
-            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.width + this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.unit || null
+            return this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.width + this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.unit || null
         },
         physObjectHeight () {
-            return this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.height + this.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.unit || null
+            return this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.dimensions?.height + this.details.source?.msDesc?.msPart?.physDesc?.objectDesc?.supportDesc?.extent?.unit || null
         },
         physHandMaterial () {
-            return this.source?.msDesc?.msPart?.physDesc?.handDesc?.handNote || null
+            return this.details.source?.msDesc?.msPart?.physDesc?.handDesc?.handNote || null
         },
     }
 }
