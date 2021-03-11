@@ -103,6 +103,8 @@ class SyncExistCommand extends Command
             $l = $this->syncHtml('dipl', (string) $letter['n'], $l);
             $l = $this->syncHtml('norm', (string) $letter['n'], $l);
 
+            $l->sanitizeHtml();
+
             // Update xml
             if (!$this->option('dry-run')) {
                 $this->exist->updateDocument($filename, $document['body']);

@@ -19,20 +19,33 @@ class SearchController
      */
     public function __invoke(LetterRepository $repository, string $term)
     {
-        $results = Letter::whereRaw('MATCH(`norm`) AGAINST(?)', [$term])
+        $results = Letter::whereRaw('MATCH(`norm_sanitized`) AGAINST(?)', [$term])
             ->select([
                 'number',
                 'title',
-                'norm',
+                'norm_sanitized',
             ])
             ->limit(10)
             ->get()
             ->map(function ($letter) use ($term) {
-                $letter->norm = preg_replace('/\\n\s+/', ' ', strip_tags($letter->norm));
-                $letter->norm = substr($letter->norm, strpos($letter->norm, $term) - 100, 200);
-                $letter->norm = str_replace($term, '<strong>' . $term . '</strong>', $letter->norm);
+                $pos = strpos($letter->norm_sanitized, $term) - 100;
+                if ($pos < 0) {
+                    $pos = 0;
+                }
 
-                return $letter;
+                $length = 200;
+                if ($pos + $length > strlen($letter->norm_sanitized)) {
+                    $length = strlen($letter->norm_sanitized) - $pos;
+                }
+
+                $result = substr($letter->norm_sanitized, $pos, $length);
+                $result = str_replace($term, '<strong>' . $term . '</strong>', $result);
+
+                return [
+                    'number' => $letter->number,
+                    'title' => $letter->title,
+                    'found' => $result
+                ];
             });
 
         return new JsonResponse([

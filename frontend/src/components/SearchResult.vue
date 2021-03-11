@@ -3,13 +3,20 @@
         <h2>Suche nach "{{ term }}"</h2>
 
         <Loading :loading="finished === false">
-            <template v-if="results.length > 0">
-                <div v-for="result in results" class="mb-8" :key="result.number">
-                    <h3><router-link :to="{ name: 'letter', params: { number: result.number }}"><strong v-text="result.letter.numberPublic"></strong> {{ result.title }}</router-link></h3>
-                    <div v-html="result.norm"></div>
+            <template v-if="resultsFiltered.length > 0">
+                <div v-for="result in resultsFiltered"
+                     class="mb-8"
+                     :key="result.number">
+                    <h3>
+                        <router-link :to="{ name: 'letter', params: { number: result.number }}">
+                            <strong v-text="result.letter.numberPublic"></strong> {{ result.title }}
+                        </router-link>
+                    </h3>
+                    <div v-html="result.found"></div>
                 </div>
             </template>
-            <div v-else class="bg-yellow-100 text-yellow-900 font-bold p-4 border-l-4 border-yellow-900">
+            <div v-else
+                 class="bg-yellow-100 text-yellow-900 font-bold p-4 border-l-4 border-yellow-900">
                 Zu dem Suchbegriff "{{ term }}" konnten wir leider nichts in unseren Daten finden. Versuche Sie es bitte mit einem anderen Begriff noch einmal.
             </div>
         </Loading>
@@ -45,25 +52,26 @@ export default {
     },
     methods: {
         search () {
-            const that = this
+            console.log('SEARCH')
             this.finished = false
 
             axios.get(this.createApiUrl('search/' + encodeURIComponent(this.term)))
-                .then(function (response) {
-                    that.results = []
+                .then((response) => {
+                    console.log(response)
+                    this.results.splice(0)
 
                     for (let i = 0; i < response.data.results.length; i++) {
                         let result = response.data.results[i]
-                        result.letter = that.$store.getters.getLetterByRef(result.number)
+                        result.letter = this.$store.getters.getLetterByRef(result.number)
 
-                        that.results.push(result)
+                        this.results.push(result)
                     }
                 })
-                .catch(function (err) {
-                    that.displayAxiosError(err)
+                .catch((err) => {
+                    this.displayAxiosError(err)
                 })
-                .then(function () {
-                    that.finished = true
+                .then(() => {
+                    this.finished = true
                 })
         },
     },
@@ -72,6 +80,13 @@ export default {
             this.search()
         },
     },
+    computed: {
+        resultsFiltered () {
+            return this.results.filter((result) => {
+                return result && result.letter
+            })
+        },
+    }
 }
 </script>
 
