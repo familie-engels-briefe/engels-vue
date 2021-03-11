@@ -307,7 +307,8 @@ export default {
     @apply font-bold;
 }
 
-/deep/ .tei_metamark[data-function="insertion"][data-place="above"] {
+/deep/ .tei_metamark[data-function="insertion"][data-place="above"],
+/deep/ .tei_metamark[data-function="label"][data-place="above"] {
     @apply relative;
 
     top: -.5rem;
