@@ -13,6 +13,5 @@ export function addLineNumbers(wrapper) {
 
         // Insert after
         line.parentNode.insertBefore(span, line.nextSibling)
-        console.log(span)
     })
 }
