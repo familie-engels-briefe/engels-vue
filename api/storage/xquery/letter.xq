@@ -67,8 +67,7 @@ return
                 }
             </organisations>
         </mentioned>
-        <source-description>
+        <sourceDescription>
             { $doc/tei:TEI//tei:sourceDesc/* }
-        </source-description>
+        </sourceDescription>
     </letter>
-
