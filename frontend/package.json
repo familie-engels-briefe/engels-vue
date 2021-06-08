@@ -42,7 +42,7 @@
         "moment": "^2.29",
         "pdfobject": "^2.2",
         "popper-max-size-modifier": "^0.2.0",
-        "postcss": "^7.0",
+        "postcss": "^8.2",
         "prismjs": "^1.22",
         "react-is": "^17.0",
         "spinkit": "^2.0",
